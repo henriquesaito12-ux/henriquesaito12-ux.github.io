@@ -835,7 +835,7 @@
   }
 
   /* Restore default cursor on touch */
-  *, a, button, [role="button"], [onclick] {
-    cursor: auto;
+  body, a, button, [role="button"], [onclick] {
+    cursor: auto !important;
   }
 }
