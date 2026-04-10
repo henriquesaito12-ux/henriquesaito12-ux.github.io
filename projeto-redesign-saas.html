@@ -11,10 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <style>
     .saas-ticker {
-      width: 100%;
-      max-width: 100vw;
+      width: 100vw;
       margin-left: calc(-50vw + 50%);
-      margin-right: calc(-50vw + 50%);
       overflow: hidden;
       padding: 32px 0;
       position: relative;
@@ -40,16 +38,22 @@
     }
     .saas-ticker__track {
       display: flex;
+      align-items: center;
       gap: 24px;
       width: max-content;
       animation: saasScroll linear infinite;
+      animation-play-state: paused;
+      visibility: hidden;
     }
-    .saas-ticker__img {
+    .saas-ticker__track.ready {
+      visibility: visible;
+    }
+    .case-v2 .saas-ticker__img {
+      display: block;
       height: 340px !important;
-      max-height: 340px !important;
       width: auto !important;
-      object-fit: cover !important;
-      flex-shrink: 0 !important;
+      max-width: none !important;
+      flex-shrink: 0;
       border-radius: 12px;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     }
@@ -59,16 +63,10 @@
     }
     @media (max-width: 768px) {
       .saas-ticker {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
         padding: 20px 0;
       }
-      .saas-ticker__img {
+      .case-v2 .saas-ticker__img {
         height: 180px !important;
-        max-height: 180px !important;
-        width: auto !important;
-        border-radius: 8px;
       }
       .saas-ticker__track {
         gap: 12px;
@@ -214,19 +212,19 @@
       <!-- Carrossel automático -->
       <div class="saas-ticker anim-scale" data-delay="100" style="margin-top: 40px;">
         <div class="saas-ticker__track" id="saasTicker">
-          <img src="abc1.png" alt="SaaS screen 1" class="saas-ticker__img" loading="lazy">
-          <img src="abc2.png" alt="SaaS screen 2" class="saas-ticker__img" loading="lazy">
-          <img src="abc3.png" alt="SaaS screen 3" class="saas-ticker__img" loading="lazy">
-          <img src="abc4.png" alt="SaaS screen 4" class="saas-ticker__img" loading="lazy">
-          <img src="abc6.png" alt="SaaS screen 6" class="saas-ticker__img" loading="lazy">
-          <img src="abc7.png" alt="SaaS screen 7" class="saas-ticker__img" loading="lazy">
+          <img src="abc1.png" alt="SaaS screen 1" class="saas-ticker__img">
+          <img src="abc2.png" alt="SaaS screen 2" class="saas-ticker__img">
+          <img src="abc3.png" alt="SaaS screen 3" class="saas-ticker__img">
+          <img src="abc4.png" alt="SaaS screen 4" class="saas-ticker__img">
+          <img src="abc6.png" alt="SaaS screen 6" class="saas-ticker__img">
+          <img src="abc7.png" alt="SaaS screen 7" class="saas-ticker__img">
           <!-- Duplicata para loop seamless -->
-          <img src="abc1.png" alt="SaaS screen 1" class="saas-ticker__img" loading="lazy">
-          <img src="abc2.png" alt="SaaS screen 2" class="saas-ticker__img" loading="lazy">
-          <img src="abc3.png" alt="SaaS screen 3" class="saas-ticker__img" loading="lazy">
-          <img src="abc4.png" alt="SaaS screen 4" class="saas-ticker__img" loading="lazy">
-          <img src="abc6.png" alt="SaaS screen 6" class="saas-ticker__img" loading="lazy">
-          <img src="abc7.png" alt="SaaS screen 7" class="saas-ticker__img" loading="lazy">
+          <img src="abc1.png" alt="SaaS screen 1" class="saas-ticker__img">
+          <img src="abc2.png" alt="SaaS screen 2" class="saas-ticker__img">
+          <img src="abc3.png" alt="SaaS screen 3" class="saas-ticker__img">
+          <img src="abc4.png" alt="SaaS screen 4" class="saas-ticker__img">
+          <img src="abc6.png" alt="SaaS screen 6" class="saas-ticker__img">
+          <img src="abc7.png" alt="SaaS screen 7" class="saas-ticker__img">
         </div>
       </div>
 
@@ -369,10 +367,17 @@
     window.addEventListener('load', function () {
       var track = document.getElementById('saasTicker');
       if (!track) return;
-      var halfWidth = track.scrollWidth / 2;
-      var speed = 5.5;
-      var duration = halfWidth / speed;
-      track.style.animationDuration = duration + 's';
+
+      // Wait one frame so the browser has finished layout
+      requestAnimationFrame(function () {
+        var halfWidth = track.scrollWidth / 2;
+        if (halfWidth <= 0) return;
+        var speed = 60;
+        var duration = halfWidth / speed;
+        track.style.animationDuration = duration + 's';
+        track.classList.add('ready');
+        track.style.animationPlayState = 'running';
+      });
     });
   </script>
 
