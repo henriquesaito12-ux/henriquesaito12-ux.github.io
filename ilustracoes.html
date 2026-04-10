@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ilustrações — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    .gallery {
+      columns: 4;
+      column-gap: 12px;
+      padding: 24px 40px 80px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      break-inside: avoid;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 1024px) {
+      .gallery {
+        columns: 3;
+        padding: 16px 24px 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        columns: 2;
+        column-gap: 8px;
+        padding: 12px 12px 60px;
+      }
+      .gallery img {
+        margin-bottom: 8px;
+        border-radius: 8px;
+      }
+      .header {
+        padding: 12px 16px;
+      }
+      .header__cta {
+        font-size: 13px;
+        padding: 10px 14px;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a href="index.html" class="header__logo" id="logoLink">
+      <img src="assinatura2.png" alt="Henrique Saito" class="header__logo-img">
+    </a>
+    <div class="header__actions">
+      <button class="header__lang" id="langToggle" type="button">
+        <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+        <span class="header__lang-opt" data-lang="en">EN</span>
+      </button>
+      <a href="#" class="header__cta" data-pt="Vamos conversar?" data-en="Let's talk?" onclick="event.preventDefault(); document.getElementById('contactModal').classList.add('active');">Vamos conversar?</a>
+    </div>
+  </header>
+
+  <div class="gallery" id="gallery">
+    <img src="desenho1.jpg" alt="Ilustração 1" class="ilustracoes__img" loading="lazy">
+    <img src="desenho2.jpg" alt="Ilustração 2" class="ilustracoes__img" loading="lazy">
+    <img src="desenho3.jpg" alt="Ilustração 3" class="ilustracoes__img" loading="lazy">
+    <img src="desenho4.jpg" alt="Ilustração 4" class="ilustracoes__img" loading="lazy">
+    <img src="desenho5.jpg" alt="Ilustração 5" class="ilustracoes__img" loading="lazy">
+    <img src="draw1.jpg" alt="Ilustração 6" class="ilustracoes__img" loading="lazy">
+    <img src="draw3.jpg" alt="Ilustração 8" class="ilustracoes__img" loading="lazy">
+    <img src="draw4.jpg" alt="Ilustração 9" class="ilustracoes__img" loading="lazy">
+    <img src="draw5.jpg" alt="Ilustração 10" class="ilustracoes__img" loading="lazy">
+    <img src="draw6.jpeg" alt="Ilustração 11" class="ilustracoes__img" loading="lazy">
+    <img src="draw7.jpg" alt="Ilustração 12" class="ilustracoes__img" loading="lazy">
+    <img src="draw8.jpeg" alt="Ilustração 13" class="ilustracoes__img" loading="lazy">
+    <img src="draw9.jpeg" alt="Ilustração 14" class="ilustracoes__img" loading="lazy">
+    <img src="draw10.jpeg" alt="Ilustração 15" class="ilustracoes__img" loading="lazy">
+  </div>
+
+  <!-- Ilustração Modal -->
+  <div class="ilu-modal" id="iluModal">
+    <div class="ilu-modal__backdrop" id="iluBackdrop"></div>
+    <button class="ilu-modal__close" id="iluClose" type="button" aria-label="Fechar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+    <div class="ilu-modal__content" id="iluContent">
+      <img class="ilu-modal__img" id="iluImg" src="" alt="">
+    </div>
+    <div class="ilu-modal__controls">
+      <button class="ilu-modal__btn" id="iluZoomOut" type="button">-</button>
+      <button class="ilu-modal__btn" id="iluReset" type="button">1:1</button>
+      <button class="ilu-modal__btn" id="iluZoomIn" type="button">+</button>
+    </div>
+  </div>
+
+  <script>
+    // Custom Cursor
+    const cursor = document.getElementById('cursor');
+    if (cursor) {
+      let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+      document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+      function updateCursor() {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        const w = cursor.offsetWidth / 2;
+        cursor.style.left = (cursorX - w) + 'px';
+        cursor.style.top = (cursorY - w) + 'px';
+        requestAnimationFrame(updateCursor);
+      }
+      requestAnimationFrame(updateCursor);
+      document.querySelectorAll('a, button, .gallery img').forEach((el) => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    }
+
+    // Language Toggle
+    let currentLang = 'pt';
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'pt' ? 'en' : 'pt';
+        document.querySelectorAll('[data-pt][data-en]').forEach((el) => {
+          el.innerHTML = el.dataset[currentLang];
+        });
+        document.querySelectorAll('.header__lang-opt').forEach((opt) => {
+          opt.classList.toggle('header__lang-opt--active', opt.dataset.lang === currentLang);
+        });
+        document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+      });
+    }
+
+    // Ilustração Modal + Zoom + Drag
+    (function () {
+      var modal = document.getElementById('iluModal');
+      var backdrop = document.getElementById('iluBackdrop');
+      var closeBtn = document.getElementById('iluClose');
+      var img = document.getElementById('iluImg');
+      var zoomIn = document.getElementById('iluZoomIn');
+      var zoomOut = document.getElementById('iluZoomOut');
+      var resetBtn = document.getElementById('iluReset');
+      if (!modal || !img) return;
+
+      var scale = 1;
+      var dragX = 0, dragY = 0;
+      var startX = 0, startY = 0;
+      var isDragging = false;
+
+      function updateTransform() {
+        img.style.transform = 'scale(' + scale + ') translate(' + dragX + 'px, ' + dragY + 'px)';
+      }
+
+      function openModal(src, alt) {
+        scale = 1; dragX = 0; dragY = 0;
+        img.src = src;
+        img.alt = alt || '';
+        updateTransform();
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.gallery .ilustracoes__img').forEach(function (image) {
+        image.addEventListener('click', function () {
+          openModal(image.src, image.alt);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+
+      zoomIn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (scale < 3) { scale = Math.min(scale + 0.5, 3); updateTransform(); }
+      });
+
+      zoomOut.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (scale > 1) { scale = Math.max(scale - 0.5, 1); updateTransform(); }
+        if (scale === 1) { dragX = 0; dragY = 0; updateTransform(); }
+      });
+
+      resetBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        scale = 1; dragX = 0; dragY = 0; updateTransform();
+      });
+
+      img.addEventListener('mousedown', function (e) {
+        if (scale <= 1) return;
+        e.preventDefault();
+        isDragging = true;
+        startX = e.clientX - dragX;
+        startY = e.clientY - dragY;
+        img.classList.add('dragging');
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!isDragging) return;
+        dragX = e.clientX - startX;
+        dragY = e.clientY - startY;
+        updateTransform();
+      });
+
+      document.addEventListener('mouseup', function () {
+        if (isDragging) {
+          isDragging = false;
+          img.classList.remove('dragging');
+        }
+      });
+    })();
+
+
+  </script>
+
+  <!-- Floating Dock Navigation -->
+  <nav class="dock" id="dock">
+    <a href="index.html" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="dock__label">Home</span>
+    </a>
+    <a href="index.html#cases" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+      </svg>
+      <span class="dock__label">Cases</span>
+    </a>
+    <a href="ilustracoes.html" class="dock__item active">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+        <path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>
+      </svg>
+      <span class="dock__label" data-pt="Ilustrações" data-en="Illustrations">Ilustrações</span>
+    </a>
+    <a href="index.html#sobre" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="dock__label" data-pt="Sobre" data-en="About">Sobre</span>
+    </a>
+    <a href="cv.html" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+      <span class="dock__label">CV</span>
+    </a>
+  </nav>
+
+  <!-- Contact Modal -->
+  <div class="contact-modal" id="contactModal">
+    <div class="contact-modal__overlay" onclick="document.getElementById('contactModal').classList.remove('active');"></div>
+    <div class="contact-modal__box">
+      <button class="contact-modal__close" onclick="document.getElementById('contactModal').classList.remove('active');" aria-label="Fechar">&times;</button>
+      <div class="contact-modal__content" id="contactContent">
+        <h2 class="contact-modal__title" data-pt="Vamos conversar?" data-en="Let's talk?">Vamos conversar?</h2>
+        <p class="contact-modal__sub" data-pt="Me conta um pouco sobre o que você tem em mente." data-en="Tell me a little about what you have in mind.">Me conta um pouco sobre o que você tem em mente.</p>
+        <div class="contact-modal__links" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;">
+          <a href="https://linkedin.com/in/henriquesaito" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #111; text-decoration: none; transition: background 0.2s ease;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:henrique.saito12@gmail.com" style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #111; text-decoration: none; transition: background 0.2s ease;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            henrique.saito12@gmail.com
+          </a>
+          <a href="https://wa.me/5519997615693" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #111; text-decoration: none; transition: background 0.2s ease;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +55 19 99761-5693
+          </a>
+        </div>
+        <p style="font-family: 'DM Sans', sans-serif; font-size: 12px; color: #999; margin-bottom: 16px;" data-pt="ou envie uma mensagem:" data-en="or send a message:">ou envie uma mensagem:</p>
+        <form class="contact-modal__form" id="contactForm" action="https://formspree.io/f/henrique.saito12@gmail.com" method="POST">
+          <input type="text" name="name" required placeholder="Seu nome" class="contact-modal__input" data-pt-placeholder="Seu nome" data-en-placeholder="Your name">
+          <input type="email" name="email" required placeholder="seu@email.com" class="contact-modal__input">
+          <textarea name="message" required placeholder="No que posso te ajudar?" class="contact-modal__input contact-modal__textarea" data-pt-placeholder="No que posso te ajudar?" data-en-placeholder="How can I help you?"></textarea>
+          <button type="submit" class="contact-modal__btn" data-pt="Enviar mensagem" data-en="Send message">Enviar mensagem</button>
+        </form>
+      </div>
+      <div class="contact-modal__success" id="contactSuccess" style="display: none;">
+        <p data-pt="Mensagem enviada! Te respondo em breve. 🙌" data-en="Message sent! I'll get back to you soon. 🙌">Mensagem enviada! Te respondo em breve. 🙌</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .contact-modal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; }
+    .contact-modal.active { display: flex; }
+    .contact-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: cmFadeIn 0.2s ease; }
+    .contact-modal__box { position: relative; background: rgba(255,255,255,0.65); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; padding: 48px; width: 90%; max-width: 520px; box-shadow: 0 24px 64px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.9); animation: cmScaleIn 0.2s ease; }
+    .contact-modal__close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 24px; color: rgba(0,0,0,0.4); cursor: pointer; line-height: 1; transition: color 0.2s ease; }
+    .contact-modal__close:hover { color: rgba(0,0,0,0.7); }
+    .contact-modal__title { font-family: 'DM Sans', sans-serif; font-size: 24px; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .contact-modal__sub { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #888; margin-bottom: 28px; }
+    .contact-modal__form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-modal__input { font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 12px 16px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; outline: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: border-color 0.2s ease; width: 100%; box-sizing: border-box; }
+    .contact-modal__input:focus { border-color: rgba(0,0,0,0.3); }
+    .contact-modal__textarea { height: 120px; resize: vertical; }
+    .contact-modal__btn { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; background: rgba(0,0,0,0.85); color: #fff; border: none; border-radius: 999px; padding: 14px 32px; width: 100%; cursor: pointer; transition: background 0.2s ease; margin-top: 4px; }
+    .contact-modal__btn:hover { background: #000; }
+    .contact-modal__success { text-align: center; padding: 40px 0; }
+    .contact-modal__success p { font-family: 'DM Sans', sans-serif; font-size: 18px; color: #333; line-height: 1.6; }
+    @keyframes cmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes cmScaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  </style>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } }).then(function(r) {
+        if (r.ok) { document.getElementById('contactContent').style.display = 'none'; document.getElementById('contactSuccess').style.display = 'block'; }
+      });
+    });
+  </script>
+</body>
+</html>

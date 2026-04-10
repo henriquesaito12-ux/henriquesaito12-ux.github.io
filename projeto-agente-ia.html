@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agente de IA — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+</head>
+<body class="case-v2">
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#discovery" class="case-nav__link" data-section="discovery">Discovery</a>
+      <a href="#solution" class="case-nav__link" data-section="solution" data-pt="Solução" data-en="Solution">Solução</a>
+      <a href="#validation" class="case-nav__link" data-section="validation" data-pt="Validação" data-en="Validation">Validação</a>
+      <a href="#impact" class="case-nav__link" data-section="impact" data-pt="Impacto" data-en="Impact">Impacto</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="Inteligência operacional em tempo real" data-en="Real-time operational intelligence">Inteligência operacional em tempo real</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">AI / UX</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Rabbot</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">UX/Product Designer</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2025</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="IA aplicada ao contexto real da operação. Não um chatbot genérico. Uma camada de inteligência." data-en="AI applied to real operational context. Not a generic chatbot. A layer of intelligence.">IA aplicada ao contexto real da operação. Não um chatbot genérico. Uma camada de inteligência.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — VISÃO GERAL -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Um operador da torre de controle me relatou uma dor simples, mas crítica: descobrir se um veículo estava atrasado era um processo manual e demorado. Ele precisava alternar entre dois sistemas: a plataforma da Rabbot e o software do rastreador. Em cada veículo, verificava a última macro apontada pelo motorista. Macros são registros de atividade em campo, como Parada para Almoço ou Carregamento, e cada uma tem um tempo limite esperado. Se o motorista ultrapassasse esse limite, estava atrasado. Mas identificar isso exigia olhar veículo por veículo, manualmente. O problema real não era o atraso em si. Era o tempo que levava para perceber que ele havia acontecido. Quando o operador finalmente identificava e tentava contato, muitas vezes o motorista já havia retomado a rota. O momento de intervenção havia passado. Esse atraso invisível tem consequências concretas: impacta a captação de novos fretes, gera horas extras não planejadas e tira o controle do processo. Fui observar a dinâmica da torre de controle pessoalmente e vi essa rotina acontecendo em tempo real. Foi aí que entendi que havia espaço para um agente assumir esse papel." data-en="A control tower operator told me about a simple but critical pain point: finding out if a vehicle was delayed was a manual, time-consuming process. He had to switch between two systems: Rabbot's platform and the tracker software. For each vehicle, he checked the last macro logged by the driver. Macros are field activity records, like Lunch Break or Loading, and each has an expected time limit. If the driver exceeded that limit, they were late. But identifying this required checking vehicle by vehicle, manually. The real problem wasn't the delay itself. It was the time it took to realize it had happened. By the time the operator finally identified and tried to make contact, the driver had often already resumed the route. The intervention window had passed. This invisible delay has concrete consequences: it impacts freight acquisition, generates unplanned overtime, and removes control from the process. I went to observe the control tower dynamics in person and saw this routine happening in real time. That's when I understood there was room for an agent to take on this role.">
+        Um operador da torre de controle me relatou uma dor simples, mas crítica: descobrir se um veículo estava atrasado era um processo manual e demorado. Ele precisava alternar entre dois sistemas: a plataforma da Rabbot e o software do rastreador. Em cada veículo, verificava a última macro apontada pelo motorista. Macros são registros de atividade em campo, como Parada para Almoço ou Carregamento, e cada uma tem um tempo limite esperado. Se o motorista ultrapassasse esse limite, estava atrasado. Mas identificar isso exigia olhar veículo por veículo, manualmente. O problema real não era o atraso em si. Era o tempo que levava para perceber que ele havia acontecido. Quando o operador finalmente identificava e tentava contato, muitas vezes o motorista já havia retomado a rota. O momento de intervenção havia passado. Esse atraso invisível tem consequências concretas: impacta a captação de novos fretes, gera horas extras não planejadas e tira o controle do processo. Fui observar a dinâmica da torre de controle pessoalmente e vi essa rotina acontecendo em tempo real. Foi aí que entendi que havia espaço para um agente assumir esse papel.
+      </p>
+    </section>
+
+    <!-- 02 — DISCOVERY -->
+    <section class="case-v2-section" id="discovery">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label">DISCOVERY</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Sentei com o time da torre de controle para entender o fluxo em detalhes. Quais macros eram críticas? O que configurava um atraso relevante? Quando a intervenção fazia diferença? Esse mapeamento foi essencial, não para construir uma automação genérica, mas para definir a lógica de decisão de um agente que precisava agir como um operador experiente. Cada regra que desenhei partiu de um comportamento real que observei." data-en="I sat down with the control tower team to understand the flow in detail. Which macros were critical? What constituted a relevant delay? When did intervention make a difference? This mapping was essential — not to build a generic automation, but to define the decision logic of an agent that needed to act like an experienced operator. Every rule I designed came from a real behavior I observed.">
+        Sentei com o time da torre de controle para entender o fluxo em detalhes. Quais macros eram críticas? O que configurava um atraso relevante? Quando a intervenção fazia diferença? Esse mapeamento foi essencial, não para construir uma automação genérica, mas para definir a lógica de decisão de um agente que precisava agir como um operador experiente. Cada regra que desenhei partiu de um comportamento real que observei.
+      </p>
+      <!-- User Flow As-Is / To-Be -->
+      <p class="case-v2-section__subtitle anim-fade" data-delay="150" data-pt="Fluxo operacional" data-en="Operational flow" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #999; margin-bottom: 16px;">Fluxo operacional</p>
+      <div class="anim-scale userflow-grid" data-delay="200" style="background: #F9FAFB; border-radius: 16px; padding: 32px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 40px;">
+
+        <!-- AS-IS -->
+        <div class="userflow-block userflow-asis">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+            <span style="display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #FEE2E2; color: #991B1B; text-transform: uppercase; letter-spacing: 0.5px;">As-is</span>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #666;" data-pt="Monitoramento manual" data-en="Manual monitoring">Monitoramento manual</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: stretch;">
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Acessa Rabbot e software do rastreador separadamente" data-en="Accesses Rabbot and tracker software separately">Acessa Rabbot e software do rastreador separadamente</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Verifica macro por macro, veículo por veículo" data-en="Checks macro by macro, vehicle by vehicle">Verifica macro por macro, veículo por veículo</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Calcula manualmente se o tempo foi excedido" data-en="Manually calculates if the time was exceeded">Calcula manualmente se o tempo foi excedido</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #FEE2E2; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; font-weight: 500; color: #991B1B;" data-pt="Identifica o atraso — muitas vezes o momento já passou" data-en="Identifies the delay — often the moment has already passed">Identifica o atraso — muitas vezes o momento já passou</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Inicia contato por WhatsApp ou e-mail manualmente" data-en="Initiates contact via WhatsApp or email manually">Inicia contato por WhatsApp ou e-mail manualmente</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Aguarda resposta e decide o próximo passo" data-en="Waits for response and decides next step">Aguarda resposta e decide o próximo passo</div>
+          </div>
+        </div>
+
+        <!-- Divisor vertical -->
+        <div class="userflow-divider" style="background: #E5E7EB; width: 1px; align-self: stretch;"></div>
+
+        <!-- TO-BE -->
+        <div class="userflow-block userflow-tobe">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+            <span style="display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #DCFCE7; color: #166534; text-transform: uppercase; letter-spacing: 0.5px;">To-be</span>
+            <span style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: #666;" data-pt="Monitoramento com IA" data-en="AI-powered monitoring">Monitoramento com IA</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: stretch;">
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Agente monitora toda a frota em tempo real" data-en="Agent monitors the entire fleet in real time">Agente monitora toda a frota em tempo real</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #DCFCE7; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; font-weight: 500; color: #166534;" data-pt="Detecta desvio de macro ou infração de conformidade" data-en="Detects macro deviation or compliance violation">Detecta desvio de macro ou infração de conformidade</div>
+
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Interpreta contexto e decide se há risco operacional" data-en="Interprets context and decides if there's operational risk">Interpreta contexto e decide se há risco operacional</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Notifica motorista via WhatsApp e escala para gestor se necessário" data-en="Notifies driver via WhatsApp and escalates to manager if needed">Notifica motorista via WhatsApp e escala para gestor se necessário</div>
+            <div style="text-align: center; color: #9CA3AF; font-size: 18px; line-height: 1; margin: 4px 0;">↓</div>
+            <div style="background: #fff; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.5; color: #333;" data-pt="Operador recebe apenas o que exige decisão humana" data-en="Operator receives only what requires human decision">Operador recebe apenas o que exige decisão humana</div>
+          </div>
+        </div>
+
+      </div>
+      <style>
+        @media (max-width: 768px) {
+          .userflow-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 20px 16px !important;
+            gap: 0 !important;
+          }
+          .userflow-divider {
+            display: block !important;
+            width: 100% !important;
+            height: 2px !important;
+            background: #E5E7EB !important;
+            margin: 32px 0 !important;
+            align-self: stretch;
+          }
+          .userflow-block {
+            width: 100% !important;
+          }
+          .userflow-asis {
+            margin-bottom: 0;
+          }
+          .userflow-block span[style*="font-size: 11px"] {
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            margin-bottom: 16px !important;
+          }
+        }
+      </style>
+    </section>
+
+    <!-- 03 — SOLUÇÃO -->
+    <section class="case-v2-section" id="solution">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label" data-pt="SOLUÇÃO" data-en="SOLUTION">SOLUÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="O agente assumiu o papel de monitorador ativo da frota. Ele acompanha macros críticas, identifica desvios e inicia tratativas automaticamente via WhatsApp com o motorista, escalando para gestores se necessário. O desafio para mim foi definir quando agir, com quem falar e como comunicar. Não sou desenvolvedor e não sei criar um agente. Meu trabalho foi traduzir o comportamento operacional em lógica acionável. Trabalhei em parceria com um desenvolvedor que implementou isso no n8n." data-en="The agent took on the role of active fleet monitor. It tracks critical macros, identifies deviations, and automatically initiates interventions via WhatsApp with the driver, escalating to managers if needed. The challenge for me was defining when to act, who to contact, and how to communicate. I'm not a developer and I don't know how to build an agent. My job was to translate operational behavior into actionable logic. I worked in partnership with a developer who implemented it in n8n.">
+        O agente assumiu o papel de monitorador ativo da frota. Ele acompanha macros críticas, identifica desvios e inicia tratativas automaticamente via WhatsApp com o motorista, escalando para gestores se necessário. O desafio para mim foi definir quando agir, com quem falar e como comunicar. Não sou desenvolvedor e não sei criar um agente. Meu trabalho foi traduzir o comportamento operacional em lógica acionável. Trabalhei em parceria com um desenvolvedor que implementou isso no n8n.
+      </p>
+      <img src="agenterabbot.jpg" alt="Interface da torre de controle" class="anim-scale" style="width: 100%; aspect-ratio: 1503 / 932; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); display: block;">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Interface da torre de controle com tratativas iniciadas pelo agente" data-en="Control tower interface with AI-initiated interventions">Interface da torre de controle com tratativas iniciadas pelo agente</p>
+    </section>
+
+    <!-- 04 — VALIDAÇÃO -->
+    <section class="case-v2-section" id="validation">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label" data-pt="VALIDAÇÃO" data-en="VALIDATION">VALIDAÇÃO</span>
+      </div>
+      <!-- 1. Texto de abertura -->
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Precisávamos provar que funcionava, não com uma demo, mas com dados reais. Sugeri um teste A/B. Integramos com os rastreadores do cliente sem custo para ele. Dois meses observando sem intervenção. Uma semana com o agente ativo. Os números falaram por si:" data-en="We needed to prove it worked — not with a demo, but with real data. I proposed an A/B test. We integrated with the client's tracking systems at no cost to them. Two months of observation without intervention. One week with the agent active. The numbers spoke for themselves:">
+        Precisávamos provar que funcionava, não com uma demo, mas com dados reais. Sugeri um teste A/B. Integramos com os rastreadores do cliente sem custo para ele. Dois meses observando sem intervenção. Uma semana com o agente ativo. Os números falaram por si:
+      </p>
+
+      <!-- 2. Cards de métricas -->
+      <div class="anim-fade validation-metrics" data-delay="200" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 32px 0; background: rgba(245, 245, 245, 0.4); border-radius: 20px; padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+        <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">628h</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="economizadas em 1.870 ocorrências monitoradas" data-en="saved across 1,870 monitored occurrences">economizadas em 1.870 ocorrências monitoradas</div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">−8.8%</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="de redução no tempo médio de pernoite por ocorrência" data-en="reduction in average overnight stop duration">de redução no tempo médio de pernoite por ocorrência</div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">R$ 62.385</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="de impacto financeiro estimado por mês (fretes + hora extra)" data-en="estimated monthly financial impact (freight + overtime)">de impacto financeiro estimado por mês (fretes + hora extra)</div>
+        </div>
+      </div>
+      <style>
+        @media (max-width: 768px) {
+          .validation-metrics {
+            grid-template-columns: 1fr !important;
+            padding: 16px !important;
+          }
+          .validation-metrics div[style*="font-size: 32px"] {
+            font-size: 28px !important;
+          }
+          .case-v2-section iframe {
+            height: 450px !important;
+          }
+        }
+      </style>
+
+      <!-- 3. Texto de continuação -->
+      <p class="case-v2-section__text anim-fade" data-delay="300" data-pt="A redução veio de três frentes: pernoite caiu 1.1h por ocorrência, parada para almoço reduziu 3.6 min e parada eventual caiu 14.2 min. Com 20% de taxa capturável, o agente liberou 10.5 dias de operação e evitou 126h de hora extra no período. A IA não apenas notifica, ela muda o comportamento operacional." data-en="The reduction came from three fronts: overnight stops fell by 1.1h per occurrence, lunch breaks dropped 3.6 min, and unplanned stops fell 14.2 min. With a 20% capture rate, the agent freed up 10.5 operating days and avoided 126h of overtime. The AI doesn't just notify, it changes operational behavior.">
+        A redução veio de três frentes: pernoite caiu 1.1h por ocorrência, parada para almoço reduziu 3.6 min e parada eventual caiu 14.2 min. Com 20% de taxa capturável, o agente liberou 10.5 dias de operação e evitou 126h de hora extra no período. A IA não apenas notifica, ela muda o comportamento operacional.
+      </p>
+
+      <!-- 4. Iframe do relatório interativo -->
+      <div class="anim-scale" style="border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); margin-top: 40px;">
+        <iframe src="https://remixhenrique.lovable.app/" style="width: 100%; height: 650px; border: none; display: block;" loading="lazy"></iframe>
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Relatório interativo gerado ao final do teste A/B — navegue pelas abas para explorar os dados" data-en="Interactive report generated at the end of the A/B test — navigate through the tabs to explore the data">Relatório interativo gerado ao final do teste A/B — navegue pelas abas para explorar os dados</p>
+    </section>
+
+    <!-- 05 — IMPACTO -->
+    <section class="case-v2-section" id="impact">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">05</span>
+        <span class="case-v2-section__label" data-pt="IMPACTO" data-en="IMPACT">IMPACTO</span>
+      </div>
+      <div class="case-v2-impact">
+        <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
+          <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Results">Resultado</h3>
+          <p class="case-v2-impact__text" data-pt="628 horas economizadas. R$ 62.385 de impacto financeiro estimado por mês. Esses não são números de apresentação — são dados reais de uma semana de operação com 60 veículos monitorados. O operador que relatou a dor parou de vasculhar listas. O agente faz isso por ele, em tempo real, para toda a frota. O projeto está em produção e abriu caminho para uma arquitetura de agentes especializados dentro da plataforma, cada um assumindo um papel operacional claro." data-en="628 hours saved. R$ 62,385 in estimated monthly financial impact. These are not presentation numbers — they are real data from one week of operation with 60 monitored vehicles. The operator who reported the pain stopped scanning lists manually. The agent does it for him, in real time, across the entire fleet. The project is in production and opened the path for an architecture of specialized agents within the platform, each taking on a clear operational role.">628 horas economizadas. R$ 62.385 de impacto financeiro estimado por mês. Esses não são números de apresentação — são dados reais de uma semana de operação com 60 veículos monitorados. O operador que relatou a dor parou de vasculhar listas. O agente faz isso por ele, em tempo real, para toda a frota. O projeto está em produção e abriu caminho para uma arquitetura de agentes especializados dentro da plataforma, cada um assumindo um papel operacional claro.</p>
+        </div>
+        <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
+          <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
+          <p class="case-v2-impact__text" data-pt="Liderei o projeto de ponta a ponta. Fui a campo para entender a dor do operador, conduzi o discovery, mapeei o comportamento operacional e traduzi tudo isso em lógica de decisão para o agente. Defini os critérios de alerta e escalonamento, criei as interfaces da torre de controle no Lovable e estruturei o experimento A/B que provou o impacto. Atuei como ponte entre operação, produto e engenharia." data-en="I led the project end to end. I went to the field to understand the operator's pain, conducted the discovery, mapped the operational behavior and translated it all into decision logic for the agent. I defined the alert and escalation criteria, built the control tower interfaces in Lovable and structured the A/B experiment that proved the impact. I acted as the bridge between operations, product and engineering.">Liderei o projeto de ponta a ponta. Fui a campo para entender a dor do operador, conduzi o discovery, mapeei o comportamento operacional e traduzi tudo isso em lógica de decisão para o agente. Defini os critérios de alerta e escalonamento, criei as interfaces da torre de controle no Lovable e estruturei o experimento A/B que provou o impacto. Atuei como ponte entre operação, produto e engenharia.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Case nav — active section tracking + smooth scroll
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    // Smooth scroll on click
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Active tracking on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

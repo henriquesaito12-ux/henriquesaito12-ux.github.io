@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henrique Saito — UX/UI Designer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a href="#" class="header__logo" id="logoLink">
+      <img src="assinatura2.png" alt="Henrique Saito" class="header__logo-img">
+    </a>
+    <div class="header__actions">
+      <button class="header__lang" id="langToggle" type="button">
+        <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+        <span class="header__lang-opt" data-lang="en">EN</span>
+      </button>
+      <a href="#" class="header__cta" data-pt="Vamos conversar?" data-en="Let's talk?" onclick="event.preventDefault(); document.getElementById('contactModal').classList.add('active');">Vamos conversar?</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <p class="hero__intro fade-in" data-pt="Sou Henrique Saito, Senior Product Designer." data-en="I am Henrique Saito, Senior Product Designer.">Sou Henrique Saito, Senior Product Designer.</p>
+      <h1 class="hero__title fade-in" data-pt="Design com foco em" data-en="Design focused on">Design com foco em</h1>
+      <p class="hero__typewriter fade-in">
+        <strong id="typewriter"></strong><span class="typewriter-cursor">|</span>
+      </p>
+      <p class="hero__subtitle fade-in" data-pt="Atuo de ponta a ponta, do discovery à prototipação e acompanhamento de métricas. Trabalho em contextos complexos onde design precisa equilibrar usabilidade, eficiência e resultado de negócio." data-en="I work end to end, from discovery to prototyping and metrics tracking. I work in complex contexts where design needs to balance usability, efficiency and business results.">
+        Atuo de ponta a ponta, do discovery à prototipação e acompanhamento de métricas. Trabalho em contextos complexos onde design precisa equilibrar usabilidade, eficiência e resultado de negócio.
+      </p>
+    </div>
+    <div class="fade-in" id="photo-card-wrap">
+
+    <div class="linkedin-card" id="photo-card">
+      <div class="linkedin-card__photo">
+        <img src="foto2.JPG" alt="Henrique Saito" style="width:100%; height:100%; object-fit:cover; object-position: center top; border-radius: 16px 16px 0 0;">
+        <div class="linkedin-card__gradient"></div>
+        <span class="linkedin-card__name">Henrique Saito</span>
+      </div>
+      <div class="linkedin-card__footer">
+        <div class="linkedin-card__user">
+          <div class="linkedin-card__avatar">
+            <img src="foto2.JPG" alt="Henrique Saito" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">
+          </div>
+          <div class="linkedin-card__info">
+            <span class="linkedin-card__handle">@henriquesaito</span>
+            <span class="linkedin-card__platform">LinkedIn</span>
+          </div>
+        </div>
+        <a href="https://linkedin.com/in/henriquesaito" target="_blank" rel="noopener" class="linkedin-card__btn" data-pt="+ Conectar" data-en="+ Connect">+ Conectar</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Faixa de Empresas -->
+  <div class="companies" id="companies">
+    <span class="companies__label" data-pt="Experiência em" data-en="Experience at">Experiência em</span>
+    <div class="companies__logos">
+      <div class="companies__logo"><img src="logorabbot.png" alt="Rabbot"></div>
+      <div class="companies__logo"><img src="logotkg.png" alt="Trackage"></div>
+      <div class="companies__logo"><img src="logogrow.png" alt="Grow"></div>
+    </div>
+  </div>
+
+  <!-- Projetos -->
+  <section class="cases-section" id="cases">
+    <div class="cases-grid">
+
+      <!-- Projeto 1 -->
+      <div class="folder fade-in" data-href="projeto-product-led-sales.html" data-project="projeto-1">
+        <div class="folder__stack">
+          <div class="folder__sheet folder__sheet--back"></div>
+          <div class="folder__sheet folder__sheet--mid"></div>
+          <div class="folder__sheet folder__sheet--front">
+            <div class="folder__thumb"><img src="capa-product-led.jpg" alt="Product-Led Sales"></div>
+            <span class="folder__name">Product-Led Sales</span>
+            <div class="folder__overlay">
+              <span class="folder__overlay-cat">PRODUCT DESIGN</span>
+              <button class="folder__overlay-btn" type="button" data-pt="Ver Projeto" data-en="View Project">Ver Projeto</button>
+            </div>
+          </div>
+        </div>
+        <div class="folder__label">
+          <span class="folder__category">PRODUCT DESIGN</span>
+          <h3 class="folder__title" data-pt="Product-Led Sales aplicado à operação" data-en="Product-Led Sales applied to operations">Product-Led Sales aplicado à operação</h3>
+        </div>
+      </div>
+
+      <!-- Projeto 2 -->
+      <div class="folder fade-in" data-href="projeto-agente-ia.html" data-project="projeto-2">
+        <div class="folder__stack">
+          <div class="folder__sheet folder__sheet--back"></div>
+          <div class="folder__sheet folder__sheet--mid"></div>
+          <div class="folder__sheet folder__sheet--front">
+            <div class="folder__thumb"><img src="capa-agente-ia.jpg" alt="Agente de IA"></div>
+            <span class="folder__name" data-pt="Agente de IA" data-en="AI Agent">Agente de IA</span>
+            <div class="folder__overlay">
+              <span class="folder__overlay-cat">AI / UX</span>
+              <button class="folder__overlay-btn" type="button" data-pt="Ver Projeto" data-en="View Project">Ver Projeto</button>
+            </div>
+          </div>
+        </div>
+        <div class="folder__label">
+          <span class="folder__category">AI / UX</span>
+          <h3 class="folder__title" data-pt="Agente de IA para Monitoramento" data-en="AI Agent for Monitoring">Agente de IA para Monitoramento</h3>
+        </div>
+      </div>
+
+      <!-- Projeto 3 -->
+      <div class="folder fade-in" data-href="projeto-app-logistica.html" data-project="projeto-3">
+        <div class="folder__stack">
+          <div class="folder__sheet folder__sheet--back"></div>
+          <div class="folder__sheet folder__sheet--mid"></div>
+          <div class="folder__sheet folder__sheet--front">
+            <div class="folder__thumb"><img src="capa-app.jpg" alt="App Logística"></div>
+            <span class="folder__name" data-pt="App Logística" data-en="Logistics App">App Logística</span>
+            <div class="folder__overlay">
+              <span class="folder__overlay-cat">MOBILE</span>
+              <button class="folder__overlay-btn" type="button" data-pt="Ver Projeto" data-en="View Project">Ver Projeto</button>
+            </div>
+          </div>
+        </div>
+        <div class="folder__label">
+          <span class="folder__category">MOBILE</span>
+          <h3 class="folder__title" data-pt="Design de App para Logística" data-en="Logistics App Design">Design de App para Logística</h3>
+        </div>
+      </div>
+
+      <!-- Projeto 4 -->
+      <div class="folder fade-in" data-href="projeto-redesign-saas.html" data-project="projeto-4">
+        <div class="folder__stack">
+          <div class="folder__sheet folder__sheet--back"></div>
+          <div class="folder__sheet folder__sheet--mid"></div>
+          <div class="folder__sheet folder__sheet--front">
+            <div class="folder__thumb"><img src="capa-saas.jpg" alt="Redesign SaaS"></div>
+            <span class="folder__name" data-pt="Redesign SaaS" data-en="SaaS Redesign">Redesign SaaS</span>
+            <div class="folder__overlay">
+              <span class="folder__overlay-cat">PRODUCT DESIGN</span>
+              <button class="folder__overlay-btn" type="button" data-pt="Ver Projeto" data-en="View Project">Ver Projeto</button>
+            </div>
+          </div>
+        </div>
+        <div class="folder__label">
+          <span class="folder__category">PRODUCT DESIGN</span>
+          <h3 class="folder__title" data-pt="Refatoração &amp; Redesign de SaaS" data-en="SaaS Refactoring &amp; Redesign">Refatoração &amp; Redesign de SaaS</h3>
+        </div>
+      </div>
+
+      <!-- Projeto 5 -->
+      <div class="folder fade-in" data-href="projeto-design-system.html" data-project="projeto-5">
+        <div class="folder__stack">
+          <div class="folder__sheet folder__sheet--back"></div>
+          <div class="folder__sheet folder__sheet--mid"></div>
+          <div class="folder__sheet folder__sheet--front">
+            <div class="folder__thumb"><img src="capa-dsg-system.jpg" alt="Design System"></div>
+            <span class="folder__name">Design System</span>
+            <div class="folder__overlay">
+              <span class="folder__overlay-cat">DESIGN SYSTEM</span>
+              <button class="folder__overlay-btn" type="button" data-pt="Ver Projeto" data-en="View Project">Ver Projeto</button>
+            </div>
+          </div>
+        </div>
+        <div class="folder__label">
+          <span class="folder__category">DESIGN SYSTEM</span>
+          <h3 class="folder__title">Design System Trackage</h3>
+        </div>
+      </div>
+
+      <!-- Projeto 6 (desabilitado) -->
+      <div class="folder fade-in" style="opacity: 0.5; cursor: not-allowed; pointer-events: none; position: relative;">
+        <span style="position: absolute; top: 12px; right: 12px; z-index: 10; background: rgba(0,0,0,0.75); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px;" data-pt="Em construção" data-en="Coming soon">Em construção</span>
+        <div class="folder__stack">
+          <div class="folder__sheet folder__sheet--back"></div>
+          <div class="folder__sheet folder__sheet--mid"></div>
+          <div class="folder__sheet folder__sheet--front">
+            <div class="folder__thumb"><img src="capa-dash.jpg" alt="Dashboard"></div>
+            <span class="folder__name">Dashboard</span>
+          </div>
+        </div>
+        <div class="folder__label">
+          <span class="folder__category">UI / INTERACTION</span>
+          <h3 class="folder__title" data-pt="Exploração de Dashboard" data-en="Dashboard Exploration">Exploração de Dashboard</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Password Modal -->
+  <div class="password-modal" id="passwordModal">
+    <div class="password-modal__backdrop" id="passwordBackdrop"></div>
+    <div class="password-modal__box">
+      <button class="password-modal__close" id="passwordClose" type="button" aria-label="Fechar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+      </button>
+      <div class="password-modal__icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2 class="password-modal__title" data-pt="Projeto protegido" data-en="Protected project">Projeto protegido</h2>
+      <p class="password-modal__text" data-pt="Este case contém informações confidenciais.&lt;br&gt;Insira a senha para acessar." data-en="This case contains confidential information.&lt;br&gt;Enter the password to access.">Este case contém informações confidenciais.<br>Insira a senha para acessar.</p>
+      <form class="password-modal__form" id="passwordModalForm">
+        <input type="password" class="password-modal__input" id="passwordModalInput" placeholder="Senha" data-pt-placeholder="Senha" data-en-placeholder="Password" autocomplete="off">
+        <button type="submit" class="password-modal__submit" data-pt="Acessar projeto" data-en="Access project">Acessar projeto</button>
+        <span class="password-modal__error" id="passwordModalError"></span>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sobre -->
+  <section class="section sobre" id="sobre">
+    <header class="section__header sobre__header">
+      <h2 class="section__title fade-in" data-pt="Sobre mim" data-en="About me">Sobre mim</h2>
+      <div class="sobre__toggle" id="sobreToggle">
+        <button class="sobre__toggle-btn sobre__toggle-btn--active" data-mode="profissional" type="button">
+          <span data-pt="Profissional" data-en="Professional">Profissional</span>
+        </button>
+        <button class="sobre__toggle-btn" data-mode="pessoal" type="button">
+          <span data-pt="Pessoal" data-en="Personal">Pessoal</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="sobre__content" id="sobreContent">
+      <!-- Texto com flip -->
+      <div class="sobre__text fade-in" id="sobreText">
+        <div class="sobre__text-inner" id="sobreTextInner">
+          <!-- Profissional -->
+          <div class="sobre__text-state sobre__text-state--active" id="sobreTextPro">
+            <p class="sobre__intro" data-pt="Desenvolvo produtos digitais com foco em resolver problemas reais de negócio e melhorar a experiência do usuário ao longo de toda a jornada." data-en="I develop digital products focused on solving real business problems and improving the user experience throughout the entire journey.">
+              Desenvolvo produtos digitais com foco em resolver problemas reais de negócio e melhorar a experiência do usuário ao longo de toda a jornada.
+            </p>
+            <p data-pt="Atuo de ponta a ponta, desde o entendimento de contexto e discovery até prototipação, validação e acompanhamento de métricas, sempre buscando reduzir fricções e gerar impacto concreto no produto." data-en="I work end to end, from context understanding and discovery to prototyping, validation and metrics tracking, always seeking to reduce friction and generate concrete impact on the product.">
+              Atuo de ponta a ponta, desde o entendimento de contexto e discovery até prototipação, validação e acompanhamento de métricas, sempre buscando reduzir fricções e gerar impacto concreto no produto.
+            </p>
+            <p data-pt="Tenho experiência em contextos operacionais complexos, onde o design precisa equilibrar usabilidade, eficiência e resultado de negócio. No dia a dia trabalho de forma próxima com times de produto, tecnologia e negócio, conectando diferentes áreas para construir soluções mais consistentes e escaláveis." data-en="I have experience in complex operational contexts, where design needs to balance usability, efficiency and business results. On a daily basis I work closely with product, technology and business teams, connecting different areas to build more consistent and scalable solutions.">
+              Tenho experiência em contextos operacionais complexos, onde o design precisa equilibrar usabilidade, eficiência e resultado de negócio. No dia a dia trabalho de forma próxima com times de produto, tecnologia e negócio, conectando diferentes áreas para construir soluções mais consistentes e escaláveis.
+            </p>
+            <p data-pt="Tenho explorado também o uso de IA para acelerar ideação, prototipação e validação, tornando o processo mais ágil sem perder qualidade." data-en="I've also been exploring the use of AI to accelerate ideation, prototyping and validation, making the process more agile without losing quality.">
+              Tenho explorado também o uso de IA para acelerar ideação, prototipação e validação, tornando o processo mais ágil sem perder qualidade.
+            </p>
+            <div class="sobre__badges">
+              <span class="sobre__badge" data-pt="+6 anos de experiência" data-en="+6 years of experience">+6 anos de experiência</span>
+              <span class="sobre__badge" data-pt="End-to-end UX/UI" data-en="End-to-end UX/UI">End-to-end UX/UI</span>
+              <span class="sobre__badge" data-pt="AI-assisted" data-en="AI-assisted">AI-assisted</span>
+<span class="sobre__badge" data-pt="B2B SaaS" data-en="B2B SaaS">B2B SaaS</span>
+            </div>
+          </div>
+          <!-- Pessoal -->
+          <div class="sobre__text-state" id="sobreTextPer">
+            <p class="sobre__intro" data-pt="Fora do trabalho, sou movido por curiosidade e por pessoas." data-en="Outside of work, I'm driven by curiosity and by people.">
+              Fora do trabalho, sou movido por curiosidade e por pessoas.
+            </p>
+            <p data-pt="Tenho um cachorro chamado Sasuke. Sim, sou fã de anime e One Piece é sagrado. Consigo falar horas sobre a história do Luffy com o mesmo entusiasmo que falo sobre design." data-en="I have a dog named Sasuke. Yes, I'm an anime fan and One Piece is sacred. I can talk for hours about Luffy's story with the same enthusiasm I talk about design.">
+              Tenho um cachorro chamado Sasuke. Sim, sou fã de anime e One Piece é sagrado. Consigo falar horas sobre a história do Luffy com o mesmo entusiasmo que falo sobre design.
+            </p>
+            <p data-pt="Desenho desde criança e nunca parei. É onde consigo criar só pelo prazer de criar. Também pratico musculação e estou tentando sobreviver ao crossfit como iniciante." data-en="I've been drawing since I was a kid and never stopped. It's where I can create just for the joy of creating. I also work out and I'm trying to survive crossfit as a beginner.">
+              Desenho desde criança e nunca parei. É onde consigo criar só pelo prazer de criar. Também pratico musculação e estou tentando sobreviver ao crossfit como iniciante.
+            </p>
+            <p data-pt="Gosto de conversar com pessoas de áreas e histórias diferentes. Acredito que é aí que as melhores ideias aparecem." data-en="I like talking to people from different fields and backgrounds. I believe that's where the best ideas come from.">
+              Gosto de conversar com pessoas de áreas e histórias diferentes. Acredito que é aí que as melhores ideias aparecem.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fotos empilhadas -->
+      <div class="sobre__photos fade-in" id="sobrePhotos">
+        <img src="pesoall.jpg" alt="Pessoal" class="sobre__photo-img sobre__photo-pessoal" id="sobrePhotoPes">
+        <img src="foto1.JPG" alt="Henrique Saito" class="sobre__photo-img sobre__photo-pro" id="sobrePhotoPro">
+      </div>
+    </div>
+
+    <!-- Glass Cards: Skills + My Stack -->
+    <div class="sobre__cards">
+
+      <!-- CARD 1 — Skills -->
+      <div class="glass-card glass-card--skills">
+        <h3 class="glass-card__title" data-pt="Habilidades" data-en="Skills">Habilidades</h3>
+        <div class="skills-cloud">
+          <div class="skill-item" style="top:40px;left:20px;z-index:10">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#4CAF50"/></svg>
+            <span class="skill-tag skill-tag--1" data-pt="UX Research" data-en="UX Research">UX Research</span>
+          </div>
+          <div class="skill-item" style="top:90px;left:310px;z-index:11">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#7B61FF"/></svg>
+            <span class="skill-tag skill-tag--2" data-pt="Product Design" data-en="Product Design">Product Design</span>
+          </div>
+          <div class="skill-item" style="top:130px;left:160px;z-index:12">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#FF6B6B"/></svg>
+            <span class="skill-tag skill-tag--3" data-pt="Prototipagem" data-en="Prototyping">Prototipagem</span>
+          </div>
+          <div class="skill-item" style="top:220px;left:20px;z-index:13">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#4ECDC4"/></svg>
+            <span class="skill-tag skill-tag--4" data-pt="Design System" data-en="Design System">Design System</span>
+          </div>
+          <div class="skill-item" style="top:220px;left:260px;z-index:14">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#FF9F43"/></svg>
+            <span class="skill-tag skill-tag--5" data-pt="Design de Interação" data-en="Interaction Design">Design de Interação</span>
+          </div>
+          <div class="skill-item" style="top:320px;left:60px;z-index:15">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#A29BFE"/></svg>
+            <span class="skill-tag skill-tag--6" data-pt="Discovery e Estratégia" data-en="Discovery &amp; Strategy">Discovery e Estratégia</span>
+          </div>
+          <div class="skill-item" style="top:320px;left:290px;z-index:16">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#FD79A8"/></svg>
+            <span class="skill-tag skill-tag--7" data-pt="Testes de Usabilidade" data-en="Usability Testing">Testes de Usabilidade</span>
+          </div>
+          <div class="skill-item" style="top:10px;left:280px;z-index:17">
+            <svg class="skill-cursor" width="14" height="14" viewBox="0 0 10 10"><path d="M1 1L5 9L6 5L10 4L1 1Z" fill="#1a1a1a"/></svg>
+            <span class="skill-tag skill-tag--8" data-pt="IA aplicada ao design" data-en="AI-driven Design">IA aplicada ao design</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 — My Stack -->
+      <div class="glass-card glass-card--stack">
+        <h3 class="glass-card__title" data-pt="Ferramentas" data-en="My Stack">Ferramentas</h3>
+        <div class="stack-cloud">
+          <div class="stack-item" style="top:8%;left:10%" data-tooltip="Figma">
+            <img src="figma.png" alt="Figma">
+          </div>
+          <div class="stack-item" style="top:6%;left:62%" data-tooltip="Miro">
+            <img src="miro.png" alt="Miro">
+          </div>
+          <div class="stack-item" style="top:30%;left:35%" data-tooltip="Lovable">
+            <img src="lovable.png" alt="Lovable">
+          </div>
+          <div class="stack-item" style="top:32%;left:72%" data-tooltip="Claude">
+            <img src="claude.png" alt="Claude">
+          </div>
+          <div class="stack-item" style="top:55%;left:8%" data-tooltip="Photoshop">
+            <img src="photoshop.png" alt="Photoshop">
+          </div>
+          <div class="stack-item" style="top:56%;left:52%" data-tooltip="Illustrator">
+            <img src="illustrator.png" alt="Illustrator">
+          </div>
+          <div class="stack-item" style="top:78%;left:30%" data-tooltip="Procreate">
+            <img src="procreate.png" alt="Procreate">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <!-- Floating Dock Navigation -->
+  <nav class="dock" id="dock">
+    <a href="#" class="dock__item active" data-section="hero" id="dockHome">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="dock__label">Home</span>
+    </a>
+    <a href="#cases" class="dock__item" data-section="cases">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+      </svg>
+      <span class="dock__label">Cases</span>
+    </a>
+    <a href="ilustracoes.html" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+        <path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>
+      </svg>
+      <span class="dock__label" data-pt="Ilustrações" data-en="Illustrations">Ilustrações</span>
+    </a>
+    <a href="#sobre" class="dock__item" data-section="sobre">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="dock__label" data-pt="Sobre" data-en="About">Sobre</span>
+    </a>
+    <a href="cv.html" class="dock__item" id="dockCV">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+      <span class="dock__label">CV</span>
+    </a>
+  </nav>
+
+  <!-- Contact Modal -->
+  <div class="contact-modal" id="contactModal">
+    <div class="contact-modal__overlay" onclick="document.getElementById('contactModal').classList.remove('active');"></div>
+    <div class="contact-modal__box">
+      <button class="contact-modal__close" onclick="document.getElementById('contactModal').classList.remove('active');" aria-label="Fechar">&times;</button>
+      <div class="contact-modal__content" id="contactContent">
+        <h2 class="contact-modal__title" data-pt="Vamos conversar?" data-en="Let's talk?">Vamos conversar?</h2>
+        <p class="contact-modal__sub" data-pt="Me conta um pouco sobre o que você tem em mente." data-en="Tell me a little about what you have in mind.">Me conta um pouco sobre o que você tem em mente.</p>
+        <div class="contact-modal__links">
+          <a href="https://linkedin.com/in/henriquesaito" target="_blank" rel="noopener" class="contact-modal__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:henrique.saito12@gmail.com" class="contact-modal__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            henrique.saito12@gmail.com
+          </a>
+          <a href="https://wa.me/5519997615693" target="_blank" rel="noopener" class="contact-modal__link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +55 19 99761-5693
+          </a>
+        </div>
+        <p class="contact-modal__divider" data-pt="ou envie uma mensagem:" data-en="or send a message:">ou envie uma mensagem:</p>
+        <form class="contact-modal__form" id="contactForm" action="https://formspree.io/f/henrique.saito12@gmail.com" method="POST">
+          <input type="text" name="name" required placeholder="Seu nome" class="contact-modal__input" data-pt-placeholder="Seu nome" data-en-placeholder="Your name">
+          <input type="email" name="email" required placeholder="seu@email.com" class="contact-modal__input">
+          <textarea name="message" required placeholder="No que posso te ajudar?" class="contact-modal__input contact-modal__textarea" data-pt-placeholder="No que posso te ajudar?" data-en-placeholder="How can I help you?"></textarea>
+          <button type="submit" class="contact-modal__btn" data-pt="Enviar mensagem" data-en="Send message">Enviar mensagem</button>
+        </form>
+      </div>
+      <div class="contact-modal__success" id="contactSuccess" style="display: none;">
+        <p data-pt="Mensagem enviada! Te respondo em breve. 🙌" data-en="Message sent! I'll get back to you soon. 🙌">Mensagem enviada! Te respondo em breve. 🙌</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .contact-modal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; }
+    .contact-modal.active { display: flex; }
+    .contact-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: cmFadeIn 0.2s ease; }
+    .contact-modal__box { position: relative; background: rgba(255,255,255,0.65); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; padding: 48px; width: 90%; max-width: 520px; box-shadow: 0 24px 64px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.9); animation: cmScaleIn 0.2s ease; }
+    .contact-modal__close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 24px; color: rgba(0,0,0,0.4); cursor: pointer; line-height: 1; transition: color 0.2s ease; }
+    .contact-modal__close:hover { color: rgba(0,0,0,0.7); }
+    .contact-modal__title { font-family: 'DM Sans', sans-serif; font-size: 24px; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .contact-modal__sub { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #888; margin-bottom: 20px; }
+    .contact-modal__links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .contact-modal__link { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #111; text-decoration: none; transition: background 0.2s ease; }
+    .contact-modal__link:hover { background: rgba(0,0,0,0.05); }
+    .contact-modal__link svg { flex-shrink: 0; }
+    .contact-modal__divider { font-family: 'DM Sans', sans-serif; font-size: 12px; color: #999; margin-bottom: 16px; }
+    .contact-modal__form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-modal__input { font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 12px 16px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; outline: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: border-color 0.2s ease; width: 100%; box-sizing: border-box; }
+    .contact-modal__input:focus { border-color: rgba(0,0,0,0.3); }
+    .contact-modal__textarea { height: 120px; resize: vertical; }
+    .contact-modal__btn { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; background: rgba(0,0,0,0.85); color: #fff; border: none; border-radius: 999px; padding: 14px 32px; width: 100%; cursor: pointer; transition: background 0.2s ease; margin-top: 4px; }
+    .contact-modal__btn:hover { background: #000; }
+    .contact-modal__success { text-align: center; padding: 40px 0; }
+    .contact-modal__success p { font-family: 'DM Sans', sans-serif; font-size: 18px; color: #333; line-height: 1.6; }
+    @keyframes cmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes cmScaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  </style>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r) {
+        if (r.ok) {
+          document.getElementById('contactContent').style.display = 'none';
+          document.getElementById('contactSuccess').style.display = 'block';
+        }
+      });
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Logística — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    /* App carousel (ticker) */
+    .app-ticker {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      overflow: hidden;
+      padding: 32px 0;
+      position: relative;
+      background: #fff;
+    }
+
+    .app-ticker::before,
+    .app-ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .app-ticker::before {
+      left: 0;
+      background: linear-gradient(to right, #ffffff, transparent);
+    }
+
+    .app-ticker::after {
+      right: 0;
+      background: linear-gradient(to left, #ffffff, transparent);
+    }
+
+    .app-ticker__track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: appScroll linear infinite;
+    }
+
+    .app-ticker__img {
+      height: 520px;
+      aspect-ratio: 375 / 812;
+      object-fit: cover;
+      border-radius: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    @keyframes appScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .app-ticker__img {
+        height: 320px;
+        width: calc(320px * 375 / 812);
+      }
+      .app-ticker__track {
+        gap: 12px;
+      }
+      .app-ticker::before,
+      .app-ticker::after {
+        width: 60px;
+      }
+      .img-row {
+        grid-template-columns: 1fr !important;
+      }
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr !important;
+        padding: 16px !important;
+      }
+      .mode-hint {
+        display: none !important;
+      }
+      /* Before/After block */
+      .before-after-container {
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+      .before-after-container > div {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto;
+      }
+      .before-after-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body class="case-v2">
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#discovery" class="case-nav__link" data-section="discovery">Discovery</a>
+      <a href="#userflow" class="case-nav__link" data-section="userflow">User Flow</a>
+      <a href="#wireframes" class="case-nav__link" data-section="wireframes">Wireframes</a>
+      <a href="#designsystem" class="case-nav__link" data-section="designsystem">Color System</a>
+      <a href="#prototipos" class="case-nav__link" data-section="prototipos" data-pt="Protótipos" data-en="Prototypes">Protótipos</a>
+      <a href="#resultado" class="case-nav__link" data-section="resultado" data-pt="Resultado" data-en="Results">Resultado</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="App de Checklists para Operações Logísticas" data-en="Checklist App for Logistics Operations">App de Checklists para Operações Logísticas</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">Mobile</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Rabbot</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">UX/Product Designer</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2023</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="Do papel ao digital. Sem perder a complexidade real da operação." data-en="From paper to digital. Without losing the real complexity of the operation.">Do papel ao digital. Sem perder a complexidade real da operação.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — VISÃO GERAL -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="A Rabbot já tinha um app de checklists, mas ele não dava conta da complexidade real da operação. O app original usava uma grade de blocos coloridos como navegação, sem hierarquia, sem design system e sem conexão com o brandbook. Cada tela era desenhada de forma isolada. Assumi o projeto para repensar a experiência do zero: substituir processos manuais em papel por algo que fizesse sentido para quem usa no campo, integrando tudo à plataforma. Conduzi o projeto de ponta a ponta, desde as visitas com usuários reais até a prototipagem, testes de usabilidade e lançamento." data-en="Rabbot already had a checklist app, but it couldn't handle the real complexity of the operation. The original app used a grid of colored tiles as navigation, with no hierarchy, no design system, and no connection to the brandbook. Every screen was designed in isolation. I took over the project to rethink the experience from scratch: replacing paper-based processes with something that made sense for field users, integrating everything into the platform. I led the project end to end, from field visits with real users to prototyping, usability testing, and launch.">
+        A Rabbot já tinha um app de checklists, mas ele não dava conta da complexidade real da operação. O app original usava uma grade de blocos coloridos como navegação, sem hierarquia, sem design system e sem conexão com o brandbook. Cada tela era desenhada de forma isolada. Assumi o projeto para repensar a experiência do zero: substituir processos manuais em papel por algo que fizesse sentido para quem usa no campo, integrando tudo à plataforma. Conduzi o projeto de ponta a ponta, desde as visitas com usuários reais até a prototipagem, testes de usabilidade e lançamento.
+      </p>
+      <!-- Antes e Depois -->
+      <div class="anim-scale before-after-container" data-delay="200" style="display: flex; align-items: center; justify-content: center; gap: 24px; margin: 40px auto;">
+        <div style="width: 180px; flex-shrink: 0;">
+          <span style="display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 999px; background: #FEE2E2; color: #991B1B; margin-bottom: 10px;" data-pt="Antes" data-en="Before">Antes</span>
+          <img src="appold (2).png" alt="Interface anterior" style="width: 100%; aspect-ratio: 375 / 812; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); display: block; opacity: 0.7;">
+        </div>
+        <span class="before-after-arrow" style="font-size: 32px; color: #9CA3AF; flex-shrink: 0;">→</span>
+        <div style="width: 280px; flex-shrink: 0;">
+          <span style="display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 999px; background: #DCFCE7; color: #166534; margin-bottom: 10px;" data-pt="Atual" data-en="Current">Atual</span>
+          <img src="ap1 (1).png" alt="Nova interface" style="width: 100%; aspect-ratio: 375 / 812; object-fit: cover; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); display: block;">
+        </div>
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 16px;" data-pt="Interface anterior vs nova interface — navegação e identidade visual reformuladas" data-en="Previous interface vs new interface — navigation and visual identity redesigned">Interface anterior vs nova interface — navegação e identidade visual reformuladas</p>
+    </section>
+
+    <!-- 02 — DISCOVERY -->
+    <section class="case-v2-section" id="discovery">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label">DISCOVERY</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="O segmento logístico ainda é muito manual. Checklists em papel, ordens de serviço impressas, gestão por planilha. Fui pessoalmente a empresas como Tegma, Porto Seguro, Bauminas e Unilever para entender como isso funcionava na prática. O que mais me importava não era só identificar dores, era mapear a jornada completa do veículo.
+
+Os principais insights de campo foram: usuários pulavam questões não por serem irrelevantes, mas porque o input era confuso ou lento; operadores perdiam progresso do checklist por quedas de conectividade, tornando o modo offline uma necessidade crítica; o brilho da tela ao sol dificultava a leitura, o que moldou a decisão de suportar dark mode e light mode com alto contraste; e gestores queriam revisar checklists preenchidos sem precisar alternar para o SaaS.
+
+Esse mapeamento foi dando clareza do que o app precisava contemplar." data-en="The logistics segment is still heavily manual. Paper checklists, printed service orders, spreadsheet management. I personally visited companies like Tegma, Porto Seguro, Bauminas, and Unilever to understand how this worked in practice. What mattered most wasn't just identifying pain points, it was mapping the complete vehicle journey.
+
+Key field insights: users skipped questions not because they were irrelevant, but because the input was confusing or slow; operators frequently lost checklist progress due to connectivity drops, making offline mode a critical requirement; phone screens in direct sunlight made content hard to read, which shaped the decision to support both dark and light modes with high contrast; and managers wanted to review completed checklists without switching to the SaaS platform.
+
+This mapping gave clarity on what the app needed to cover.">
+        O segmento logístico ainda é muito manual. Checklists em papel, ordens de serviço impressas, gestão por planilha. Fui pessoalmente a empresas como Tegma, Porto Seguro, Bauminas e Unilever para entender como isso funcionava na prática. O que mais me importava não era só identificar dores, era mapear a jornada completa do veículo.
+
+Os principais insights de campo foram: usuários pulavam questões não por serem irrelevantes, mas porque o input era confuso ou lento; operadores perdiam progresso do checklist por quedas de conectividade, tornando o modo offline uma necessidade crítica; o brilho da tela ao sol dificultava a leitura, o que moldou a decisão de suportar dark mode e light mode com alto contraste; e gestores queriam revisar checklists preenchidos sem precisar alternar para o SaaS.
+
+Esse mapeamento foi dando clareza do que o app precisava contemplar.
+      </p>
+      <!-- Fotos em campo -->
+      <div class="img-row anim-scale" data-delay="200" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px;">
+        <div>
+          <div style="background: #F5F5F5; border-radius: 12px; padding: 16px; height: 320px; display: flex; align-items: center; justify-content: center;">
+            <img src="visitategma.png" alt="Visita à Tegma" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">
+          </div>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Visita à Tegma" data-en="Field visit — Tegma">Visita à Tegma</p>
+        </div>
+        <div>
+          <div style="background: #F5F5F5; border-radius: 12px; padding: 16px; height: 320px; display: flex; align-items: center; justify-content: center;">
+            <img src="observacao.png" alt="Observação em campo" style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">
+          </div>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Observação em campo" data-en="Field observation">Observação em campo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 — USER FLOW -->
+    <section class="case-v2-section" id="userflow">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label">USER FLOW</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Com a jornada mapeada, desenhei user flows detalhados para cada perfil de usuário. Essa etapa foi essencial para garantir que cada caminho dentro do app fosse claro e funcional antes de qualquer decisão visual." data-en="With the journey mapped, I designed detailed user flows for each user profile. This step was essential to ensure every path within the app was clear and functional before any visual decisions were made.">
+        Com a jornada mapeada, desenhei user flows detalhados para cada perfil de usuário. Essa etapa foi essencial para garantir que cada caminho dentro do app fosse claro e funcional antes de qualquer decisão visual.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="userflow.png" alt="User Flow" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="User flow — jornada do operador no app" data-en="User flow — operator journey in the app">User flow — jornada do operador no app</p>
+    </section>
+
+    <!-- 04 — WIREFRAMES -->
+    <section class="case-v2-section" id="wireframes">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label">WIREFRAMES</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Sempre rascunhei no papel. Antes mesmo do boom da IA, já usava esboços em reuniões para materializar rapidamente o que estava sendo discutido, uma forma de garantir que todo mundo está falando da mesma coisa. Os primeiros wireframes foram feitos à mão, focados 100% na estrutura e no fluxo. Isso permitiu explorar e descartar ideias rápido, antes de avançar para o digital." data-en="I always sketched on paper first. Even before the AI boom, I used sketches in meetings to quickly materialize what was being discussed, a way to make sure everyone was on the same page. The first wireframes were hand-drawn, 100% focused on structure and flow. This allowed ideas to be explored and discarded quickly, before moving to digital.">
+        Sempre rascunhei no papel. Antes mesmo do boom da IA, já usava esboços em reuniões para materializar rapidamente o que estava sendo discutido, uma forma de garantir que todo mundo está falando da mesma coisa. Os primeiros wireframes foram feitos à mão, focados 100% na estrutura e no fluxo. Isso permitiu explorar e descartar ideias rápido, antes de avançar para o digital.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F9F9F9; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="wireframe.png" alt="Wireframes em papel" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Wireframes em papel — estrutura antes da interface" data-en="Paper wireframes — structure before the interface">Wireframes em papel — estrutura antes da interface</p>
+    </section>
+
+    <!-- 05 — COLOR SYSTEM -->
+    <section class="case-v2-section" id="designsystem">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">05</span>
+        <span class="case-v2-section__label">COLOR SYSTEM</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Antes de redesenhar qualquer tela, construí o design system. Essa foi a decisão de maior alavancagem do projeto. Defini uma paleta de cores primitiva (Blue, Green, Neutral, Red, Yellow) com 10 tons cada, e sobre ela criei tokens semânticos como Background_1, Font_Title, Button_Primary e Border_Default. A camada semântica foi estruturada em quatro contextos: Full HD Light, Full HD Dark, HD Light e HD Dark, correspondendo às resoluções e modos usados em produção.
+
+Isso significou que alternar entre dark mode e light mode não exigiu nenhum redesenho, apenas uma troca de variável. Quando validamos o toggle via Figma variable modes, o app inteiro atualizou instantaneamente. O mesmo sistema de tokens serviu de base para o redesign da plataforma SaaS, unificando a identidade visual de ambos os produtos pela primeira vez." data-en="Before redesigning any screen, I built the design system. This was the highest-leverage decision of the project. I defined a primitive color palette (Blue, Green, Neutral, Red, Yellow) with 10 tonal steps each, and on top of it created semantic tokens like Background_1, Font_Title, Button_Primary, and Border_Default. The semantic layer was structured across four contexts: Full HD Light, Full HD Dark, HD Light, and HD Dark, matching the resolutions and modes used in production.
+
+This meant switching between dark and light mode required zero redesign, just a variable swap. When we validated the toggle using Figma variable modes, the entire app updated instantly. The same token foundation served as the base for the SaaS platform redesign, unifying the visual identity of both products for the first time.">
+        Antes de redesenhar qualquer tela, construí o design system. Essa foi a decisão de maior alavancagem do projeto. Defini uma paleta de cores primitiva (Blue, Green, Neutral, Red, Yellow) com 10 tons cada, e sobre ela criei tokens semânticos como Background_1, Font_Title, Button_Primary e Border_Default. A camada semântica foi estruturada em quatro contextos: Full HD Light, Full HD Dark, HD Light e HD Dark, correspondendo às resoluções e modos usados em produção.
+
+Isso significou que alternar entre dark mode e light mode não exigiu nenhum redesenho, apenas uma troca de variável. Quando validamos o toggle via Figma variable modes, o app inteiro atualizou instantaneamente. O mesmo sistema de tokens serviu de base para o redesign da plataforma SaaS, unificando a identidade visual de ambos os produtos pela primeira vez.
+      </p>
+      <!-- Paleta de cores -->
+      <div class="anim-scale" data-delay="150" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="colors.png" alt="Paleta de cores primitiva" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+
+      <!-- Dark / Light mode toggle -->
+      <div class="anim-scale" data-delay="250" style="display: flex; align-items: center; justify-content: center; gap: 40px; margin: 40px auto;">
+        <div id="modeToggle" style="position: relative; max-width: 280px; width: 280px; cursor: pointer; aspect-ratio: 375 / 812;">
+          <img src="white.png" alt="Light mode" id="modeBack" style="position: absolute; top: 0; left: 0; width: 90%; aspect-ratio: 375 / 812; object-fit: cover; border-radius: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.10); transform: translateX(32px) translateY(16px) rotate(6deg); z-index: 1; transition: all 0.4s ease;">
+          <img src="dark.png" alt="Dark mode" id="modeFront" style="position: relative; width: 100%; aspect-ratio: 375 / 812; object-fit: cover; border-radius: 24px; box-shadow: 0 16px 48px rgba(0,0,0,0.18); transform: rotate(-2deg); z-index: 2; transition: all 0.4s ease, transform 0.3s ease;">
+        </div>
+        <!-- Hint lateral -->
+        <div class="mode-hint" style="display: flex; align-items: center; gap: 6px; transform: rotate(-5deg);">
+          <span style="font-size: 18px; color: #888;">←</span>
+          <span style="font-family: 'Patrick Hand', cursive; font-size: 15px; color: #888; white-space: pre-line; line-height: 1.4;" data-pt="clique para&#10;alternar" data-en="click to&#10;toggle">clique para&#10;alternar</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 — PROTÓTIPOS -->
+    <section class="case-v2-section" id="prototipos">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">06</span>
+        <span class="case-v2-section__label" data-pt="PROTÓTIPOS" data-en="PROTOTYPES">PROTÓTIPOS</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Com a estrutura validada, parti para os protótipos de alta fidelidade. O app ganhou uma identidade visual alinhada ao brandbook da Rabbot. A navegação foi completamente reformulada: a grade de blocos coloridos deu lugar a uma bottom navigation bar persistente e um drawer lateral para navegação secundária. O botão de novo checklist ganhou destaque direto na home, refletindo que iniciar um checklist era a ação mais frequente dos operadores. Foram 22 tipos de questão diferentes para cobrir a complexidade real da operação, cada um com seu próprio componente de input, documentado para handoff com o time de desenvolvimento." data-en="With the structure validated, I moved to high-fidelity prototypes. The app gained a visual identity aligned with Rabbot's brandbook. Navigation was completely redesigned: the colored tile grid gave way to a persistent bottom navigation bar and a side drawer for secondary navigation. The new checklist button was given prominence directly on the home screen, reflecting that starting a checklist was by far the most frequent action performed by operators. 22 different question types were built to cover the real complexity of the operation, each with its own input component, documented for developer handoff.">
+        Com a estrutura validada, parti para os protótipos de alta fidelidade. O app ganhou uma identidade visual alinhada ao brandbook da Rabbot. A navegação foi completamente reformulada: a grade de blocos coloridos deu lugar a uma bottom navigation bar persistente e um drawer lateral para navegação secundária. O botão de novo checklist ganhou destaque direto na home, refletindo que iniciar um checklist era a ação mais frequente dos operadores. Foram 22 tipos de questão diferentes para cobrir a complexidade real da operação, cada um com seu próprio componente de input, documentado para handoff com o time de desenvolvimento.
+      </p>
+
+      <!-- Carrossel automático -->
+      <div class="app-ticker anim-scale" data-delay="100">
+        <div class="app-ticker__track" id="appTicker">
+          <img src="ap0 (1).png" alt="App screen 0" class="app-ticker__img">
+          <img src="ap1 (1).png" alt="App screen 1" class="app-ticker__img">
+          <img src="ap2 (1).png" alt="App screen 2" class="app-ticker__img">
+          <img src="ap3 (1).png" alt="App screen 3" class="app-ticker__img">
+          <img src="ap4 (1).png" alt="App screen 4" class="app-ticker__img">
+          <img src="ap5 (1).png" alt="App screen 5" class="app-ticker__img">
+          <img src="ap6 (1).png" alt="App screen 6" class="app-ticker__img">
+          <img src="ap7 (1).png" alt="App screen 7" class="app-ticker__img">
+          <img src="ap8 (1).png" alt="App screen 8" class="app-ticker__img">
+          <img src="ap10 (1).png" alt="App screen 10" class="app-ticker__img">
+          <img src="ap11 (1).png" alt="App screen 11" class="app-ticker__img">
+          <img src="ap12 (1).png" alt="App screen 12" class="app-ticker__img">
+          <!-- Duplicata para loop seamless -->
+          <img src="ap0 (1).png" alt="App screen 0" class="app-ticker__img">
+          <img src="ap1 (1).png" alt="App screen 1" class="app-ticker__img">
+          <img src="ap2 (1).png" alt="App screen 2" class="app-ticker__img">
+          <img src="ap3 (1).png" alt="App screen 3" class="app-ticker__img">
+          <img src="ap4 (1).png" alt="App screen 4" class="app-ticker__img">
+          <img src="ap5 (1).png" alt="App screen 5" class="app-ticker__img">
+          <img src="ap6 (1).png" alt="App screen 6" class="app-ticker__img">
+          <img src="ap7 (1).png" alt="App screen 7" class="app-ticker__img">
+          <img src="ap8 (1).png" alt="App screen 8" class="app-ticker__img">
+          <img src="ap10 (1).png" alt="App screen 10" class="app-ticker__img">
+          <img src="ap11 (1).png" alt="App screen 11" class="app-ticker__img">
+          <img src="ap12 (1).png" alt="App screen 12" class="app-ticker__img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 — HANDOFF -->
+    <section class="case-v2-section" id="handoff">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">07</span>
+        <span class="case-v2-section__label">HANDOFF</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Todas as telas, variações de componentes, estados de botão, campos de input e dropdowns foram documentados em detalhe no Figma. Para gestão de tarefas, usamos o Jira. Cada card era pré-alinhado com o Tech Lead antes de entrar no board, garantindo que os desenvolvedores tivessem todas as informações necessárias para implementar sem precisar interromper o processo de design para tirar dúvidas. Trabalhei em ciclos curtos de revisão de build, ajustando specs conforme o que o Flutter conseguia entregar nativamente." data-en="All screens, component variations, button states, input fields, and dropdowns were documented in detail within Figma. For task management, we used Jira. Tasks were pre-aligned with the Tech Lead before being added to the board, ensuring developers had all the information needed to implement without interrupting the design process for clarification. I worked in short build review cycles, adjusting specs based on what Flutter could deliver natively.">
+        Todas as telas, variações de componentes, estados de botão, campos de input e dropdowns foram documentados em detalhe no Figma. Para gestão de tarefas, usamos o Jira. Cada card era pré-alinhado com o Tech Lead antes de entrar no board, garantindo que os desenvolvedores tivessem todas as informações necessárias para implementar sem precisar interromper o processo de design para tirar dúvidas. Trabalhei em ciclos curtos de revisão de build, ajustando specs conforme o que o Flutter conseguia entregar nativamente.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="handoff.png" alt="Handoff no Figma" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Documentação de componentes e handoff no Figma" data-en="Component documentation and handoff in Figma">Documentação de componentes e handoff no Figma</p>
+    </section>
+
+    <!-- 08 — PÓS-LANÇAMENTO -->
+    <section class="case-v2-section" id="poslancamento">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">08</span>
+        <span class="case-v2-section__label" data-pt="PÓS-LANÇAMENTO" data-en="POST-LAUNCH">PÓS-LANÇAMENTO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Depois do lançamento, acompanhei de perto a recepção dos usuários. Formulários, entrevistas e pesquisas de satisfação dentro do próprio app nos ajudaram a entender o que estava funcionando e o que precisava de ajuste. Iterei com base em comportamento real, não em suposições.
+
+Estruturei também os conteúdos e guias do Helpcenter, tutoriais, guias interativos e respostas para dúvidas frequentes, tudo pensado para reduzir a dependência de suporte manual e facilitar a adoção por novos usuários. Os tickets de suporte relacionados ao app caíram de uma média de 30 por semana para menos de 10." data-en="After launch, I closely monitored user reception. In-app surveys, interviews, and satisfaction research helped us understand what was working and what needed adjustment. I iterated based on real behavior, not assumptions.
+
+I also structured the Help Center content, tutorials, interactive guides, and FAQ answers, all designed to reduce dependence on manual support and facilitate adoption by new users. App-related support tickets dropped from an average of 30 per week to fewer than 10.">
+        Depois do lançamento, acompanhei de perto a recepção dos usuários. Formulários, entrevistas e pesquisas de satisfação dentro do próprio app nos ajudaram a entender o que estava funcionando e o que precisava de ajuste. Iterei com base em comportamento real, não em suposições.
+
+Estruturei também os conteúdos e guias do Helpcenter, tutoriais, guias interativos e respostas para dúvidas frequentes, tudo pensado para reduzir a dependência de suporte manual e facilitar a adoção por novos usuários. Os tickets de suporte relacionados ao app caíram de uma média de 30 por semana para menos de 10.
+      </p>
+      <!-- Feedbacks -->
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="feedbacks.png" alt="Feedbacks" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Feedbacks coletados após o lançamento" data-en="Feedback collected after launch">Feedbacks coletados após o lançamento</p>
+
+      <!-- Helpcenter -->
+      <div class="anim-scale" data-delay="300" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="helpcenter.png" alt="Helpcenter" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Helpcenter integrado ao app" data-en="Help Center integrated into the app">Helpcenter integrado ao app</p>
+    </section>
+
+    <!-- 09 — RESULTADO -->
+    <section class="case-v2-section" id="resultado">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">09</span>
+        <span class="case-v2-section__label" data-pt="RESULTADO" data-en="RESULTS">RESULTADO</span>
+      </div>
+
+      <!-- Cards de métricas (liquid glass) -->
+      <div class="anim-fade metrics-grid" data-delay="100" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin: 32px 0; background: rgba(245, 245, 245, 0.4); border-radius: 20px; padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+        <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 4px 24px rgba(0,0,0,0.06); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; color: #111;">12k+</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="usuários ativos pós-lançamento" data-en="active users post-launch">usuários ativos pós-lançamento</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 4px 24px rgba(0,0,0,0.06); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; color: #111;">68%</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="taxa de retenção" data-en="user retention rate">taxa de retenção</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 4px 24px rgba(0,0,0,0.06); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; color: #111;">~67%</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="redução nos tickets de suporte" data-en="reduction in support tickets">redução nos tickets de suporte</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 4px 24px rgba(0,0,0,0.06); border-radius: 16px; padding: 24px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; color: #111;">22</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="tipos de questão entregues" data-en="question types shipped">tipos de questão entregues</div>
+        </div>
+      </div>
+
+      <p class="case-v2-section__text anim-fade" data-delay="200" data-pt="Conduzi o projeto inteiro: discovery em campo, mapeamento de jornada, wireframes, design system, prototipagem, testes de usabilidade e iterações pós-lançamento. Também fui responsável pelo Helpcenter. Foi um dos projetos onde mais tive contato direto com usuários reais, e isso fez toda a diferença nas decisões que tomei." data-en="I led the entire project: field discovery, journey mapping, wireframes, design system, prototyping, usability testing, and post-launch iterations. I was also responsible for the Help Center. This was one of the projects where I had the most direct contact with real users, and that made all the difference in the decisions I made.">
+        Conduzi o projeto inteiro: discovery em campo, mapeamento de jornada, wireframes, design system, prototipagem, testes de usabilidade e iterações pós-lançamento. Também fui responsável pelo Helpcenter. Foi um dos projetos onde mais tive contato direto com usuários reais, e isso fez toda a diferença nas decisões que tomei.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Case nav — active section tracking + smooth scroll
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Active tracking on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Dark/Light mode toggle
+    (function () {
+      var toggle = document.getElementById('modeToggle');
+      if (!toggle) return;
+      var front = document.getElementById('modeFront');
+      var back = document.getElementById('modeBack');
+      var swapped = false;
+
+      // Hover effect on front image
+      toggle.addEventListener('mouseenter', function () {
+        var active = swapped ? back : front;
+        var currentRotate = swapped ? '6deg' : '-2deg';
+        active.style.transform = 'rotate(' + currentRotate + ') translateX(-8px)';
+      });
+      toggle.addEventListener('mouseleave', function () {
+        if (swapped) {
+          back.style.transform = 'rotate(-2deg)';
+        } else {
+          front.style.transform = 'rotate(-2deg)';
+        }
+      });
+
+      toggle.addEventListener('click', function () {
+        swapped = !swapped;
+        if (swapped) {
+          front.style.transform = 'translateX(32px) translateY(16px) rotate(6deg)';
+          front.style.zIndex = '1';
+          front.style.boxShadow = '0 8px 24px rgba(0,0,0,0.10)';
+          front.style.width = '90%';
+          back.style.transform = 'rotate(-2deg)';
+          back.style.zIndex = '2';
+          back.style.boxShadow = '0 16px 48px rgba(0,0,0,0.18)';
+          back.style.width = '100%';
+          back.style.position = 'relative';
+          front.style.position = 'absolute';
+          front.style.top = '0';
+          front.style.left = '0';
+        } else {
+          front.style.transform = 'rotate(-2deg)';
+          front.style.zIndex = '2';
+          front.style.boxShadow = '0 16px 48px rgba(0,0,0,0.18)';
+          front.style.width = '100%';
+          front.style.position = 'relative';
+          back.style.transform = 'translateX(32px) translateY(16px) rotate(6deg)';
+          back.style.zIndex = '1';
+          back.style.boxShadow = '0 8px 24px rgba(0,0,0,0.10)';
+          back.style.width = '90%';
+          back.style.position = 'absolute';
+          back.style.top = '0';
+          back.style.left = '0';
+        }
+      });
+    })();
+
+    // App Ticker — set animation duration based on content width
+    (function () {
+      var track = document.getElementById('appTicker');
+      if (!track) return;
+      var halfWidth = track.scrollWidth / 2;
+      var speed = 60;
+      var duration = halfWidth / speed;
+      track.style.animationDuration = duration + 's';
+    })();
+  </script>
+</body>
+</html>

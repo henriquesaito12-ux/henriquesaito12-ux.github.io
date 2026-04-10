@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agente de IA para Monitoramento — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate" data-project="projeto-2" data-password="saito2026">
+    <div class="password-gate__box">
+      <div class="password-gate__icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2 class="password-gate__title">Projeto protegido</h2>
+      <p class="password-gate__text">Este case contem informacoes confidenciais. Insira a senha para acessar.</p>
+      <form class="password-gate__form" id="passwordForm">
+        <input type="password" class="password-gate__input" id="passwordInput" placeholder="Senha" autocomplete="off">
+        <button type="submit" class="password-gate__submit">Acessar projeto</button>
+        <span class="password-gate__error" id="passwordError"></span>
+      </form>
+      <a href="index.html" class="password-gate__back">&larr; Voltar ao portfolio</a>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav__logo">HS</a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html#projetos">Projetos</a></li>
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-hero">
+    <a href="index.html#projetos" class="project-hero__back fade-in">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Voltar
+    </a>
+    <span class="project-hero__category fade-in">AI / UX</span>
+    <h1 class="project-hero__title fade-in">Agente de IA para Monitoramento</h1>
+    <p class="project-hero__summary fade-in">
+      Design da experiencia de um agente inteligente que monitora operacoes
+      e entrega alertas acionaveis em tempo real.
+    </p>
+  </div>
+
+  <div class="project-content">
+
+    <div class="project-meta fade-in">
+      <div class="project-meta__item">
+        <h4>Tipo</h4>
+        <p>AI Product Design</p>
+      </div>
+      <div class="project-meta__item">
+        <h4>Meu papel</h4>
+        <p>UX Designer — pesquisa, fluxo e interface</p>
+      </div>
+      <div class="project-meta__item">
+        <h4>Ferramentas</h4>
+        <p>Figma, Miro, Notion</p>
+      </div>
+    </div>
+
+    <div class="project-image fade-in">Imagem — Interface do agente de monitoramento</div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Contexto</h3>
+      <div class="project-section__text">
+        <p>
+          Operacoes complexas geram um volume alto de dados que muitas vezes sao
+          ignorados ou analisados tarde demais. A proposta era criar um agente de IA
+          capaz de monitorar esses dados e alertar a equipe sobre anomalias.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Problema</h3>
+      <div class="project-section__text">
+        <p>
+          A equipe de operacoes nao tinha visibilidade em tempo real dos problemas.
+          Os alertas existentes eram genericos e geravam fadiga, fazendo com que
+          informacoes criticas fossem ignoradas.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-image--half fade-in">
+      <div>Imagem — Mapeamento de alertas</div>
+      <div>Imagem — Fluxo de decisao do agente</div>
+    </div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Solucao</h3>
+      <div class="project-section__text">
+        <p>
+          Desenhamos uma interface conversacional onde o agente de IA apresenta
+          insights contextualizados e sugere acoes especificas. O foco foi em
+          reduzir o ruido e entregar apenas o que importa.
+        </p>
+        <p>
+          A experiencia foi projetada para diferentes niveis de urgencia, com
+          um sistema de priorizacao visual que facilita a tomada de decisao rapida.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-image fade-in">Imagem — Tela de alertas priorizados</div>
+
+    <div class="project-impact fade-in">
+      <h3 class="project-impact__label">Impacto</h3>
+      <p class="project-impact__text">
+        Reducao significativa no tempo de resposta a incidentes. A interface
+        foi validada com o time de operacoes e integrada ao fluxo diario da equipe.
+      </p>
+    </div>
+
+    <nav class="project-nav fade-in">
+      <a href="projeto-1.html">
+        <span class="project-nav__label">&larr; Projeto anterior</span>
+        <span class="project-nav__title">Product-Led Sales</span>
+      </a>
+      <a href="projeto-3.html" class="project-nav__next">
+        <span class="project-nav__label">Proximo projeto &rarr;</span>
+        <span class="project-nav__title">Design de App para Logistica</span>
+      </a>
+    </nav>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

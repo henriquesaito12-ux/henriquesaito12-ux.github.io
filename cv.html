@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    body { background: #fff; }
+
+    .cv { max-width: 960px; margin: 0 auto; padding: 120px 2rem 80px; }
+
+    .cv__layout {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      gap: 48px;
+    }
+
+    /* --- Left column --- */
+    .cv__sidebar { position: sticky; top: 100px; align-self: start; }
+
+    .cv__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+    }
+
+    .cv__name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .cv__role {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .cv__link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #1a1a1a;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1px;
+    }
+
+    .cv__link:hover { border-color: #1a1a1a; }
+
+    .cv__download {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #888;
+      background: none;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      text-decoration: none;
+      text-align: center;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cv__download:hover { color: #1a1a1a; border-color: #1a1a1a; }
+
+    .cv__divider {
+      border: none;
+      border-top: 1px solid #f0f0f0;
+      margin: 20px 0;
+    }
+
+    .cv__info-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+
+    .cv__info-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    /* --- Right column --- */
+    .cv__main { min-width: 0; }
+
+    .cv__section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .cv__section-line {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin-bottom: 24px;
+    }
+
+    /* Company block */
+    .cv__company {
+      padding: 0 0 24px;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 24px;
+    }
+
+    .cv__company:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .cv__company-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .cv__company-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .cv__company-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .cv__company-type {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* Role timeline */
+    .cv__roles { padding-left: 18px; border-left: 2px solid #e8e8e8; }
+
+    .cv__role-item {
+      position: relative;
+      padding-left: 20px;
+      padding-bottom: 20px;
+    }
+
+    .cv__role-item:last-child { padding-bottom: 0; }
+
+    .cv__role-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d0d0d0;
+      border: 2px solid #fff;
+    }
+
+    .cv__role-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    .cv__role-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cv__role-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .cv__role-desc.open {
+      max-height: 300px;
+    }
+
+    .cv__role-toggle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #888;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .cv__role-toggle:hover {
+      color: #1a1a1a;
+    }
+
+    /* Education & certs */
+    .cv__edu-item, .cv__cert-item {
+      padding: 0 0 16px;
+      border-bottom: 1px solid #f5f5f5;
+      margin-bottom: 16px;
+    }
+
+    .cv__edu-item:last-child, .cv__cert-item:last-child {
+      border-bottom: none; margin-bottom: 0;
+    }
+
+    .cv__edu-name, .cv__cert-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    .cv__edu-detail, .cv__cert-detail {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #999;
+    }
+
+    .cv__section + .cv__section { margin-top: 40px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .cv__layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .cv__sidebar { position: static; }
+      .cv { padding: 100px 1.5rem 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a href="index.html" class="header__logo" id="logoLink">
+      <img src="assinatura2.png" alt="Henrique Saito" class="header__logo-img">
+    </a>
+    <div class="header__actions">
+      <button class="header__lang" id="langToggle" type="button">
+        <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+        <span class="header__lang-opt" data-lang="en">EN</span>
+      </button>
+      <a href="#" class="header__cta" data-pt="Vamos conversar?" data-en="Let's talk?" onclick="event.preventDefault(); document.getElementById('contactModal').classList.add('active');">Vamos conversar?</a>
+    </div>
+  </header>
+
+  <div class="cv">
+    <div class="cv__layout">
+
+      <!-- Sidebar -->
+      <aside class="cv__sidebar">
+        <img src="foto2.JPG" alt="Henrique Saito" class="cv__avatar">
+        <div class="cv__name">Henrique Saito</div>
+        <div class="cv__role">Senior Product Designer</div>
+        <a href="https://linkedin.com/in/henriquesaito" target="_blank" rel="noopener" class="cv__link">linkedin.com/in/henriquesaito</a>
+
+        <hr class="cv__divider">
+
+        <div class="cv__info-label" data-pt="Localização" data-en="Location">Localização</div>
+        <div class="cv__info-value">Indaiatuba, São Paulo, Brasil</div>
+
+        <div class="cv__info-label" data-pt="Idiomas" data-en="Languages">Idiomas</div>
+        <div class="cv__info-value" data-pt="Português (nativo), Inglês (intermediário)" data-en="Portuguese (native), English (intermediate)">Português (nativo), Inglês (intermediário)</div>
+
+        <hr class="cv__divider">
+
+        <a href="cv-henrique-saito.pdf" download class="cv__download" data-pt="Baixar CV" data-en="Download CV">Baixar CV</a>
+      </aside>
+
+      <!-- Main -->
+      <div class="cv__main">
+
+        <!-- Experiência -->
+        <div class="cv__section">
+          <h2 class="cv__section-title" data-pt="Experiência" data-en="Experience">Experiência</h2>
+          <hr class="cv__section-line">
+
+          <!-- Rabbot -->
+          <div class="cv__company">
+            <div class="cv__company-header">
+              <img src="logorabbot.png" alt="Rabbot" class="cv__company-logo">
+              <div>
+                <div class="cv__company-name">Rabbot</div>
+                <div class="cv__company-type" data-pt="Tempo integral" data-en="Full-time">Tempo integral</div>
+              </div>
+            </div>
+            <div class="cv__roles">
+              <div class="cv__role-item">
+                <div class="cv__role-title" data-pt="Product Designer Sênior" data-en="Senior Product Designer">Product Designer Sênior</div>
+                <div class="cv__role-meta" data-pt="ago 2025 – o momento · São Paulo, Brasil" data-en="Aug 2025 – present · São Paulo, Brazil">ago 2025 – o momento · São Paulo, Brasil<button class="cv__role-toggle" type="button" data-pt-open="+" data-pt-close="−" data-en-open="+" data-en-close="−">+</button></div>
+                <p class="cv__role-desc" data-pt="Atuo como Product Designer Sênior liderando iniciativas na evolução de produtos SaaS, com foco em eficiência operacional e impacto no negócio. Estruturo problemas, identifico fricções na jornada e direciono soluções em conjunto com produto, tecnologia e áreas de negócio, além de explorar o uso de IA para acelerar o processo de design." data-en="I work as a Senior Product Designer leading initiatives in the evolution of SaaS products, focused on operational efficiency and business impact. I structure problems, identify friction in the journey and direct solutions together with product, technology and business areas, while exploring the use of AI to accelerate the design process.">Atuo como Product Designer Sênior liderando iniciativas na evolução de produtos SaaS, com foco em eficiência operacional e impacto no negócio. Estruturo problemas, identifico fricções na jornada e direciono soluções em conjunto com produto, tecnologia e áreas de negócio, além de explorar o uso de IA para acelerar o processo de design.</p>
+              </div>
+              <div class="cv__role-item">
+                <div class="cv__role-title" data-pt="Product Designer Pleno" data-en="Mid-level Product Designer">Product Designer Pleno</div>
+                <div class="cv__role-meta" data-pt="jan 2023 – ago 2025 · São Paulo, Brasil" data-en="Jan 2023 – Aug 2025 · São Paulo, Brazil">jan 2023 – ago 2025 · São Paulo, Brasil<button class="cv__role-toggle" type="button" data-pt-open="+" data-pt-close="−" data-en-open="+" data-en-close="−">+</button></div>
+                <p class="cv__role-desc" data-pt="Atuei como Product Designer em produtos SaaS (web e mobile) para gestão de frotas, participando da evolução da experiência do usuário em contextos operacionais complexos. Contribuí com discovery, mapeamento de jornadas, prototipação e validação de soluções, trabalhando de forma próxima com times de produto e tecnologia." data-en="I worked as a Product Designer on SaaS products (web and mobile) for fleet management, participating in the evolution of user experience in complex operational contexts. I contributed with discovery, journey mapping, prototyping and solution validation, working closely with product and technology teams.">Atuei como Product Designer em produtos SaaS (web e mobile) para gestão de frotas, participando da evolução da experiência do usuário em contextos operacionais complexos. Contribuí com discovery, mapeamento de jornadas, prototipação e validação de soluções, trabalhando de forma próxima com times de produto e tecnologia.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trackage -->
+          <div class="cv__company">
+            <div class="cv__company-header">
+              <img src="logotkg.png" alt="Trackage" class="cv__company-logo">
+              <div>
+                <div class="cv__company-name">Trackage</div>
+                <div class="cv__company-type" data-pt="1 ano 4 meses" data-en="1 year 4 months">1 ano 4 meses</div>
+              </div>
+            </div>
+            <div class="cv__roles">
+              <div class="cv__role-item">
+                <div class="cv__role-title">Product Designer</div>
+                <div class="cv__role-meta" data-pt="out 2021 – jan 2023" data-en="Oct 2021 – Jan 2023">out 2021 – jan 2023<button class="cv__role-toggle" type="button" data-pt-open="+" data-pt-close="−" data-en-open="+" data-en-close="−">+</button></div>
+                <p class="cv__role-desc" data-pt="Atuei como Product Designer na Trackage, contribuindo na evolução de uma plataforma SaaS e aplicativo mobile, com foco na melhoria da experiência do usuário. Trabalhei na construção de jornadas, definição de fluxos e prototipação de soluções, além de liderar a criação e evolução do Design System." data-en="I worked as a Product Designer at Trackage, contributing to the evolution of a SaaS platform and mobile app, focused on improving the user experience. I worked on building journeys, defining flows and prototyping solutions, as well as leading the creation and evolution of the Design System.">Atuei como Product Designer na Trackage, contribuindo na evolução de uma plataforma SaaS e aplicativo mobile, com foco na melhoria da experiência do usuário. Trabalhei na construção de jornadas, definição de fluxos e prototipação de soluções, além de liderar a criação e evolução do Design System.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Groways -->
+          <div class="cv__company">
+            <div class="cv__company-header">
+              <img src="logogrow.png" alt="Groways Marketing Digital" class="cv__company-logo">
+              <div>
+                <div class="cv__company-name">Groways Marketing Digital</div>
+                <div class="cv__company-type" data-pt="Tempo integral" data-en="Full-time">Tempo integral</div>
+              </div>
+            </div>
+            <div class="cv__roles">
+              <div class="cv__role-item">
+                <div class="cv__role-title">Designer</div>
+                <div class="cv__role-meta" data-pt="ago 2020 – out 2021 · Indaiatuba, São Paulo" data-en="Aug 2020 – Oct 2021 · Indaiatuba, São Paulo">ago 2020 – out 2021 · Indaiatuba, São Paulo<button class="cv__role-toggle" type="button" data-pt-open="+" data-pt-close="−" data-en-open="+" data-en-close="−">+</button></div>
+                <p class="cv__role-desc" data-pt="Foco em criação de interfaces para sites institucionais e e-commerce aplicando conceitos de UX/UI. Atuei em edição de artes para mídias sociais, diagramação de e-books e criação de materiais visuais." data-en="Focused on creating interfaces for institutional websites and e-commerce applying UX/UI concepts. I worked on editing art for social media, e-book layout and creating visual materials.">Foco em criação de interfaces para sites institucionais e e-commerce aplicando conceitos de UX/UI. Atuei em edição de artes para mídias sociais, diagramação de e-books e criação de materiais visuais.</p>
+              </div>
+              <div class="cv__role-item">
+                <div class="cv__role-title" data-pt="Estagiário de Design" data-en="Design Intern">Estagiário de Design</div>
+                <div class="cv__role-meta" data-pt="set 2019 – ago 2020" data-en="Sep 2019 – Aug 2020">set 2019 – ago 2020</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formação -->
+        <div class="cv__section">
+          <h2 class="cv__section-title" data-pt="Formação" data-en="Education">Formação</h2>
+          <hr class="cv__section-line">
+
+          <div class="cv__edu-item">
+            <div class="cv__edu-name" data-pt="Universidade de Sorocaba" data-en="University of Sorocaba">Universidade de Sorocaba</div>
+            <div class="cv__edu-detail" data-pt="Bacharelado em Design e Comunicação Visual · 2019 – 2021" data-en="Bachelor's in Design and Visual Communication · 2019 – 2021">Bacharelado em Design e Comunicação Visual · 2019 – 2021</div>
+          </div>
+          <div class="cv__edu-item">
+            <div class="cv__edu-name">Awari</div>
+            <div class="cv__edu-detail" data-pt="UX Design · abr 2022 – ago 2022" data-en="UX Design · Apr 2022 – Aug 2022">UX Design · abr 2022 – ago 2022</div>
+          </div>
+        </div>
+
+        <!-- Certificações -->
+        <div class="cv__section">
+          <h2 class="cv__section-title" data-pt="Certificações" data-en="Certifications">Certificações</h2>
+          <hr class="cv__section-line">
+
+          <div class="cv__cert-item">
+            <div class="cv__cert-name">Vibe Coding L5: Diamond</div>
+            <div class="cv__cert-detail" data-pt="Lovable · fev 2026" data-en="Lovable · Feb 2026">Lovable · fev 2026</div>
+          </div>
+          <div class="cv__cert-item">
+            <div class="cv__cert-name">Design Ops</div>
+            <div class="cv__cert-detail" data-pt="Awari · abr 2023" data-en="Awari · Apr 2023">Awari · abr 2023</div>
+          </div>
+          <div class="cv__cert-item">
+            <div class="cv__cert-name" data-pt="Intensivo de UX Design" data-en="UX Design Intensive">Intensivo de UX Design</div>
+            <div class="cv__cert-detail" data-pt="Awari · ago 2022" data-en="Awari · Aug 2022">Awari · ago 2022</div>
+          </div>
+          <div class="cv__cert-item">
+            <div class="cv__cert-name" data-pt="Design System: Criando componentes e documentando" data-en="Design System: Creating components and documentation">Design System: Criando componentes e documentando</div>
+            <div class="cv__cert-detail" data-pt="Alura · abr 2022" data-en="Alura · Apr 2022">Alura · abr 2022</div>
+          </div>
+          <div class="cv__cert-item">
+            <div class="cv__cert-name" data-pt="Design System: Projetando os primeiros elementos" data-en="Design System: Designing the first elements">Design System: Projetando os primeiros elementos</div>
+            <div class="cv__cert-detail" data-pt="Alura · out 2021" data-en="Alura · Oct 2021">Alura · out 2021</div>
+          </div>
+          <div class="cv__cert-item">
+            <div class="cv__cert-name" data-pt="SEO: Técnicas de otimização de conteúdo" data-en="SEO: Content optimization techniques">SEO: Técnicas de otimização de conteúdo</div>
+            <div class="cv__cert-detail" data-pt="ESPM · set 2021" data-en="ESPM · Sep 2021">ESPM · set 2021</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Custom Cursor
+    const cursor = document.getElementById('cursor');
+    if (cursor) {
+      let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+      document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+      function updateCursor() {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        const w = cursor.offsetWidth / 2;
+        cursor.style.left = (cursorX - w) + 'px';
+        cursor.style.top = (cursorY - w) + 'px';
+        requestAnimationFrame(updateCursor);
+      }
+      requestAnimationFrame(updateCursor);
+      document.querySelectorAll('a, button').forEach((el) => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    }
+
+    // Language Toggle
+    let currentLang = 'pt';
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'pt' ? 'en' : 'pt';
+        document.querySelectorAll('[data-pt][data-en]').forEach((el) => {
+          el.innerHTML = el.dataset[currentLang];
+        });
+        document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach((el) => {
+          el.placeholder = el.dataset[currentLang + 'Placeholder'];
+        });
+        document.querySelectorAll('.header__lang-opt').forEach((opt) => {
+          opt.classList.toggle('header__lang-opt--active', opt.dataset.lang === currentLang);
+        });
+        document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+
+        // Update toggle buttons text on lang change
+        document.querySelectorAll('.cv__role-toggle').forEach((btn) => {
+          const meta = btn.closest('.cv__role-meta');
+          const desc = meta ? meta.nextElementSibling : null;
+          const isOpen = desc && desc.classList.contains('open');
+          btn.textContent = isOpen ? btn.dataset[currentLang + 'Close'] : btn.dataset[currentLang + 'Open'];
+        });
+      });
+    }
+
+    // Role description expand/collapse
+    document.querySelectorAll('.cv__role-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const meta = btn.closest('.cv__role-meta');
+        const desc = meta ? meta.nextElementSibling : null;
+        if (!desc || !desc.classList.contains('cv__role-desc')) return;
+        const isOpen = desc.classList.toggle('open');
+        const lang = document.documentElement.lang === 'en' ? 'en' : 'pt';
+        btn.textContent = isOpen ? btn.dataset[lang + 'Close'] : btn.dataset[lang + 'Open'];
+      });
+    });
+  </script>
+
+  <!-- Floating Dock Navigation -->
+  <nav class="dock" id="dock">
+    <a href="index.html" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="dock__label">Home</span>
+    </a>
+    <a href="index.html#cases" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+      </svg>
+      <span class="dock__label">Cases</span>
+    </a>
+    <a href="ilustracoes.html" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+        <path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>
+      </svg>
+      <span class="dock__label" data-pt="Ilustrações" data-en="Illustrations">Ilustrações</span>
+    </a>
+    <a href="index.html#sobre" class="dock__item">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span class="dock__label" data-pt="Sobre" data-en="About">Sobre</span>
+    </a>
+    <a href="cv.html" class="dock__item active">
+      <svg class="dock__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+      <span class="dock__label">CV</span>
+    </a>
+  </nav>
+
+  <!-- Contact Modal -->
+  <div class="contact-modal" id="contactModal">
+    <div class="contact-modal__overlay" onclick="document.getElementById('contactModal').classList.remove('active');"></div>
+    <div class="contact-modal__box">
+      <button class="contact-modal__close" onclick="document.getElementById('contactModal').classList.remove('active');" aria-label="Fechar">&times;</button>
+      <div class="contact-modal__content" id="contactContent">
+        <h2 class="contact-modal__title" data-pt="Vamos conversar?" data-en="Let's talk?">Vamos conversar?</h2>
+        <p class="contact-modal__sub" data-pt="Me conta um pouco sobre o que você tem em mente." data-en="Tell me a little about what you have in mind.">Me conta um pouco sobre o que você tem em mente.</p>
+        <form class="contact-modal__form" id="contactForm" action="https://formspree.io/f/henrique.saito12@gmail.com" method="POST">
+          <input type="text" name="name" required placeholder="Seu nome" class="contact-modal__input" data-pt-placeholder="Seu nome" data-en-placeholder="Your name">
+          <input type="email" name="email" required placeholder="seu@email.com" class="contact-modal__input">
+          <textarea name="message" required placeholder="No que posso te ajudar?" class="contact-modal__input contact-modal__textarea" data-pt-placeholder="No que posso te ajudar?" data-en-placeholder="How can I help you?"></textarea>
+          <button type="submit" class="contact-modal__btn" data-pt="Enviar mensagem" data-en="Send message">Enviar mensagem</button>
+        </form>
+      </div>
+      <div class="contact-modal__success" id="contactSuccess" style="display: none;">
+        <p data-pt="Mensagem enviada! Te respondo em breve. 🙌" data-en="Message sent! I'll get back to you soon. 🙌">Mensagem enviada! Te respondo em breve. 🙌</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .contact-modal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; }
+    .contact-modal.active { display: flex; }
+    .contact-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: cmFadeIn 0.2s ease; }
+    .contact-modal__box { position: relative; background: rgba(255,255,255,0.65); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.8); border-radius: 24px; padding: 48px; width: 90%; max-width: 520px; box-shadow: 0 24px 64px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.9); animation: cmScaleIn 0.2s ease; }
+    .contact-modal__close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 24px; color: rgba(0,0,0,0.4); cursor: pointer; line-height: 1; transition: color 0.2s ease; }
+    .contact-modal__close:hover { color: rgba(0,0,0,0.7); }
+    .contact-modal__title { font-family: 'DM Sans', sans-serif; font-size: 24px; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .contact-modal__sub { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #888; margin-bottom: 28px; }
+    .contact-modal__form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-modal__input { font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 12px 16px; background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; outline: none; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: border-color 0.2s ease; width: 100%; box-sizing: border-box; }
+    .contact-modal__input:focus { border-color: rgba(0,0,0,0.3); }
+    .contact-modal__textarea { height: 120px; resize: vertical; }
+    .contact-modal__btn { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; background: rgba(0,0,0,0.85); color: #fff; border: none; border-radius: 999px; padding: 14px 32px; width: 100%; cursor: pointer; transition: background 0.2s ease; margin-top: 4px; }
+    .contact-modal__btn:hover { background: #000; }
+    .contact-modal__success { text-align: center; padding: 40px 0; }
+    .contact-modal__success p { font-family: 'DM Sans', sans-serif; font-size: 18px; color: #333; line-height: 1.6; }
+    @keyframes cmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes cmScaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  </style>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } }).then(function(r) {
+        if (r.ok) { document.getElementById('contactContent').style.display = 'none'; document.getElementById('contactSuccess').style.display = 'block'; }
+      });
+    });
+  </script>
+</body>
+</html>

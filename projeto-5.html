@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Trackage — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate" data-project="projeto-5" data-password="saito2026">
+    <div class="password-gate__box">
+      <div class="password-gate__icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2 class="password-gate__title">Projeto protegido</h2>
+      <p class="password-gate__text">Este case contem informacoes confidenciais. Insira a senha para acessar.</p>
+      <form class="password-gate__form" id="passwordForm">
+        <input type="password" class="password-gate__input" id="passwordInput" placeholder="Senha" autocomplete="off">
+        <button type="submit" class="password-gate__submit">Acessar projeto</button>
+        <span class="password-gate__error" id="passwordError"></span>
+      </form>
+      <a href="index.html" class="password-gate__back">&larr; Voltar ao portfolio</a>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav__logo">HS</a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html#projetos">Projetos</a></li>
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <div class="project-hero">
+    <a href="index.html#projetos" class="project-hero__back fade-in">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Voltar
+    </a>
+    <span class="project-hero__category fade-in">Design System</span>
+    <h1 class="project-hero__title fade-in">Design System Trackage</h1>
+    <p class="project-hero__summary fade-in">
+      Construcao de um design system do zero para unificar a linguagem visual
+      e acelerar a entrega de produto.
+    </p>
+  </div>
+
+  <div class="project-content">
+
+    <div class="project-meta fade-in">
+      <div class="project-meta__item">
+        <h4>Empresa</h4>
+        <p>Trackage</p>
+      </div>
+      <div class="project-meta__item">
+        <h4>Meu papel</h4>
+        <p>Design System Lead</p>
+      </div>
+      <div class="project-meta__item">
+        <h4>Ferramentas</h4>
+        <p>Figma, Storybook, Tokens Studio</p>
+      </div>
+    </div>
+
+    <div class="project-image fade-in">Imagem — Visao geral do design system</div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Contexto</h3>
+      <div class="project-section__text">
+        <p>
+          A Trackage tinha multiplos produtos com interfaces desalinhadas.
+          Cada squad criava componentes do zero, gerando retrabalho e
+          inconsistencia na experiencia do usuario.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Problema</h3>
+      <div class="project-section__text">
+        <p>
+          Sem uma fonte de verdade para componentes e padroes, o time perdia
+          tempo recriando elementos e discutindo decisoes que ja haviam sido
+          tomadas. A velocidade de entrega estava comprometida.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-image--half fade-in">
+      <div>Imagem — Inventario de componentes existentes</div>
+      <div>Imagem — Tokens de cor e tipografia</div>
+    </div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Solucao</h3>
+      <div class="project-section__text">
+        <p>
+          Construi o design system em camadas: tokens de design (cores, espacamento,
+          tipografia), componentes atomicos, e padroes compostos. Tudo documentado
+          e versionado no Figma com espelho no Storybook.
+        </p>
+        <p>
+          Criei um processo de governanca com rituais de review e contribuicao
+          para que qualquer designer ou dev pudesse propor novos componentes.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-image fade-in">Imagem — Biblioteca de componentes no Figma</div>
+
+    <div class="project-impact fade-in">
+      <h3 class="project-impact__label">Impacto</h3>
+      <p class="project-impact__text">
+        O design system foi adotado por todas as squads. Reducao no tempo de
+        design e desenvolvimento de novas features. Consistencia visual entre
+        todos os produtos da empresa.
+      </p>
+    </div>
+
+    <nav class="project-nav fade-in">
+      <a href="projeto-4.html">
+        <span class="project-nav__label">&larr; Projeto anterior</span>
+        <span class="project-nav__title">Refatoracao & Redesign de SaaS</span>
+      </a>
+      <a href="projeto-6.html" class="project-nav__next">
+        <span class="project-nav__label">Proximo projeto &rarr;</span>
+        <span class="project-nav__title">Exploracao de Dashboard</span>
+      </a>
+    </nav>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

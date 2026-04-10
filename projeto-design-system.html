@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Trackage — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    @media (max-width: 768px) {
+      .ds-meta {
+        grid-template-columns: 1fr !important;
+      }
+      .ds-frame {
+        height: 400px;
+      }
+    }
+
+    .ds-frame {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      overflow-y: scroll;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      background: #F9F9F9;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.15) transparent;
+    }
+    .ds-frame::-webkit-scrollbar {
+      width: 6px;
+    }
+    .ds-frame::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .ds-frame::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 3px;
+    }
+    .ds-frame__hint {
+      position: sticky;
+      top: 0;
+      text-align: right;
+      padding: 8px 12px 0 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #BBB;
+      pointer-events: none;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body class="case-v2">
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate" data-project="projeto-5" data-password="saito2026">
+    <div class="password-gate__box">
+      <div class="password-gate__icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2 class="password-gate__title" data-pt="Projeto protegido" data-en="Protected project">Projeto protegido</h2>
+      <p class="password-gate__text" data-pt="Este case contém informações confidenciais. Insira a senha para acessar." data-en="This case contains confidential information. Enter the password to access.">Este case contém informações confidenciais. Insira a senha para acessar.</p>
+      <form class="password-gate__form" id="passwordForm">
+        <input type="password" class="password-gate__input" id="passwordInput" placeholder="Senha" autocomplete="off">
+        <button type="submit" class="password-gate__submit" data-pt="Acessar projeto" data-en="Access project">Acessar projeto</button>
+        <span class="password-gate__error" id="passwordError"></span>
+      </form>
+      <a href="index.html" class="password-gate__back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+    </div>
+  </div>
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#problema" class="case-nav__link" data-section="problema" data-pt="Problema" data-en="Problem">Problema</a>
+      <a href="#solucao" class="case-nav__link" data-section="solucao" data-pt="Solução" data-en="Solution">Solução</a>
+      <a href="#resultado" class="case-nav__link" data-section="resultado" data-pt="Resultado" data-en="Results">Resultado</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="Design System Trackage" data-en="Trackage Design System">Design System Trackage</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">Design System</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Trackage</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">UX/Product Designer</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2022</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="Construção de um design system do zero para unificar a linguagem visual e acelerar a entrega de produto." data-en="Building a design system from scratch to unify the visual language and accelerate product delivery.">Construção de um design system do zero para unificar a linguagem visual e acelerar a entrega de produto.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — VISÃO GERAL -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+
+      <div class="ds-meta anim-fade" data-delay="50" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 32px; padding: 24px; background: #F9FAFB; border-radius: 12px;">
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Empresa" data-en="Company">Empresa</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Trackage</p>
+        </div>
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Meu papel" data-en="My role">Meu papel</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Design System Lead</p>
+        </div>
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Ferramentas" data-en="Tools">Ferramentas</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Figma</p>
+        </div>
+      </div>
+
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="A Trackage tinha múltiplos produtos com interfaces desalinhadas. Cada squad criava componentes do zero, gerando retrabalho e inconsistência na experiência do usuário. Construí o design system de ponta a ponta para unificar a linguagem visual e acelerar a entrega de produto." data-en="Trackage had multiple products with misaligned interfaces. Each squad created components from scratch, generating rework and inconsistency in the user experience. I built the design system end to end to unify the visual language and accelerate product delivery.">
+        A Trackage tinha múltiplos produtos com interfaces desalinhadas. Cada squad criava componentes do zero, gerando retrabalho e inconsistência na experiência do usuário. Construí o design system de ponta a ponta para unificar a linguagem visual e acelerar a entrega de produto.
+      </p>
+    </section>
+
+    <!-- 02 — PROBLEMA -->
+    <section class="case-v2-section" id="problema">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label" data-pt="PROBLEMA" data-en="PROBLEM">PROBLEMA</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Sem uma fonte de verdade para componentes e padrões, o time perdia tempo recriando elementos e discutindo decisões que já haviam sido tomadas. A velocidade de entrega estava comprometida. Interfaces inconsistentes entre produtos geravam confusão nos usuários e dificultavam a manutenção." data-en="Without a single source of truth for components and patterns, the team wasted time recreating elements and debating decisions that had already been made. Delivery speed was compromised. Inconsistent interfaces across products confused users and made maintenance difficult.">
+        Sem uma fonte de verdade para componentes e padrões, o time perdia tempo recriando elementos e discutindo decisões que já haviam sido tomadas. A velocidade de entrega estava comprometida. Interfaces inconsistentes entre produtos geravam confusão nos usuários e dificultavam a manutenção.
+      </p>
+    </section>
+
+    <!-- 03 — SOLUÇÃO -->
+    <section class="case-v2-section" id="solucao">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label" data-pt="SOLUÇÃO" data-en="SOLUTION">SOLUÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Construí o design system em camadas: tokens de design (cores, espaçamento, tipografia), componentes atômicos e padrões compostos. Tudo documentado e versionado no Figma.
+
+Criei um processo de governança com rituais de review e contribuição para que qualquer designer ou dev pudesse propor novos componentes. O sistema foi pensado para escalar com a empresa, não apenas resolver o problema imediato." data-en="I built the design system in layers: design tokens (colors, spacing, typography), atomic components, and composite patterns. Everything documented and versioned in Figma.
+
+I created a governance process with review and contribution rituals so that any designer or developer could propose new components. The system was designed to scale with the company, not just solve the immediate problem.">
+        Construí o design system em camadas: tokens de design (cores, espaçamento, tipografia), componentes atômicos e padrões compostos. Tudo documentado e versionado no Figma.
+
+Criei um processo de governança com rituais de review e contribuição para que qualquer designer ou dev pudesse propor novos componentes. O sistema foi pensado para escalar com a empresa, não apenas resolver o problema imediato.
+      </p>
+    </section>
+
+    <!-- Galeria do Design System -->
+    <section class="case-v2-section" id="galeria">
+      <div class="ds-frame anim-scale"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys1.jpg" alt="Design System 1" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys2.jpg" alt="Design System 2" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys3.jpg" alt="Design System 3" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys4.jpg" alt="Design System 4" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys5.jpg" alt="Design System 5" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys6.jpg" alt="Design System 6" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys7.jpg" alt="Design System 7" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys8.jpg" alt="Design System 8" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys9.jpg" alt="Design System 9" style="width: 100%; display: block;"></div>
+      <div class="ds-frame anim-scale" data-delay="50"><div class="ds-frame__hint">↕ scroll</div><img src="imgsys10.jpg" alt="Design System 10" style="width: 100%; display: block;"></div>
+    </section>
+
+    <!-- 04 — RESULTADO -->
+    <section class="case-v2-section" id="resultado">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label" data-pt="RESULTADO" data-en="RESULTS">RESULTADO</span>
+      </div>
+      <div class="case-v2-impact">
+        <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
+          <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Result">Resultado</h3>
+          <p class="case-v2-impact__text" data-pt="O design system foi adotado por todas as squads. Redução no tempo de design e desenvolvimento de novas features. Consistência visual entre todos os produtos da empresa." data-en="The design system was adopted by all squads. Reduction in design and development time for new features. Visual consistency across all company products.">O design system foi adotado por todas as squads. Redução no tempo de design e desenvolvimento de novas features. Consistência visual entre todos os produtos da empresa.</p>
+        </div>
+        <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
+          <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
+          <p class="case-v2-impact__text" data-pt="Liderei a construção do design system de ponta a ponta: inventário de componentes, definição de tokens, criação da biblioteca no Figma e processo de governança. Atuei como ponte entre design e engenharia para garantir que o sistema fosse adotado de forma prática, não apenas teórica." data-en="I led the design system build end to end: component inventory, token definition, Figma library creation, and governance process. I acted as the bridge between design and engineering to ensure the system was adopted practically, not just theoretically.">Liderei a construção do design system de ponta a ponta: inventário de componentes, definição de tokens, criação da biblioteca no Figma e processo de governança. Atuei como ponte entre design e engenharia para garantir que o sistema fosse adotado de forma prática, não apenas teórica.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Case nav — active section tracking + smooth scroll
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Active tracking on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product-Led Sales — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate" data-project="projeto-1" data-password="saito2026">
+    <div class="password-gate__box">
+      <div class="password-gate__icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2 class="password-gate__title">Projeto protegido</h2>
+      <p class="password-gate__text">Este case contem informacoes confidenciais. Insira a senha para acessar.</p>
+      <form class="password-gate__form" id="passwordForm">
+        <input type="password" class="password-gate__input" id="passwordInput" placeholder="Senha" autocomplete="off">
+        <button type="submit" class="password-gate__submit">Acessar projeto</button>
+        <span class="password-gate__error" id="passwordError"></span>
+      </form>
+      <a href="index.html" class="password-gate__back">&larr; Voltar ao portfolio</a>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav__logo">HS</a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html#projetos">Projetos</a></li>
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- Project Hero -->
+  <div class="project-hero">
+    <a href="index.html#projetos" class="project-hero__back fade-in">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Voltar
+    </a>
+    <span class="project-hero__category fade-in">Product Design</span>
+    <h1 class="project-hero__title fade-in">Product-Led Sales aplicado a operacao</h1>
+    <p class="project-hero__summary fade-in">
+      Modelo de vendas orientado por produto que substituiu a narrativa individual
+      por um diagnostico estruturado e validacao em campo.
+    </p>
+  </div>
+
+  <!-- Project Content -->
+  <div class="project-content">
+
+    <div class="project-meta fade-in">
+      <div class="project-meta__item">
+        <h4>Empresa</h4>
+        <p>Rabbot</p>
+      </div>
+      <div class="project-meta__item">
+        <h4>Meu papel</h4>
+        <p>Product Designer — concepcao, fluxo e campo</p>
+      </div>
+      <div class="project-meta__item">
+        <h4>Ferramentas</h4>
+        <p>Lovable, Supabase, Figma</p>
+      </div>
+    </div>
+
+    <div class="project-image fade-in">Imagem — Visao geral do fluxo</div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Contexto</h3>
+      <div class="project-section__text">
+        <p>
+          O time comercial da Rabbot operava sem um processo padronizado. Cada vendedor
+          conduzia a conversa com o cliente de forma diferente, dependendo de sua propria
+          narrativa. Isso gerava inconsistencia nas entregas e dificultava a escalabilidade.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Problema</h3>
+      <div class="project-section__text">
+        <p>
+          A venda dependia inteiramente da narrativa do vendedor. Nao havia diagnostico
+          estruturado, o que significava que cada reuniao era diferente e o produto nao
+          era demonstrado de forma consistente.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-image--half fade-in">
+      <div>Imagem — Antes: fluxo desestruturado</div>
+      <div>Imagem — Depois: diagnostico padronizado</div>
+    </div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Solucao</h3>
+      <div class="project-section__text">
+        <p>
+          Desenhamos um modelo de Product-Led Sales com tres pilares: diagnostico
+          estruturado do cliente, demonstracao do produto orientada por dados, e uma
+          POC pratica (Blitz) aplicada diretamente no campo.
+        </p>
+        <p>
+          A ferramenta foi prototipada com Lovable e conectada ao Supabase para
+          armazenar os dados de cada diagnostico em tempo real.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-image fade-in">Imagem — Interface do diagnostico</div>
+
+    <div class="project-section fade-in">
+      <h3 class="project-section__label">Processo</h3>
+      <div class="project-section__text">
+        <p>
+          Discovery com o time de vendas para mapear dores e oportunidades. Estruturacao
+          do modelo de diagnostico. Prototipagem funcional da ferramenta. Validacao em campo
+          com Blitz junto a clientes reais. Iteracao com base no feedback coletado.
+        </p>
+      </div>
+    </div>
+
+    <div class="project-impact fade-in">
+      <h3 class="project-impact__label">Impacto</h3>
+      <p class="project-impact__text">
+        Padronizou o time de vendas. O modelo esta ativo no fluxo comercial
+        da empresa e virou referencia interna para novas iniciativas de Product-Led Growth.
+      </p>
+    </div>
+
+    <div class="project-image--half fade-in">
+      <div>Imagem — Resultado da Blitz</div>
+      <div>Imagem — Dashboard de acompanhamento</div>
+    </div>
+
+    <!-- Project Navigation -->
+    <nav class="project-nav fade-in">
+      <div></div>
+      <a href="projeto-2.html" class="project-nav__next">
+        <span class="project-nav__label">Proximo projeto &rarr;</span>
+        <span class="project-nav__title">Agente de IA para Monitoramento</span>
+      </a>
+    </nav>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

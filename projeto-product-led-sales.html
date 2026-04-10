@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product-Led Sales — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    .build-ticker {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      overflow: hidden;
+      padding: 32px 0;
+      position: relative;
+    }
+
+    .build-ticker::before,
+    .build-ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 400px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .build-ticker::before {
+      left: 0;
+      background: linear-gradient(to right, #ffffff, transparent);
+    }
+
+    .build-ticker::after {
+      right: 0;
+      background: linear-gradient(to left, #ffffff, transparent);
+    }
+
+    .build-ticker__track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: buildScroll linear infinite;
+    }
+
+    .build-ticker__img {
+      height: 260px;
+      width: 462px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    @keyframes buildScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Solution diagram */
+    .solution-diagram {
+      background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e0e0e0 100%);
+      border-radius: 24px;
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .solution-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      padding: 28px 20px;
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+    }
+
+    .solution-card__icon { margin-bottom: 14px; }
+
+    .solution-card__title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+
+    .solution-card__sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .solution-arrow {
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .solution-diagram {
+        flex-direction: column;
+        gap: 16px;
+        padding: 32px 20px;
+      }
+      .solution-arrow { transform: rotate(90deg); }
+      .build-ticker__img {
+        height: 180px;
+        width: 320px;
+      }
+      .build-ticker::before,
+      .build-ticker::after {
+        width: 80px;
+      }
+      .table-scroll-hint {
+        display: block !important;
+      }
+      .pls-scroll-frame {
+        height: 400px !important;
+      }
+    }
+  </style>
+</head>
+<body class="case-v2">
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#discovery" class="case-nav__link" data-section="discovery">Discovery</a>
+      <a href="#solution" class="case-nav__link" data-section="solution" data-pt="Solução" data-en="Solution">Solução</a>
+      <a href="#build" class="case-nav__link" data-section="build" data-pt="Construção" data-en="Build">Construção</a>
+      <a href="#validation" class="case-nav__link" data-section="validation" data-pt="Validação" data-en="Validation">Validação</a>
+      <a href="#impact" class="case-nav__link" data-section="impact" data-pt="Impacto" data-en="Impact">Impacto</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="Product-Led Sales aplicado à operação" data-en="Product-Led Sales applied to operations">Product-Led Sales aplicado à operação</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">Product Design</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Rabbot</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">UX/Product Designer</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2025</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="O produto como argumento de venda. Não uma demo. Uma experiência real." data-en="The product as the sales argument. Not a demo. A real experience.">O produto como argumento de venda. Não uma demo. Uma experiência real.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — OVERVIEW -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="O problema não era o produto. Era que cada vendedor apresentava o produto de um jeito diferente. Os mais antigos improvisavam com base na experiência. Os novos repetiam o que ouviam dos outros. Não existia consistência, nem profundidade técnica. Percebi que não adiantava criar mais material de apoio. O problema era estrutural. Precisávamos transformar o próprio produto no argumento de venda." data-en="The problem wasn't the product. It was that every salesperson presented it differently. Senior reps improvised based on experience. New ones repeated what they heard from others. There was no consistency, no technical depth. I realized that creating more sales materials wouldn't help. The problem was structural. We needed to turn the product itself into the sales argument.">
+        O problema não era o produto. Era que cada vendedor apresentava o produto de um jeito diferente. Os mais antigos improvisavam com base na experiência. Os novos repetiam o que ouviam dos outros. Não existia consistência, nem profundidade técnica. Percebi que não adiantava criar mais material de apoio. O problema era estrutural. Precisávamos transformar o próprio produto no argumento de venda.
+      </p>
+    </section>
+
+    <!-- 02 — DISCOVERY -->
+    <section class="case-v2-section" id="discovery">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label">DISCOVERY</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Antes de propor qualquer solução, fui a campo. Acompanhei reuniões, observei como os vendedores conduziam o diagnóstico e onde as conversas perdiam força. Ficou claro que o problema não era só de comunicação, mas de processo. Em campo observei dois padrões claros: a dificuldade de aprofundar em features técnicas do produto, e a ausência total de um roteiro estruturado. Cada venda dependia da habilidade individual de quem estava na sala." data-en="Before proposing any solution, I went into the field. I sat in on meetings, observed how salespeople conducted diagnostics, and where conversations lost momentum. It became clear the problem wasn't just about communication, but about process. In the field I identified two clear patterns: the difficulty of going deep on technical product features, and the complete absence of a structured script. Every sale depended on the individual skill of whoever was in the room.">
+        Antes de propor qualquer solução, fui a campo. Acompanhei reuniões, observei como os vendedores conduziam o diagnóstico e onde as conversas perdiam força. Ficou claro que o problema não era só de comunicação, mas de processo. Em campo observei dois padrões claros: a dificuldade de aprofundar em features técnicas do produto, e a ausência total de um roteiro estruturado. Cada venda dependia da habilidade individual de quem estava na sala.
+      </p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 280px; height: 360px; border-radius: 16px; overflow: hidden;">
+          <img src="fotoemcampo.jpg" alt="Foto em campo" style="width: 100%; height: 100%; object-fit: cover; object-position: right center;">
+        </div>
+        <div style="flex: 1; min-width: 280px; height: 360px; border-radius: 16px; overflow: hidden;">
+          <img src="campo.jpg" alt="Foto em campo 2" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </div>
+      <p style="font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Visita a campo: observação do processo comercial" data-en="Field visit: observing the sales process">Visita a campo: observação do processo comercial</p>
+
+      <!-- Customer Journey Map -->
+      <div style="margin-top: 56px;">
+        <h3 class="case-v2-subtitle anim-fade">Customer Journey Map</h3>
+        <p class="case-v2-text anim-fade" style="margin-bottom: 32px;" data-pt="Mapeei a jornada do vendedor e do cliente ao longo das quatro etapas do ciclo comercial, da prospecção ao fechamento, identificando dores, pensamentos e oportunidades em cada momento." data-en="I mapped the salesperson and client journey across the four stages of the sales cycle, from prospecting to closing, identifying pain points, thoughts, and opportunities at each moment.">
+          Mapeei a jornada do vendedor e do cliente ao longo das quatro etapas do ciclo comercial, da prospecção ao fechamento, identificando dores, pensamentos e oportunidades em cada momento.
+        </p>
+        <div style="background: rgba(245, 245, 245, 0.6); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); overflow: hidden; padding: 4px;">
+          <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table style="width: 100%; min-width: 720px; border-collapse: separate; border-spacing: 4px; font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.5;">
+              <!-- Cabeçalho -->
+              <thead>
+                <tr>
+                  <th style="background: transparent; padding: 12px 16px; width: 130px;"></th>
+                  <th style="background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 13px; text-align: left; color: #111;" data-pt="1. Prospecção" data-en="1. Prospecting">1. Prospecção</th>
+                  <th style="background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 13px; text-align: left; color: #111;" data-pt="2. Primeira reunião" data-en="2. First meeting">2. Primeira reunião</th>
+                  <th style="background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 13px; text-align: left; color: #111;" data-pt="3. Blitz operacional" data-en="3. Operational Blitz">3. Blitz operacional</th>
+                  <th style="background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 13px; text-align: left; color: #111;" data-pt="4. Fechamento" data-en="4. Closing">4. Fechamento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- O que acontece -->
+                <tr>
+                  <td style="background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; vertical-align: top;" data-pt="O que acontece" data-en="What happens">O que acontece</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #333;" data-pt="Vendedor qualifica o lead e agenda reunião. Sem roteiro definido, cada um improvisa do jeito que aprendeu." data-en="Salesperson qualifies the lead and schedules a meeting. No defined script, everyone improvises the way they learned.">Vendedor qualifica o lead e agenda reunião. Sem roteiro definido, cada um improvisa do jeito que aprendeu.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #333;" data-pt="Diagnóstico guiado no produto. Coleta dados da operação em tempo real e gera indicadores automáticos." data-en="Product-guided diagnostic. Collects operational data in real time and generates automatic indicators.">Diagnóstico guiado no produto. Coleta dados da operação em tempo real e gera indicadores automáticos.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #333;" data-pt="Um dia inteiro de uso real do produto na operação do cliente. Checklists, movimentações, tempos capturados." data-en="A full day of real product usage in the client's operation. Checklists, movements, and times captured.">Um dia inteiro de uso real do produto na operação do cliente. Checklists, movimentações, tempos capturados.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #333;" data-pt="Relatório gerado automaticamente com dados do cliente. Reunião vira leitura conjunta de evidências reais." data-en="Report automatically generated with client data. The meeting becomes a joint reading of real evidence.">Relatório gerado automaticamente com dados do cliente. Reunião vira leitura conjunta de evidências reais.</td>
+                </tr>
+                <!-- Pensamentos do vendedor -->
+                <tr>
+                  <td style="background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; vertical-align: top;" data-pt="Vendedor pensa" data-en="Salesperson thinks">Vendedor pensa</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Vou falar o que sempre funcionou comigo.&quot;" data-en="&quot;I'll say what has always worked for me.&quot;">"Vou falar o que sempre funcionou comigo."</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Tenho um roteiro. Sei exatamente o que perguntar.&quot;" data-en="&quot;I have a script. I know exactly what to ask.&quot;">"Tenho um roteiro. Sei exatamente o que perguntar."</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;O produto está vendendo por mim.&quot;" data-en="&quot;The product is selling itself for me.&quot;">"O produto está vendendo por mim."</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Não preciso convencer. Os dados falam.&quot;" data-en="&quot;I don't need to convince anyone. The data speaks for itself.&quot;">"Não preciso convencer. Os dados falam."</td>
+                </tr>
+                <!-- Pensamentos do cliente -->
+                <tr>
+                  <td style="background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; vertical-align: top;" data-pt="Cliente pensa" data-en="Client thinks">Cliente pensa</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Mais um software.&quot;" data-en="&quot;Just another software.&quot;">"Mais um software."</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Esse cara entende minha operação.&quot;" data-en="&quot;This guy actually understands my operation.&quot;">"Esse cara entende minha operação."</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Isso está funcionando de verdade na minha operação.&quot;" data-en="&quot;This is actually working in my operation.&quot;">"Isso está funcionando de verdade na minha operação."</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; font-style: italic; color: #777;" data-pt="&quot;Os dados são da minha empresa. Difícil ignorar.&quot;" data-en="&quot;The data is from my own company. Hard to ignore.&quot;">"Os dados são da minha empresa. Difícil ignorar."</td>
+                </tr>
+                <!-- Pontos de dor -->
+                <tr>
+                  <td style="background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; vertical-align: top;" data-pt="Pontos de dor" data-en="Pain points">Pontos de dor</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #c0392b;" data-pt="Inconsistência: cada vendedor apresenta diferente. Novos repetem o que ouviram." data-en="Inconsistency: every salesperson presents differently. New hires repeat what they heard.">Inconsistência: cada vendedor apresenta diferente. Novos repetem o que ouviram.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #c0392b;" data-pt="Improviso: dificuldade de aprofundar em features técnicas sem roteiro." data-en="Improvisation: hard to go deep on technical features without a script.">Improviso: dificuldade de aprofundar em features técnicas sem roteiro.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #c0392b;" data-pt="Resistência: equipe do cliente pode ter baixa adesão no primeiro dia." data-en="Resistance: client's team may have low adoption on the first day.">Resistência: equipe do cliente pode ter baixa adesão no primeiro dia.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #c0392b;" data-pt="Timing: manter o momentum entre a Blitz e a assinatura." data-en="Timing: keeping momentum between the Blitz and the contract signing.">Timing: manter o momentum entre a Blitz e a assinatura.</td>
+                </tr>
+                <!-- Oportunidades -->
+                <tr>
+                  <td style="background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; vertical-align: top;" data-pt="Oportunidades" data-en="Opportunities">Oportunidades</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #27ae60;" data-pt="Padronizar o diagnóstico antes da reunião." data-en="Standardize the diagnostic before the meeting.">Padronizar o diagnóstico antes da reunião.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #27ae60;" data-pt="Estrutura guiada que qualquer vendedor consegue seguir." data-en="A guided structure any salesperson can follow.">Estrutura guiada que qualquer vendedor consegue seguir.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #27ae60;" data-pt="Dados reais capturados automaticamente durante o uso." data-en="Real data captured automatically during usage.">Dados reais capturados automaticamente durante o uso.</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; color: #27ae60;" data-pt="Relatório de ROI gerado automaticamente ao final da Blitz." data-en="ROI report automatically generated at the end of the Blitz.">Relatório de ROI gerado automaticamente ao final da Blitz.</td>
+                </tr>
+                <!-- Curva emocional -->
+                <tr>
+                  <td style="background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; vertical-align: top;" data-pt="Curva emocional" data-en="Emotional curve">Curva emocional</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; text-align: center; font-size: 24px;">😐</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; text-align: center; font-size: 24px;">🙂</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; text-align: center; font-size: 24px;">😮</td>
+                  <td style="background: rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); vertical-align: top; text-align: center; font-size: 24px;">😄</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-scroll-hint" style="display: none; font-family: 'DM Sans', sans-serif; font-size: 12px; color: #999; text-align: center; margin-top: 10px;" data-pt="← deslize para ver mais →" data-en="← swipe to see more →">← deslize para ver mais →</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 — SOLUTION -->
+    <section class="case-v2-section" id="solution">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label" data-pt="SOLUÇÃO" data-en="SOLUTION">SOLUÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Desenhei um modelo de Product-Led Sales: em vez de explicar o produto, a gente o colocava para funcionar dentro da operação do cliente. A venda deixaria de ser uma apresentação e passaria a ser uma experiência real. O modelo foi estruturado em quatro etapas: diagnóstico estruturado na primeira reunião, configuração automática do ambiente, validação em campo de um dia inteiro (a Blitz) e um relatório final com métricas e ROI." data-en="I designed a Product-Led Sales model: instead of explaining the product, we put it to work inside the client's operation. The sale would stop being a presentation and become a real experience. The model was structured in four stages: a structured diagnostic in the first meeting, automatic environment setup, a full-day field validation (the Blitz) and a final report with metrics and ROI.">
+        Desenhei um modelo de Product-Led Sales: em vez de explicar o produto, a gente o colocava para funcionar dentro da operação do cliente. A venda deixaria de ser uma apresentação e passaria a ser uma experiência real. O modelo foi estruturado em quatro etapas: diagnóstico estruturado na primeira reunião, configuração automática do ambiente, validação em campo de um dia inteiro (a Blitz) e um relatório final com métricas e ROI.
+      </p>
+      <div class="solution-diagram anim-scale">
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="solution-card__title" data-pt="Diagnóstico guiado" data-en="Guided diagnostic">Diagnóstico guiado</div>
+          <div class="solution-card__sub" data-pt="Coleta estruturada de dados estratégicos" data-en="Structured collection of strategic data">Coleta estruturada de dados estratégicos</div>
+        </div>
+        <svg class="solution-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <div class="solution-card__title" data-pt="Setup automático" data-en="Automatic setup">Setup automático</div>
+          <div class="solution-card__sub" data-pt="Ambiente configurado a partir do diagnóstico" data-en="Environment configured from the diagnostic">Ambiente configurado a partir do diagnóstico</div>
+        </div>
+        <svg class="solution-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="solution-card__title" data-pt="Blitz operacional" data-en="Operational Blitz">Blitz operacional</div>
+          <div class="solution-card__sub" data-pt="Uso real do produto na operação" data-en="Real product usage in operations">Uso real do produto na operação</div>
+        </div>
+        <svg class="solution-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="solution-card__title" data-pt="Relatório &amp; ROI" data-en="Report &amp; ROI">Relatório &amp; ROI</div>
+          <div class="solution-card__sub" data-pt="Métricas consolidadas e evidência de impacto" data-en="Consolidated metrics and impact evidence">Métricas consolidadas e evidência de impacto</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 — BUILD -->
+    <section class="case-v2-section" id="build">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label" data-pt="CONSTRUÇÃO" data-en="BUILD">CONSTRUÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Criei uma interface guiada para a primeira reunião. O vendedor conduz o diagnóstico em tempo real, coleta dados da operação do cliente e já gera indicadores iniciais. Isso trouxe consistência para algo que antes dependia totalmente de improviso, permitindo que qualquer vendedor, independente da experiência, chegasse preparado. Com base no diagnóstico, a plataforma configurava automaticamente um ambiente pronto para a operação do cliente." data-en="I created a guided interface for the first meeting. The salesperson conducts the diagnostic in real time, collects data from the client's operation and generates initial indicators. This brought consistency to something that previously depended entirely on improvisation, allowing any salesperson, regardless of experience, to arrive prepared. Based on the diagnostic, the platform automatically configured an environment ready for the client's operation.">
+        Criei uma interface guiada para a primeira reunião. O vendedor conduz o diagnóstico em tempo real, coleta dados da operação do cliente e já gera indicadores iniciais. Isso trouxe consistência para algo que antes dependia totalmente de improviso, permitindo que qualquer vendedor, independente da experiência, chegasse preparado. Com base no diagnóstico, a plataforma configurava automaticamente um ambiente pronto para a operação do cliente.
+      </p>
+      <p class="case-v2-text anim-fade" style="margin-bottom: 32px;" data-pt="O layout foi desenhado no Figma, com foco em consistência visual e fluxo guiado. Para validar a experiência de forma funcional, exportei o design no Lovable, mantendo o mesmo sistema visual e testando o fluxo com o time de vendas." data-en="The layout was designed in Figma, focused on visual consistency and guided flow. To validate the experience functionally, I exported the design to Lovable, keeping the same visual system and testing the flow with the sales team.">
+        O layout foi desenhado no Figma, com foco em consistência visual e fluxo guiado. Para validar a experiência de forma funcional, exportei o design no Lovable, mantendo o mesmo sistema visual e testando o fluxo com o time de vendas.
+      </p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px;">
+        <div style="flex: 1; min-width: 280px;">
+          <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+            <img src="figma.jpg" alt="Design no Figma" style="width: 100%; aspect-ratio: 847 / 458; object-fit: contain; display: block;">
+          </div>
+          <p style="font-size: 12px; color: #999; text-align: center; margin-top: 8px;" data-pt="Design no Figma" data-en="Design in Figma">Design no Figma</p>
+        </div>
+        <div style="flex: 1; min-width: 280px;">
+          <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+            <img src="lovable.jpg" alt="Protótipo funcional no Lovable" style="width: 100%; aspect-ratio: 847 / 458; object-fit: contain; display: block;">
+          </div>
+          <p style="font-size: 12px; color: #999; text-align: center; margin-top: 8px;" data-pt="Protótipo funcional no Lovable" data-en="Functional prototype in Lovable">Protótipo funcional no Lovable</p>
+        </div>
+      </div>
+      <p class="case-v2-text anim-fade" style="margin-top: 40px; margin-bottom: 32px;" data-pt="Com o fluxo validado, as telas foram construídas etapa por etapa. Cada decisão de interface tinha um objetivo claro: reduzir o improviso e garantir que qualquer vendedor chegasse à reunião preparado, independente do tempo de casa." data-en="With the flow validated, the screens were built step by step. Every interface decision had a clear goal: reduce improvisation and ensure any salesperson could arrive at the meeting prepared, regardless of tenure.">
+        Com o fluxo validado, as telas foram construídas etapa por etapa. Cada decisão de interface tinha um objetivo claro: reduzir o improviso e garantir que qualquer vendedor chegasse à reunião preparado, independente do tempo de casa.
+      </p>
+      <!-- Ticker Build -->
+      <div class="build-ticker anim-scale">
+        <div class="build-ticker__track" id="buildTicker">
+          <img src="d1.png" alt="Build 1" class="build-ticker__img">
+          <img src="d2.png" alt="Build 2" class="build-ticker__img">
+          <img src="d3.png" alt="Build 3" class="build-ticker__img">
+          <img src="d4.png" alt="Build 4" class="build-ticker__img">
+          <img src="d5.png" alt="Build 5" class="build-ticker__img">
+          <img src="d6.png" alt="Build 6" class="build-ticker__img">
+          <img src="d7.png" alt="Build 7" class="build-ticker__img">
+          <!-- Duplicata para loop seamless -->
+          <img src="d1.png" alt="Build 1" class="build-ticker__img">
+          <img src="d2.png" alt="Build 2" class="build-ticker__img">
+          <img src="d3.png" alt="Build 3" class="build-ticker__img">
+          <img src="d4.png" alt="Build 4" class="build-ticker__img">
+          <img src="d5.png" alt="Build 5" class="build-ticker__img">
+          <img src="d6.png" alt="Build 6" class="build-ticker__img">
+          <img src="d7.png" alt="Build 7" class="build-ticker__img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 — VALIDATION -->
+    <section class="case-v2-section" id="validation">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">05</span>
+        <span class="case-v2-section__label" data-pt="VALIDAÇÃO" data-en="VALIDATION">VALIDAÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Essa é a parte que mais me orgulha. A Blitz é um dia inteiro de uso real do produto dentro da operação do cliente. Não uma demo, não um piloto controlado. O produto funcionando de verdade, sob pressão real. Participei das primeiras Blitz presencialmente. Acompanhei checklists sendo preenchidos, movimentações registradas, tempos capturados. Ao final do dia, a plataforma gerava automaticamente um relatório com os dados da operação: métricas, eficiência, impacto financeiro estimado. A reunião de fechamento deixava de ser uma apresentação comercial e virava uma leitura conjunta dos dados do próprio cliente. Não tem argumento de venda mais forte do que isso." data-en="This is the part I'm most proud of. The Blitz is a full day of real product usage inside the client's operation. Not a demo, not a controlled pilot. The product working for real, under real pressure. I participated in the first Blitz sessions in person. I watched checklists being filled out, movements recorded, times captured. At the end of the day, the platform automatically generated a report with operational data: metrics, efficiency, estimated financial impact. The closing meeting stopped being a sales presentation and became a joint reading of the client's own data. There's no stronger sales argument than that.">
+        Essa é a parte que mais me orgulha. A Blitz é um dia inteiro de uso real do produto dentro da operação do cliente. Não uma demo, não um piloto controlado. O produto funcionando de verdade, sob pressão real. Participei das primeiras Blitz presencialmente. Acompanhei checklists sendo preenchidos, movimentações registradas, tempos capturados. Ao final do dia, a plataforma gerava automaticamente um relatório com os dados da operação: métricas, eficiência, impacto financeiro estimado. A reunião de fechamento deixava de ser uma apresentação comercial e virava uma leitura conjunta dos dados do próprio cliente. Não tem argumento de venda mais forte do que isso.
+      </p>
+      <!-- BLOCO 1 — Foto em campo -->
+      <div class="anim-scale" style="border-radius: 12px; overflow: hidden;">
+        <img src="fotoemcampo2.jpg" alt="Blitz em campo" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: center; border-radius: 12px; display: block;">
+      </div>
+      <p style="font-size: 12px; color: #999; text-align: center; margin-top: 8px;" data-pt="Acompanhamento presencial da Blitz na operação do cliente" data-en="In-person follow-up of the Blitz at the client's operation">Acompanhamento presencial da Blitz na operação do cliente</p>
+
+      <!-- BLOCO 2 — Dinâmica da Blitz -->
+      <div style="margin-top: 56px;">
+<div class="pls-scroll-frame" style="height: 580px; overflow-y: scroll; scroll-behavior: smooth; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent;">
+          <img src="relatorio.jpg" alt="Relatório gerado ao final do dia" style="width: 100%; height: auto; display: block;">
+        </div>
+        <p style="font-size: 12px; color: #999; text-align: center; margin-top: 8px;" data-pt="Relatório gerado ao final do dia" data-en="Report generated at the end of the day">Relatório gerado ao final do dia</p>
+      </div>
+    </section>
+
+    <!-- 06 — IMPACT -->
+    <section class="case-v2-section" id="impact">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">06</span>
+        <span class="case-v2-section__label" data-pt="IMPACTO" data-en="IMPACT">IMPACTO</span>
+      </div>
+      <div class="case-v2-impact">
+        <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
+          <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Results">Resultado</h3>
+          <p class="case-v2-impact__text" data-pt="O modelo ainda está ativo no fluxo comercial da Rabbot. Padronizou a abordagem do time, facilitou o onboarding de novos vendedores e contribuiu diretamente para a aquisição de novas contas." data-en="The model is still active in Rabbot's sales flow. It standardized the team's approach, facilitated onboarding of new salespeople, and directly contributed to the acquisition of new accounts.">O modelo ainda está ativo no fluxo comercial da Rabbot. Padronizou a abordagem do time, facilitou o onboarding de novos vendedores e contribuiu diretamente para a aquisição de novas contas.</p>
+        </div>
+        <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
+          <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
+          <p class="case-v2-impact__text" data-pt="Liderei o projeto do zero, da imersão em campo até a prototipagem no Lovable. Trabalhei junto com um desenvolvedor na integração com o Supabase. Mas mais do que entregar uma ferramenta, o que me motivou foi resolver um problema que eu mesmo observei: tornar o produto o principal argumento de venda." data-en="I led the project from scratch, from field immersion to prototyping in Lovable. I worked alongside a developer on the Supabase integration. But more than delivering a tool, what motivated me was solving a problem I observed myself: making the product the main sales argument.">Liderei o projeto do zero, da imersão em campo até a prototipagem no Lovable. Trabalhei junto com um desenvolvedor na integração com o Supabase. Mas mais do que entregar uma ferramenta, o que me motivou foi resolver um problema que eu mesmo observei: tornar o produto o principal argumento de venda.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Case nav — active section tracking + smooth scroll
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    // Smooth scroll on click
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Active tracking on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Build Ticker — set animation duration based on content width
+    (function () {
+      var track = document.getElementById('buildTicker');
+      if (!track) return;
+      // 7 images × (746px + 24px gap) = 5390px for half the track
+      // Speed: ~60px/s → duration = 5390 / 60 ≈ 90s
+      var halfWidth = track.scrollWidth / 2;
+      var speed = 60;
+      var duration = halfWidth / speed;
+      track.style.animationDuration = duration + 's';
+    })();
+  </script>
+</body>
+</html>

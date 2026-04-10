@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redesign SaaS — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    .saas-ticker {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      overflow: hidden;
+      padding: 32px 0;
+      position: relative;
+      background: #fff;
+    }
+    .saas-ticker::before,
+    .saas-ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .saas-ticker::before {
+      left: 0;
+      background: linear-gradient(to right, #ffffff, transparent);
+    }
+    .saas-ticker::after {
+      right: 0;
+      background: linear-gradient(to left, #ffffff, transparent);
+    }
+    .saas-ticker__track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: saasScroll linear infinite;
+    }
+    .saas-ticker__img {
+      height: 340px;
+      aspect-ratio: 1920 / 932;
+      object-fit: contain;
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+    @keyframes saasScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (max-width: 768px) {
+      .saas-ticker__img {
+        height: 200px;
+        width: calc(200px * 16 / 9);
+        border-radius: 8px;
+      }
+      .saas-ticker__track {
+        gap: 12px;
+      }
+      .saas-ticker::before,
+      .saas-ticker::after {
+        width: 60px;
+      }
+      .img-row-saas {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body class="case-v2">
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#discovery" class="case-nav__link" data-section="discovery">Discovery</a>
+      <a href="#jornada" class="case-nav__link" data-section="jornada" data-pt="Jornada" data-en="Journey">Jornada</a>
+      <a href="#wireframes" class="case-nav__link" data-section="wireframes">Wireframes</a>
+      <a href="#prototipos" class="case-nav__link" data-section="prototipos" data-pt="Protótipos" data-en="Prototypes">Protótipos</a>
+      <a href="#resultado" class="case-nav__link" data-section="resultado" data-pt="Resultado" data-en="Results">Resultado</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="Redesign da plataforma SaaS de gestão logística" data-en="Redesign of the logistics management SaaS platform">Redesign da plataforma SaaS de gestão logística</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">Product Design</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Rabbot</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">UX/Product Designer</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2023</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="Navegação, escalabilidade e consistência. Do zero." data-en="Navigation, scalability and consistency. From scratch.">Navegação, escalabilidade e consistência. Do zero.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — VISÃO GERAL -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Liderei, junto com outro designer, o redesenho completo da plataforma SaaS de gestão logística da Rabbot. A plataforma tinha limitações reais: navegação pouco intuitiva, baixa escalabilidade e problemas de desempenho que dificultavam o dia a dia dos usuários. Conduzi o projeto desde a exploração inicial até o acompanhamento pós-lançamento, passando por pesquisas, mapeamento de jornadas, prototipagem e colaboração próxima com o time de desenvolvimento." data-en="I co-led, alongside another designer, the complete redesign of Rabbot's logistics management SaaS platform. The platform had real limitations: unintuitive navigation, low scalability, and performance issues that made daily use difficult. I led the project from initial exploration to post-launch monitoring, covering research, journey mapping, prototyping, and close collaboration with the development team.">
+        Liderei, junto com outro designer, o redesenho completo da plataforma SaaS de gestão logística da Rabbot. A plataforma tinha limitações reais: navegação pouco intuitiva, baixa escalabilidade e problemas de desempenho que dificultavam o dia a dia dos usuários. Conduzi o projeto desde a exploração inicial até o acompanhamento pós-lançamento, passando por pesquisas, mapeamento de jornadas, prototipagem e colaboração próxima com o time de desenvolvimento.
+      </p>
+    </section>
+
+    <!-- 02 — DISCOVERY -->
+    <section class="case-v2-section" id="discovery">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label">DISCOVERY</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Começamos reunindo insights por meio de entrevistas com usuários, análise de dados e benchmarking. Organizamos tudo no Miro, categorizando problemas críticos e oportunidades de melhoria. Em paralelo, criamos playbooks detalhados para estruturar jornadas, mapear personas e alinhar o time sobre o que precisava mudar. Esses materiais também orientaram decisões estratégicas de produto, como versionamento futuro e estratégias de Go-To-Market." data-en="We started by gathering insights through user interviews, data analysis, and benchmarking. We organized everything in Miro, categorizing critical problems and improvement opportunities. In parallel, we created detailed playbooks to structure journeys, map personas, and align the team on what needed to change. These materials also guided strategic product decisions, such as future versioning and Go-To-Market strategies.">
+        Começamos reunindo insights por meio de entrevistas com usuários, análise de dados e benchmarking. Organizamos tudo no Miro, categorizando problemas críticos e oportunidades de melhoria. Em paralelo, criamos playbooks detalhados para estruturar jornadas, mapear personas e alinhar o time sobre o que precisava mudar. Esses materiais também orientaram decisões estratégicas de produto, como versionamento futuro e estratégias de Go-To-Market.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="miroplaybook.png" alt="Miro — organização dos insights e playbooks" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Miro — organização dos insights e playbooks" data-en="Miro — insights organization and playbooks">Miro — organização dos insights e playbooks</p>
+    </section>
+
+    <!-- 03 — JORNADA -->
+    <section class="case-v2-section" id="jornada">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label" data-pt="JORNADA" data-en="JOURNEY">JORNADA</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Mapeamos as principais jornadas com base na abordagem Jobs To Be Done, entendendo o que os usuários precisavam realizar em cada etapa. Fizemos análises As Is e To Be para diagnosticar as falhas da versão anterior e propor melhorias concretas. Conectamos essas jornadas às alavancas de negócio: onboarding, adoção e retenção. O design precisava fazer sentido tanto para o usuário quanto para o produto." data-en="We mapped the main journeys based on the Jobs To Be Done approach, understanding what users needed to accomplish at each stage. We conducted As-Is and To-Be analyses to diagnose failures in the previous version and propose concrete improvements. We connected these journeys to business levers: onboarding, adoption, and retention. The design needed to make sense for both the user and the product.">
+        Mapeamos as principais jornadas com base na abordagem Jobs To Be Done, entendendo o que os usuários precisavam realizar em cada etapa. Fizemos análises As Is e To Be para diagnosticar as falhas da versão anterior e propor melhorias concretas. Conectamos essas jornadas às alavancas de negócio: onboarding, adoção e retenção. O design precisava fazer sentido tanto para o usuário quanto para o produto.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="jornadadeuso.png" alt="Mapeamento de jornada" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Mapeamento de jornada — Jobs To Be Done" data-en="Journey mapping — Jobs To Be Done">Mapeamento de jornada — Jobs To Be Done</p>
+    </section>
+
+    <!-- 04 — WIREFRAMES -->
+    <section class="case-v2-section" id="wireframes">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label">WIREFRAMES</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Os primeiros wireframes serviram para validar conceitos, priorizar funcionalidades e ajustar a estrutura antes de qualquer definição visual. Essa etapa foi importante para alinhar o time e garantir que estávamos resolvendo os problemas certos antes de avançar." data-en="The first wireframes served to validate concepts, prioritize features, and adjust the structure before any visual decisions. This step was important to align the team and ensure we were solving the right problems before moving forward.">
+        Os primeiros wireframes serviram para validar conceitos, priorizar funcionalidades e ajustar a estrutura antes de qualquer definição visual. Essa etapa foi importante para alinhar o time e garantir que estávamos resolvendo os problemas certos antes de avançar.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F9F9F9; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="wireframe.jpg" alt="Wireframes" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Wireframes — estrutura antes da interface" data-en="Wireframes — structure before the interface">Wireframes — estrutura antes da interface</p>
+    </section>
+
+    <!-- 05 — PROTÓTIPOS -->
+    <section class="case-v2-section" id="prototipos">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">05</span>
+        <span class="case-v2-section__label" data-pt="PROTÓTIPOS" data-en="PROTOTYPES">PROTÓTIPOS</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Os protótipos de alta fidelidade foram organizados no Figma com componentes reutilizáveis e documentação clara, pensando desde o início no handoff para o time de desenvolvimento. A organização do arquivo foi tão importante quanto o design em si." data-en="The high-fidelity prototypes were organized in Figma with reusable components and clear documentation, thinking from the start about handoff to the development team. The file organization was just as important as the design itself.">
+        Os protótipos de alta fidelidade foram organizados no Figma com componentes reutilizáveis e documentação clara, pensando desde o início no handoff para o time de desenvolvimento. A organização do arquivo foi tão importante quanto o design em si.
+      </p>
+
+      <!-- Handoff Figma -->
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="handoffsaas.png" alt="Organização no Figma" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Organização no Figma — componentes e handoff" data-en="Figma organization — components and handoff">Organização no Figma — componentes e handoff</p>
+
+      <!-- Carrossel automático -->
+      <div class="saas-ticker anim-scale" data-delay="100" style="margin-top: 40px;">
+        <div class="saas-ticker__track" id="saasTicker">
+          <img src="abc1.png" alt="SaaS screen 1" class="saas-ticker__img">
+          <img src="abc2.png" alt="SaaS screen 2" class="saas-ticker__img">
+          <img src="abc3.png" alt="SaaS screen 3" class="saas-ticker__img">
+          <img src="abc4.png" alt="SaaS screen 4" class="saas-ticker__img">
+          <img src="abc6.png" alt="SaaS screen 6" class="saas-ticker__img">
+          <img src="abc7.png" alt="SaaS screen 7" class="saas-ticker__img">
+          <!-- Duplicata para loop seamless -->
+          <img src="abc1.png" alt="SaaS screen 1" class="saas-ticker__img">
+          <img src="abc2.png" alt="SaaS screen 2" class="saas-ticker__img">
+          <img src="abc3.png" alt="SaaS screen 3" class="saas-ticker__img">
+          <img src="abc4.png" alt="SaaS screen 4" class="saas-ticker__img">
+          <img src="abc6.png" alt="SaaS screen 6" class="saas-ticker__img">
+          <img src="abc7.png" alt="SaaS screen 7" class="saas-ticker__img">
+        </div>
+      </div>
+
+      <!-- Implementação -->
+      <h3 class="case-v2-section__subtitle" style="margin-top: 48px;" data-pt="Implementação" data-en="Implementation">Implementação</h3>
+      <p class="case-v2-section__text anim-fade" data-pt="Para facilitar a adoção das novas funcionalidades, desenvolvemos tours interativos com o Gainsight PX, orientando os usuários sobre as novidades da plataforma de forma contextual, sem depender de treinamentos manuais." data-en="To facilitate adoption of the new features, we developed interactive tours using Gainsight PX, guiding users through the platform's new features contextually, without relying on manual training.">
+        Para facilitar a adoção das novas funcionalidades, desenvolvemos tours interativos com o Gainsight PX, orientando os usuários sobre as novidades da plataforma de forma contextual, sem depender de treinamentos manuais.
+      </p>
+      <div class="img-row-saas anim-scale" data-delay="200" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px;">
+        <div style="background: #F5F5F5; border-radius: 12px; padding: 16px;">
+          <img src="tour.png" alt="Tour interativo 1" style="width: 100%; aspect-ratio: 16/9; object-fit: contain; display: block;">
+        </div>
+        <div style="background: #F5F5F5; border-radius: 12px; padding: 16px;">
+          <img src="tour2.png" alt="Tour interativo 2" style="width: 100%; aspect-ratio: 16/9; object-fit: contain; display: block;">
+        </div>
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Tours interativos com Gainsight PX" data-en="Interactive tours with Gainsight PX">Tours interativos com Gainsight PX</p>
+
+      <!-- Monitoramento -->
+      <h3 class="case-v2-section__subtitle" style="margin-top: 48px;" data-pt="Monitoramento" data-en="Monitoring">Monitoramento</h3>
+      <p class="case-v2-section__text anim-fade" data-pt="Após o lançamento, acompanhamos métricas de uso: frequência de interação, tempo gasto nas jornadas, feedbacks via entrevistas e formulários. Esses dados foram fundamentais para validar hipóteses e priorizar os próximos ajustes." data-en="After launch, we monitored usage metrics: interaction frequency, time spent on journeys, feedback via interviews and forms. This data was fundamental to validate hypotheses and prioritize the next adjustments.">
+        Após o lançamento, acompanhamos métricas de uso: frequência de interação, tempo gasto nas jornadas, feedbacks via entrevistas e formulários. Esses dados foram fundamentais para validar hipóteses e priorizar os próximos ajustes.
+      </p>
+      <div class="anim-scale" data-delay="200" style="background: #F5F5F5; border-radius: 12px; padding: 24px; margin-top: 32px;">
+        <img src="monitoramento.png" alt="Métricas de uso" style="width: 100%; object-fit: contain; display: block;">
+      </div>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Métricas de uso pós-lançamento" data-en="Post-launch usage metrics">Métricas de uso pós-lançamento</p>
+    </section>
+
+    <!-- 06 — RESULTADO -->
+    <section class="case-v2-section" id="resultado">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">06</span>
+        <span class="case-v2-section__label" data-pt="RESULTADO" data-en="RESULTS">RESULTADO</span>
+      </div>
+      <div class="case-v2-impact">
+        <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
+          <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Result">Resultado</h3>
+          <p class="case-v2-impact__text" data-pt="A plataforma ficou mais escalável, moderna e consistente. As jornadas ficaram mais claras e o produto ganhou uma base sólida para continuar evoluindo. O principal aprendizado foi entender que num redesign de plataforma complexa, tão importante quanto a qualidade do design é a qualidade da documentação e do processo." data-en="The platform became more scalable, modern, and consistent. The journeys became clearer and the product gained a solid foundation to keep evolving. The main learning was understanding that in a complex platform redesign, the quality of documentation and process is just as important as the quality of the design.">A plataforma ficou mais escalável, moderna e consistente. As jornadas ficaram mais claras e o produto ganhou uma base sólida para continuar evoluindo. O principal aprendizado foi entender que num redesign de plataforma complexa, tão importante quanto a qualidade do design é a qualidade da documentação e do processo.</p>
+        </div>
+        <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
+          <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
+          <p class="case-v2-impact__text" data-pt="Conduzi o projeto junto com outro designer, dividindo responsabilidades de forma colaborativa. Fui responsável pela condução das pesquisas, mapeamento de jornadas, prototipagem e acompanhamento pós-lançamento. Mais do que entregar telas, o trabalho aqui foi estruturar um processo que desse clareza para todo o time sobre o que estávamos construindo e por quê." data-en="I co-led the project alongside another designer, sharing responsibilities collaboratively. I was responsible for conducting research, journey mapping, prototyping, and post-launch monitoring. More than delivering screens, the work here was to structure a process that gave the entire team clarity about what we were building and why.">Conduzi o projeto junto com outro designer, dividindo responsabilidades de forma colaborativa. Fui responsável pela condução das pesquisas, mapeamento de jornadas, prototipagem e acompanhamento pós-lançamento. Mais do que entregar telas, o trabalho aqui foi estruturar um processo que desse clareza para todo o time sobre o que estávamos construindo e por quê.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Case nav — active section tracking + smooth scroll
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Active tracking on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // SaaS Ticker — set animation duration based on content width
+    (function () {
+      var track = document.getElementById('saasTicker');
+      if (!track) return;
+      var halfWidth = track.scrollWidth / 2;
+      var speed = 60;
+      var duration = halfWidth / speed;
+      track.style.animationDuration = duration + 's';
+    })();
+  </script>
+</body>
+</html>
