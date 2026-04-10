@@ -44,6 +44,7 @@
       gap: 24px;
       width: max-content;
       animation: buildScroll linear infinite;
+      animation-play-state: paused;
     }
 
     .build-ticker__img {
@@ -406,7 +407,7 @@
       <!-- BLOCO 2 — Dinâmica da Blitz -->
       <div style="margin-top: 56px;">
 <div class="pls-scroll-frame" style="height: 580px; overflow-y: scroll; scroll-behavior: smooth; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent;">
-          <img src="relatorio.jpg" alt="Relatório gerado ao final do dia" style="width: 100%; height: auto; display: block;">
+          <img src="rrelatorioo.jpg" alt="Relatório gerado ao final do dia" style="width: 100%; height: auto; display: block;">
         </div>
         <p style="font-size: 12px; color: #999; text-align: center; margin-top: 8px;" data-pt="Relatório gerado ao final do dia" data-en="Report generated at the end of the day">Relatório gerado ao final do dia</p>
       </div>
@@ -526,12 +527,31 @@
     (function () {
       var track = document.getElementById('buildTicker');
       if (!track) return;
-      // 7 images × (746px + 24px gap) = 5390px for half the track
-      // Speed: ~60px/s → duration = 5390 / 60 ≈ 90s
-      var halfWidth = track.scrollWidth / 2;
-      var speed = 60;
-      var duration = halfWidth / speed;
-      track.style.animationDuration = duration + 's';
+      var imgs = track.querySelectorAll('img');
+      var loaded = 0;
+      var total = imgs.length;
+
+      function startTicker() {
+        var halfWidth = track.scrollWidth / 2;
+        var speed = 60;
+        var duration = halfWidth / speed;
+        track.style.animationDuration = duration + 's';
+        track.style.animationPlayState = 'running';
+      }
+
+      function onImgReady() {
+        loaded++;
+        if (loaded >= total) startTicker();
+      }
+
+      imgs.forEach(function (img) {
+        if (img.complete) {
+          onImgReady();
+        } else {
+          img.addEventListener('load', onImgReady);
+          img.addEventListener('error', onImgReady);
+        }
+      });
     })();
   </script>
 

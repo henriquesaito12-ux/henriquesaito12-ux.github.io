@@ -11,8 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <style>
     .saas-ticker {
-      width: 100vw;
+      width: 100%;
+      max-width: 100vw;
       margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
       overflow: hidden;
       padding: 32px 0;
       position: relative;
@@ -56,6 +58,12 @@
       100% { transform: translateX(-50%); }
     }
     @media (max-width: 768px) {
+      .saas-ticker {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 20px 0;
+      }
       .saas-ticker__img {
         height: 180px !important;
         max-height: 180px !important;
@@ -67,7 +75,7 @@
       }
       .saas-ticker::before,
       .saas-ticker::after {
-        width: 60px;
+        width: 40px;
       }
       .img-row-saas {
         grid-template-columns: 1fr !important;
