@@ -34,7 +34,13 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none;
+}
+
+a, button, [role="button"], .folder, [onclick],
+label, select, input[type="submit"], input[type="button"],
+.project-card, .gallery img, .carousel img,
+[class*="card"], [class*="btn"], [class*="badge"] {
+  cursor: pointer;
 }
 
 body {
@@ -46,11 +52,6 @@ body {
   overflow-x: hidden;
   padding-bottom: 120px;
   padding-top: 80px;
-  cursor: none;
-}
-
-a, button, input, textarea, select {
-  cursor: none;
 }
 
 a {
@@ -63,47 +64,6 @@ img {
   display: block;
 }
 
-/* ============================
-   Custom Cursor
-   ============================ */
-
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  background: var(--black);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, border 0.15s ease, mix-blend-mode 0.15s ease;
-  will-change: left, top;
-}
-
-.cursor.hover {
-  width: 36px;
-  height: 36px;
-  background: transparent;
-  border: 1.5px solid var(--black);
-}
-
-.cursor.dock-hover {
-  width: 40px;
-  height: 40px;
-  background: var(--white);
-  mix-blend-mode: difference;
-  border: none;
-}
-
-.cursor.light {
-  background: var(--white);
-}
-
-.cursor.light.hover {
-  background: transparent;
-  border-color: var(--white);
-}
 
 /* ============================
    Header
@@ -179,6 +139,9 @@ img {
   font-size: 13px;
   font-weight: 500;
   transition: background 0.2s ease;
+  min-width: 180px;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .header__cta:hover {
@@ -1115,6 +1078,29 @@ img {
   display: block;
 }
 
+.btn-ilustracoes {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid #111;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: #111;
+  background: transparent;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-ilustracoes:hover {
+  background: #111;
+  color: #fff;
+}
+
 /* --- Stacked photos --- */
 
 .sobre__photos {
@@ -2040,12 +2026,8 @@ img {
     padding: 5px 10px;
   }
 
-  /* Hide custom cursor on touch devices */
-  .cursor {
-    display: none;
-  }
-
-  html, body, a, button, input, textarea, select {
+  /* Restore default cursor on touch devices */
+  a, button, [role="button"], .folder, [onclick] {
     cursor: auto;
   }
 }

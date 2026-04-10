@@ -49,8 +49,9 @@
     }
 
     .app-ticker__img {
-      height: 520px;
-      aspect-ratio: 375 / 812;
+      height: 480px;
+      width: calc(480px * 375 / 812);
+      max-width: none;
       object-fit: cover;
       border-radius: 16px;
       flex-shrink: 0;
@@ -65,8 +66,8 @@
     /* Responsive */
     @media (max-width: 768px) {
       .app-ticker__img {
-        height: 320px;
-        width: calc(320px * 375 / 812);
+        height: 260px;
+        width: calc(260px * 375 / 812);
       }
       .app-ticker__track {
         gap: 12px;
@@ -108,9 +109,6 @@
   </style>
 </head>
 <body class="case-v2">
-
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor"></div>
 
   <!-- Case Header -->
   <header class="case-nav" id="caseNav">
@@ -306,31 +304,31 @@ Isso significou que alternar entre dark mode e light mode não exigiu nenhum red
       <!-- Carrossel automático -->
       <div class="app-ticker anim-scale" data-delay="100">
         <div class="app-ticker__track" id="appTicker">
-          <img src="ap0 (1).png" alt="App screen 0" class="app-ticker__img">
-          <img src="ap1 (1).png" alt="App screen 1" class="app-ticker__img">
-          <img src="ap2 (1).png" alt="App screen 2" class="app-ticker__img">
-          <img src="ap3 (1).png" alt="App screen 3" class="app-ticker__img">
-          <img src="ap4 (1).png" alt="App screen 4" class="app-ticker__img">
-          <img src="ap5 (1).png" alt="App screen 5" class="app-ticker__img">
-          <img src="ap6 (1).png" alt="App screen 6" class="app-ticker__img">
-          <img src="ap7 (1).png" alt="App screen 7" class="app-ticker__img">
-          <img src="ap8 (1).png" alt="App screen 8" class="app-ticker__img">
-          <img src="ap10 (1).png" alt="App screen 10" class="app-ticker__img">
-          <img src="ap11 (1).png" alt="App screen 11" class="app-ticker__img">
-          <img src="ap12 (1).png" alt="App screen 12" class="app-ticker__img">
+          <img src="ap0 (1).png" alt="App screen 0" class="app-ticker__img" loading="lazy">
+          <img src="ap1 (1).png" alt="App screen 1" class="app-ticker__img" loading="lazy">
+          <img src="ap2 (1).png" alt="App screen 2" class="app-ticker__img" loading="lazy">
+          <img src="ap3 (1).png" alt="App screen 3" class="app-ticker__img" loading="lazy">
+          <img src="ap4 (1).png" alt="App screen 4" class="app-ticker__img" loading="lazy">
+          <img src="ap5 (1).png" alt="App screen 5" class="app-ticker__img" loading="lazy">
+          <img src="ap6 (1).png" alt="App screen 6" class="app-ticker__img" loading="lazy">
+          <img src="ap7 (1).png" alt="App screen 7" class="app-ticker__img" loading="lazy">
+          <img src="ap8 (1).png" alt="App screen 8" class="app-ticker__img" loading="lazy">
+          <img src="ap10 (1).png" alt="App screen 10" class="app-ticker__img" loading="lazy">
+          <img src="ap11 (1).png" alt="App screen 11" class="app-ticker__img" loading="lazy">
+          <img src="ap12 (1).png" alt="App screen 12" class="app-ticker__img" loading="lazy">
           <!-- Duplicata para loop seamless -->
-          <img src="ap0 (1).png" alt="App screen 0" class="app-ticker__img">
-          <img src="ap1 (1).png" alt="App screen 1" class="app-ticker__img">
-          <img src="ap2 (1).png" alt="App screen 2" class="app-ticker__img">
-          <img src="ap3 (1).png" alt="App screen 3" class="app-ticker__img">
-          <img src="ap4 (1).png" alt="App screen 4" class="app-ticker__img">
-          <img src="ap5 (1).png" alt="App screen 5" class="app-ticker__img">
-          <img src="ap6 (1).png" alt="App screen 6" class="app-ticker__img">
-          <img src="ap7 (1).png" alt="App screen 7" class="app-ticker__img">
-          <img src="ap8 (1).png" alt="App screen 8" class="app-ticker__img">
-          <img src="ap10 (1).png" alt="App screen 10" class="app-ticker__img">
-          <img src="ap11 (1).png" alt="App screen 11" class="app-ticker__img">
-          <img src="ap12 (1).png" alt="App screen 12" class="app-ticker__img">
+          <img src="ap0 (1).png" alt="App screen 0" class="app-ticker__img" loading="lazy">
+          <img src="ap1 (1).png" alt="App screen 1" class="app-ticker__img" loading="lazy">
+          <img src="ap2 (1).png" alt="App screen 2" class="app-ticker__img" loading="lazy">
+          <img src="ap3 (1).png" alt="App screen 3" class="app-ticker__img" loading="lazy">
+          <img src="ap4 (1).png" alt="App screen 4" class="app-ticker__img" loading="lazy">
+          <img src="ap5 (1).png" alt="App screen 5" class="app-ticker__img" loading="lazy">
+          <img src="ap6 (1).png" alt="App screen 6" class="app-ticker__img" loading="lazy">
+          <img src="ap7 (1).png" alt="App screen 7" class="app-ticker__img" loading="lazy">
+          <img src="ap8 (1).png" alt="App screen 8" class="app-ticker__img" loading="lazy">
+          <img src="ap10 (1).png" alt="App screen 10" class="app-ticker__img" loading="lazy">
+          <img src="ap11 (1).png" alt="App screen 11" class="app-ticker__img" loading="lazy">
+          <img src="ap12 (1).png" alt="App screen 12" class="app-ticker__img" loading="lazy">
         </div>
       </div>
     </section>
@@ -410,6 +408,38 @@ Estruturei também os conteúdos e guias do Helpcenter, tutoriais, guias interat
       </p>
     </section>
 
+  </div>
+
+  <!-- Next Project -->
+  <div class="next-project-footer">
+    <a href="projeto-redesign-saas.html" class="next-project">
+      <div>
+        <span class="next-project__label" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</span>
+        <div class="next-project__name" data-pt="Redesign da Plataforma SaaS" data-en="SaaS Platform Redesign">Redesign da Plataforma SaaS</div>
+        <span class="next-project__tag">Product Design</span>
+      </div>
+      <span class="next-project__arrow">&rarr;</span>
+    </a>
+  </div>
+
+  <!-- Floating Folder + Side Panel -->
+  <button class="folder-fab" id="folderFab" aria-label="Ver outros projetos">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <div class="folder-panel" id="folderPanel">
+    <div class="folder-panel__title" data-pt="Projetos" data-en="Projects">Projetos</div>
+    <a href="projeto-product-led-sales.html" class="folder-panel__item">
+      <img src="capa-product-led.jpg" alt="" class="folder-panel__thumb">
+      <div><span class="folder-panel__tag">Product Design</span><div class="folder-panel__name" data-pt="Product-Led Sales" data-en="Product-Led Sales">Product-Led Sales</div></div>
+    </a>
+    <a href="projeto-agente-ia.html" class="folder-panel__item">
+      <img src="capa-agente-ia.jpg" alt="" class="folder-panel__thumb">
+      <div><span class="folder-panel__tag">AI / UX</span><div class="folder-panel__name" data-pt="Agente de IA" data-en="AI Agent">Agente de IA</div></div>
+    </a>
+    <a href="projeto-redesign-saas.html" class="folder-panel__item">
+      <img src="capa-saas.jpg" alt="" class="folder-panel__thumb">
+      <div><span class="folder-panel__tag">Product Design</span><div class="folder-panel__name" data-pt="Redesign SaaS" data-en="SaaS Redesign">Redesign SaaS</div></div>
+    </a>
   </div>
 
   <!-- Footer -->
@@ -523,14 +553,49 @@ Estruturei também os conteúdos e guias do Helpcenter, tutoriais, guias interat
       });
     })();
 
-    // App Ticker — set animation duration based on content width
-    (function () {
+    // App Ticker — set animation duration after all images load
+    window.addEventListener('load', function () {
       var track = document.getElementById('appTicker');
       if (!track) return;
       var halfWidth = track.scrollWidth / 2;
-      var speed = 60;
+      var speed = 30;
       var duration = halfWidth / speed;
       track.style.animationDuration = duration + 's';
+    });
+  </script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" style="display:none">
+    <div id="lightbox-overlay"></div>
+    <button id="lightbox-close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <style>
+    #lightbox { position:fixed; inset:0; z-index:99999; display:flex; align-items:center; justify-content:center; }
+    #lightbox-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(4px); }
+    #lightbox-img { position:relative; z-index:2; max-width:90vw; max-height:90vh; object-fit:contain; border-radius:12px; box-shadow:0 24px 64px rgba(0,0,0,0.4); animation:lightbox-in 0.2s ease; }
+    #lightbox-close { position:absolute; top:20px; right:24px; z-index:3; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white; font-size:24px; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; }
+    #lightbox-close:hover { background:rgba(255,255,255,0.2); }
+    @keyframes lightbox-in { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+  </style>
+  <script>
+    (function() {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightbox-img');
+      var lbClose = document.getElementById('lightbox-close');
+      var lbOverlay = document.getElementById('lightbox-overlay');
+      document.querySelectorAll('.app-ticker__img').forEach(function(img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function() {
+          lbImg.src = img.src;
+          lb.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      function close() { lb.style.display = 'none'; document.body.style.overflow = ''; }
+      lbClose.addEventListener('click', close);
+      lbOverlay.addEventListener('click', close);
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
     })();
   </script>
 </body>

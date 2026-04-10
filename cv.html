@@ -262,9 +262,6 @@
 </head>
 <body>
 
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor"></div>
-
   <!-- Header -->
   <header class="header" id="header">
     <a href="index.html" class="header__logo" id="logoLink">
@@ -298,8 +295,6 @@
         <div class="cv__info-value" data-pt="Português (nativo), Inglês (intermediário)" data-en="Portuguese (native), English (intermediate)">Português (nativo), Inglês (intermediário)</div>
 
         <hr class="cv__divider">
-
-        <a href="cv-henrique-saito.pdf" download class="cv__download" data-pt="Baixar CV" data-en="Download CV">Baixar CV</a>
       </aside>
 
       <!-- Main -->
@@ -425,26 +420,6 @@
   </div>
 
   <script>
-    // Custom Cursor
-    const cursor = document.getElementById('cursor');
-    if (cursor) {
-      let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
-      document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-      function updateCursor() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-        const w = cursor.offsetWidth / 2;
-        cursor.style.left = (cursorX - w) + 'px';
-        cursor.style.top = (cursorY - w) + 'px';
-        requestAnimationFrame(updateCursor);
-      }
-      requestAnimationFrame(updateCursor);
-      document.querySelectorAll('a, button').forEach((el) => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-      });
-    }
-
     // Language Toggle
     let currentLang = 'pt';
     const langToggle = document.getElementById('langToggle');

@@ -47,11 +47,12 @@
     }
 
     .build-ticker__img {
-      height: 260px;
-      width: 462px;
-      object-fit: cover;
+      height: 320px !important;
+      max-height: 320px !important;
+      width: auto !important;
+      object-fit: cover !important;
+      flex-shrink: 0 !important;
       border-radius: 12px;
-      flex-shrink: 0;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     }
 
@@ -113,8 +114,9 @@
       }
       .solution-arrow { transform: rotate(90deg); }
       .build-ticker__img {
-        height: 180px;
-        width: 320px;
+        height: 200px !important;
+        max-height: 200px !important;
+        width: auto !important;
       }
       .build-ticker::before,
       .build-ticker::after {
@@ -130,9 +132,6 @@
   </style>
 </head>
 <body class="case-v2">
-
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor"></div>
 
   <!-- Case Header -->
   <header class="case-nav" id="caseNav">
@@ -433,6 +432,38 @@
 
   </div>
 
+  <!-- Next Project -->
+  <div class="next-project-footer">
+    <a href="projeto-agente-ia.html" class="next-project">
+      <div>
+        <span class="next-project__label" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</span>
+        <div class="next-project__name" data-pt="Agente de IA para Monitoramento" data-en="AI Agent for Monitoring">Agente de IA para Monitoramento</div>
+        <span class="next-project__tag">AI / UX</span>
+      </div>
+      <span class="next-project__arrow">&rarr;</span>
+    </a>
+  </div>
+
+  <!-- Floating Folder + Side Panel -->
+  <button class="folder-fab" id="folderFab" aria-label="Ver outros projetos">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <div class="folder-panel" id="folderPanel">
+    <div class="folder-panel__title" data-pt="Projetos" data-en="Projects">Projetos</div>
+    <a href="projeto-agente-ia.html" class="folder-panel__item">
+      <img src="capa-agente-ia.jpg" alt="" class="folder-panel__thumb">
+      <div><span class="folder-panel__tag">AI / UX</span><div class="folder-panel__name" data-pt="Agente de IA" data-en="AI Agent">Agente de IA</div></div>
+    </a>
+    <a href="projeto-app-logistica.html" class="folder-panel__item">
+      <img src="capa-app.jpg" alt="" class="folder-panel__thumb">
+      <div><span class="folder-panel__tag">Mobile</span><div class="folder-panel__name" data-pt="App Logística" data-en="Logistics App">App Logística</div></div>
+    </a>
+    <a href="projeto-redesign-saas.html" class="folder-panel__item">
+      <img src="capa-saas.jpg" alt="" class="folder-panel__thumb">
+      <div><span class="folder-panel__tag">Product Design</span><div class="folder-panel__name" data-pt="Redesign SaaS" data-en="SaaS Redesign">Redesign SaaS</div></div>
+    </a>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
@@ -501,6 +532,41 @@
       var speed = 60;
       var duration = halfWidth / speed;
       track.style.animationDuration = duration + 's';
+    })();
+  </script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" style="display:none">
+    <div id="lightbox-overlay"></div>
+    <button id="lightbox-close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <style>
+    #lightbox { position:fixed; inset:0; z-index:99999; display:flex; align-items:center; justify-content:center; }
+    #lightbox-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(4px); }
+    #lightbox-img { position:relative; z-index:2; max-width:90vw; max-height:90vh; object-fit:contain; border-radius:12px; box-shadow:0 24px 64px rgba(0,0,0,0.4); animation:lightbox-in 0.2s ease; }
+    #lightbox-close { position:absolute; top:20px; right:24px; z-index:3; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white; font-size:24px; width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; }
+    #lightbox-close:hover { background:rgba(255,255,255,0.2); }
+    @keyframes lightbox-in { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+  </style>
+  <script>
+    (function() {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightbox-img');
+      var lbClose = document.getElementById('lightbox-close');
+      var lbOverlay = document.getElementById('lightbox-overlay');
+      document.querySelectorAll('.build-ticker__img').forEach(function(img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function() {
+          lbImg.src = img.src;
+          lb.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      function close() { lb.style.display = 'none'; document.body.style.overflow = ''; }
+      lbClose.addEventListener('click', close);
+      lbOverlay.addEventListener('click', close);
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
     })();
   </script>
 </body>

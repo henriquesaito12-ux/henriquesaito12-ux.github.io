@@ -1,56 +1,3 @@
-// ============================
-// Custom Cursor
-// ============================
-
-const cursor = document.getElementById('cursor');
-
-if (cursor) {
-  let mouseX = 0;
-  let mouseY = 0;
-  let cursorX = 0;
-  let cursorY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function updateCursor() {
-    cursorX += (mouseX - cursorX) * 0.2;
-    cursorY += (mouseY - cursorY) * 0.2;
-    const w = cursor.offsetWidth / 2;
-    cursor.style.left = (cursorX - w) + 'px';
-    cursor.style.top = (cursorY - w) + 'px';
-    requestAnimationFrame(updateCursor);
-  }
-
-  requestAnimationFrame(updateCursor);
-
-  const hoverTargets = document.querySelectorAll('a, button, .folder, input');
-  hoverTargets.forEach((el) => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-  });
-
-  // Dark section detection
-  const darkSections = document.querySelectorAll('.dark-section');
-  darkSections.forEach((section) => {
-    section.addEventListener('mouseenter', () => cursor.classList.add('light'));
-    section.addEventListener('mouseleave', () => cursor.classList.remove('light'));
-  });
-
-  // Dock hover — liquid glass cursor
-  const dock = document.querySelector('.dock');
-  if (dock) {
-    dock.addEventListener('mouseenter', () => {
-      cursor.classList.remove('hover');
-      cursor.classList.add('dock-hover');
-    });
-    dock.addEventListener('mouseleave', () => {
-      cursor.classList.remove('dock-hover');
-    });
-  }
-}
 
 // ============================
 // Fade-in on scroll
@@ -170,7 +117,7 @@ let pendingHref = null;
 let pendingProject = null;
 
 function openModal(href, projectId) {
-  if (sessionStorage.getItem('unlocked_' + projectId) === 'true') {
+  if (localStorage.getItem('portfolio_auth') === 'true') {
     window.location.href = href;
     return;
   }
@@ -214,7 +161,7 @@ if (modal && modalForm) {
     const value = modalInput.value.trim();
 
     if (value === PROJECT_PASSWORD) {
-      sessionStorage.setItem('unlocked_' + pendingProject, 'true');
+      localStorage.setItem('portfolio_auth', 'true');
       window.location.href = pendingHref;
     } else {
       modalInput.classList.add('error');
@@ -250,7 +197,7 @@ if (gate && gateForm) {
   const projectId = gate.dataset.project;
   const projectPassword = gate.dataset.password;
 
-  if (sessionStorage.getItem('unlocked_' + projectId) === 'true') {
+  if (localStorage.getItem('portfolio_auth') === 'true') {
     gate.classList.add('unlocked');
   }
 
@@ -259,7 +206,7 @@ if (gate && gateForm) {
     const value = gateInput.value.trim();
 
     if (value === projectPassword) {
-      sessionStorage.setItem('unlocked_' + projectId, 'true');
+      localStorage.setItem('portfolio_auth', 'true');
       gate.classList.add('unlocked');
     } else {
       gateInput.classList.add('error');
@@ -665,4 +612,29 @@ if (dockHome) dockHome.addEventListener('click', scrollToTop);
   }
 
   setInterval(nudge, 3000);
+})();
+
+// ============================
+// Floating Folder FAB + Side Panel
+// ============================
+
+(function () {
+  var fab = document.getElementById('folderFab');
+  var panel = document.getElementById('folderPanel');
+  if (!fab || !panel) return;
+
+  fab.addEventListener('click', function (e) {
+    e.stopPropagation();
+    panel.classList.toggle('open');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!panel.contains(e.target) && e.target !== fab) {
+      panel.classList.remove('open');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') panel.classList.remove('open');
+  });
 })();
