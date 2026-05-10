@@ -33,14 +33,14 @@
     <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
       <h1 class="case-v2-hero__title" data-pt="Inteligência operacional em tempo real" data-en="Real-time operational intelligence">Inteligência operacional em tempo real</h1>
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
-        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">AI / UX</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">AI</span>
         <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Rabbot</span>
         <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">UX/Product Designer</span>
         <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2025</span>
       </div>
     </div>
     <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
-      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="IA aplicada ao contexto real da operação. Não um chatbot genérico. Uma camada de inteligência." data-en="AI applied to real operational context. Not a generic chatbot. A layer of intelligence.">IA aplicada ao contexto real da operação. Não um chatbot genérico. Uma camada de inteligência.</p>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="IA aplicada ao contexto real da operação. Uma camada de inteligência." data-en="AI applied to real operational context. Not a generic chatbot. A layer of intelligence.">IA aplicada ao contexto real da operação. Uma camada de inteligência.</p>
     </div>
   </section>
 
@@ -48,6 +48,9 @@
     @media (max-width: 768px) {
       .case-v2-hero {
         flex-direction: column !important;
+      }
+      .aia-cards {
+        grid-template-columns: 1fr !important;
       }
       .case-v2-hero__left-col {
         flex: 1 1 100% !important;
@@ -71,8 +74,23 @@
         <span class="case-v2-section__number">01</span>
         <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
       </div>
-      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Um operador da torre de controle me relatou uma dor simples, mas crítica: descobrir se um veículo estava atrasado era um processo manual e demorado. Ele precisava alternar entre dois sistemas: a plataforma da Rabbot e o software do rastreador. Em cada veículo, verificava a última macro apontada pelo motorista. Macros são registros de atividade em campo, como Parada para Almoço ou Carregamento, e cada uma tem um tempo limite esperado. Se o motorista ultrapassasse esse limite, estava atrasado. Mas identificar isso exigia olhar veículo por veículo, manualmente. O problema real não era o atraso em si. Era o tempo que levava para perceber que ele havia acontecido. Quando o operador finalmente identificava e tentava contato, muitas vezes o motorista já havia retomado a rota. O momento de intervenção havia passado. Esse atraso invisível tem consequências concretas: impacta a captação de novos fretes, gera horas extras não planejadas e tira o controle do processo. Fui observar a dinâmica da torre de controle pessoalmente e vi essa rotina acontecendo em tempo real. Foi aí que entendi que havia espaço para um agente assumir esse papel." data-en="A control tower operator told me about a simple but critical pain point: finding out if a vehicle was delayed was a manual, time-consuming process. He had to switch between two systems: Rabbot's platform and the tracker software. For each vehicle, he checked the last macro logged by the driver. Macros are field activity records, like Lunch Break or Loading, and each has an expected time limit. If the driver exceeded that limit, they were late. But identifying this required checking vehicle by vehicle, manually. The real problem wasn't the delay itself. It was the time it took to realize it had happened. By the time the operator finally identified and tried to make contact, the driver had often already resumed the route. The intervention window had passed. This invisible delay has concrete consequences: it impacts freight acquisition, generates unplanned overtime, and removes control from the process. I went to observe the control tower dynamics in person and saw this routine happening in real time. That's when I understood there was room for an agent to take on this role.">
-        Um operador da torre de controle me relatou uma dor simples, mas crítica: descobrir se um veículo estava atrasado era um processo manual e demorado. Ele precisava alternar entre dois sistemas: a plataforma da Rabbot e o software do rastreador. Em cada veículo, verificava a última macro apontada pelo motorista. Macros são registros de atividade em campo, como Parada para Almoço ou Carregamento, e cada uma tem um tempo limite esperado. Se o motorista ultrapassasse esse limite, estava atrasado. Mas identificar isso exigia olhar veículo por veículo, manualmente. O problema real não era o atraso em si. Era o tempo que levava para perceber que ele havia acontecido. Quando o operador finalmente identificava e tentava contato, muitas vezes o motorista já havia retomado a rota. O momento de intervenção havia passado. Esse atraso invisível tem consequências concretas: impacta a captação de novos fretes, gera horas extras não planejadas e tira o controle do processo. Fui observar a dinâmica da torre de controle pessoalmente e vi essa rotina acontecendo em tempo real. Foi aí que entendi que havia espaço para um agente assumir esse papel.
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Na torre de controle das transportadoras, os operadores precisavam monitorar se os motoristas estavam cumprindo os tempos de cada atividade — parada para almoço, carregamento, pernoite. O processo era totalmente manual: alternar entre a plataforma da Rabbot e o rastreador, checar veículo por veículo." data-en="In the carriers' control tower, operators needed to monitor whether drivers were meeting the time limits for each activity — lunch break, loading, overnight stop. The process was entirely manual: switching between Rabbot's platform and the tracker, checking vehicle by vehicle.">
+        Na torre de controle das transportadoras, os operadores precisavam monitorar se os motoristas estavam cumprindo os tempos de cada atividade — parada para almoço, carregamento, pernoite. O processo era totalmente manual: alternar entre a plataforma da Rabbot e o rastreador, checar veículo por veículo.
+      </p>
+
+      <div class="anim-fade aia-cards" data-delay="150" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;">
+        <div style="padding: 20px; background: #F9FAFB; border-radius: 12px; border: 1px solid rgba(0,0,0,0.04);">
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #111; margin: 0 0 6px 0;" data-pt="A dor" data-en="The pain">A dor</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #666; line-height: 1.5; margin: 0;" data-pt="Quando o operador finalmente percebia o atraso e tentava contato, o motorista já havia retomado a rota. A janela de intervenção passava." data-en="By the time the operator noticed the delay and tried to make contact, the driver had already resumed the route. The intervention window had passed.">Quando o operador finalmente percebia o atraso e tentava contato, o motorista já havia retomado a rota. A janela de intervenção passava.</p>
+        </div>
+        <div style="padding: 20px; background: #F9FAFB; border-radius: 12px; border: 1px solid rgba(0,0,0,0.04);">
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: #111; margin: 0 0 6px 0;" data-pt="O impacto" data-en="The impact">O impacto</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #666; line-height: 1.5; margin: 0;" data-pt="Perda de fretes, horas extras não planejadas e falta de controle sobre a operação. O problema não era o atraso — era não saber que ele estava acontecendo." data-en="Lost freight, unplanned overtime, and lack of control over the operation. The problem wasn't the delay — it was not knowing it was happening.">Perda de fretes, horas extras não planejadas e falta de controle sobre a operação. O problema não era o atraso — era não saber que ele estava acontecendo.</p>
+        </div>
+      </div>
+
+      <p class="case-v2-section__text anim-fade" data-delay="200" data-pt="Fui até a torre de controle acompanhar essa rotina pessoalmente. Vi o operador repetindo esse ciclo dezenas de vezes por dia. Foi ali que ficou claro: dava pra automatizar essa vigilância com um agente de IA." data-en="I went to the control tower to follow this routine in person. I watched the operator repeating this cycle dozens of times a day. That's where it became clear: this surveillance could be automated with an AI agent.">
+        Fui até a torre de controle acompanhar essa rotina pessoalmente. Vi o operador repetindo esse ciclo dezenas de vezes por dia. Foi ali que ficou claro: dava pra automatizar essa vigilância com um agente de IA.
       </p>
     </section>
 
@@ -185,14 +203,14 @@
         <span class="case-v2-section__label" data-pt="VALIDAÇÃO" data-en="VALIDATION">VALIDAÇÃO</span>
       </div>
       <!-- 1. Texto de abertura -->
-      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Precisávamos provar que funcionava, não com uma demo, mas com dados reais. Sugeri um teste A/B. Integramos com os rastreadores do cliente sem custo para ele. Dois meses observando sem intervenção. Uma semana com o agente ativo. Os números falaram por si:" data-en="We needed to prove it worked — not with a demo, but with real data. I proposed an A/B test. We integrated with the client's tracking systems at no cost to them. Two months of observation without intervention. One week with the agent active. The numbers spoke for themselves:">
-        Precisávamos provar que funcionava, não com uma demo, mas com dados reais. Sugeri um teste A/B. Integramos com os rastreadores do cliente sem custo para ele. Dois meses observando sem intervenção. Uma semana com o agente ativo. Os números falaram por si:
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Precisávamos provar que funcionava, não com uma demo, mas com dados reais. Sugeri um teste A/B. Integramos com os rastreadores do cliente sem custo para ele. Dois meses observando sem intervenção. Os números falaram por si:" data-en="We needed to prove it worked — not with a demo, but with real data. I proposed an A/B test. We integrated with the client's tracking systems at no cost to them. Two months of observation without intervention. One week with the agent active. The numbers spoke for themselves:">
+        Precisávamos provar que funcionava, não com uma demo, mas com dados reais. Sugeri um teste A/B. Integramos com os rastreadores do cliente sem custo para ele. Dois meses observando sem intervenção. Os números falaram por si:
       </p>
 
       <!-- 2. Cards de métricas -->
       <div class="anim-fade validation-metrics" data-delay="200" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 32px 0; background: rgba(245, 245, 245, 0.4); border-radius: 20px; padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
         <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 16px; padding: 24px;">
-          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">628h</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">535.8h</div>
           <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="economizadas em 1.870 ocorrências monitoradas" data-en="saved across 1,870 monitored occurrences">economizadas em 1.870 ocorrências monitoradas</div>
         </div>
         <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 16px; padding: 24px;">
@@ -200,7 +218,7 @@
           <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="de redução no tempo médio de pernoite por ocorrência" data-en="reduction in average overnight stop duration">de redução no tempo médio de pernoite por ocorrência</div>
         </div>
         <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8); border-radius: 16px; padding: 24px;">
-          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">R$ 62.385</div>
+          <div style="font-family: 'DM Sans', sans-serif; font-size: 32px; font-weight: 700; color: #111;">R$ 53.220</div>
           <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #888; margin-top: 8px;" data-pt="de impacto financeiro estimado por mês (fretes + hora extra)" data-en="estimated monthly financial impact (freight + overtime)">de impacto financeiro estimado por mês (fretes + hora extra)</div>
         </div>
       </div>
@@ -224,11 +242,11 @@
         A redução veio de três frentes: pernoite caiu 1.1h por ocorrência, parada para almoço reduziu 3.6 min e parada eventual caiu 14.2 min. Com 20% de taxa capturável, o agente liberou 10.5 dias de operação e evitou 126h de hora extra no período. A IA não apenas notifica, ela muda o comportamento operacional.
       </p>
 
-      <!-- 4. Iframe do relatório interativo -->
-      <div class="anim-scale" style="border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); margin-top: 40px;">
-        <iframe src="https://remixhenrique.lovable.app/" style="width: 100%; height: 650px; border: none; display: block;" loading="lazy"></iframe>
+      <!-- 4. Relatório de impacto -->
+      <div class="anim-scale" style="border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); margin-top: 40px;">
+        <img src="impactoagente.png" alt="Relatório de impacto do agente de disponibilidade — 535.8 horas economizadas" style="width: 100%; display: block;">
       </div>
-      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Relatório interativo gerado ao final do teste A/B — navegue pelas abas para explorar os dados" data-en="Interactive report generated at the end of the A/B test — navigate through the tabs to explore the data">Relatório interativo gerado ao final do teste A/B — navegue pelas abas para explorar os dados</p>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; text-align: center; margin-top: 12px;" data-pt="Relatório de impacto gerado ao final do teste — dados reais da operação Bauminas" data-en="Impact report generated at the end of the test — real data from Bauminas operation">Relatório de impacto gerado ao final do teste — dados reais da operação Bauminas</p>
     </section>
 
     <!-- 05 — IMPACTO -->
@@ -240,11 +258,11 @@
       <div class="case-v2-impact">
         <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
           <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Results">Resultado</h3>
-          <p class="case-v2-impact__text" data-pt="628 horas economizadas. R$ 62.385 de impacto financeiro estimado por mês. Esses não são números de apresentação — são dados reais de uma semana de operação com 60 veículos monitorados. O operador que relatou a dor parou de vasculhar listas. O agente faz isso por ele, em tempo real, para toda a frota. O projeto está em produção e abriu caminho para uma arquitetura de agentes especializados dentro da plataforma, cada um assumindo um papel operacional claro." data-en="628 hours saved. R$ 62,385 in estimated monthly financial impact. These are not presentation numbers — they are real data from one week of operation with 60 monitored vehicles. The operator who reported the pain stopped scanning lists manually. The agent does it for him, in real time, across the entire fleet. The project is in production and opened the path for an architecture of specialized agents within the platform, each taking on a clear operational role.">628 horas economizadas. R$ 62.385 de impacto financeiro estimado por mês. Esses não são números de apresentação — são dados reais de uma semana de operação com 60 veículos monitorados. O operador que relatou a dor parou de vasculhar listas. O agente faz isso por ele, em tempo real, para toda a frota. O projeto está em produção e abriu caminho para uma arquitetura de agentes especializados dentro da plataforma, cada um assumindo um papel operacional claro.</p>
+          <p class="case-v2-impact__text" data-pt="535.8 horas economizadas em 1.614 ocorrências monitoradas. R$ 53.220 de impacto financeiro estimado por mês. Esses não são números de apresentação — são dados reais. O operador que relatou a dor parou de vasculhar listas. O agente faz isso por ele, em tempo real, para toda a frota. O projeto está em produção e abriu caminho para uma arquitetura de agentes especializados dentro da plataforma, cada um assumindo um papel operacional claro." data-en="535.8 hours saved across 1,614 monitored occurrences. R$ 53,220 in estimated monthly financial impact. These are not presentation numbers — they are real data. The operator who reported the pain stopped scanning lists manually. The agent does it for him, in real time, across the entire fleet. The project is in production and opened the path for an architecture of specialized agents within the platform, each taking on a clear operational role.">535.8 horas economizadas em 1.614 ocorrências monitoradas. R$ 53.220 de impacto financeiro estimado por mês. Esses não são números de apresentação — são dados reais. O operador que relatou a dor parou de vasculhar listas. O agente faz isso por ele, em tempo real, para toda a frota. O projeto está em produção e abriu caminho para uma arquitetura de agentes especializados dentro da plataforma, cada um assumindo um papel operacional claro.</p>
         </div>
         <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
           <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
-          <p class="case-v2-impact__text" data-pt="Liderei o projeto de ponta a ponta. Fui a campo para entender a dor do operador, conduzi o discovery, mapeei o comportamento operacional e traduzi tudo isso em lógica de decisão para o agente. Defini os critérios de alerta e escalonamento, criei as interfaces da torre de controle no Lovable e estruturei o experimento A/B que provou o impacto. Atuei como ponte entre operação, produto e engenharia." data-en="I led the project end to end. I went to the field to understand the operator's pain, conducted the discovery, mapped the operational behavior and translated it all into decision logic for the agent. I defined the alert and escalation criteria, built the control tower interfaces in Lovable and structured the A/B experiment that proved the impact. I acted as the bridge between operations, product and engineering.">Liderei o projeto de ponta a ponta. Fui a campo para entender a dor do operador, conduzi o discovery, mapeei o comportamento operacional e traduzi tudo isso em lógica de decisão para o agente. Defini os critérios de alerta e escalonamento, criei as interfaces da torre de controle no Lovable e estruturei o experimento A/B que provou o impacto. Atuei como ponte entre operação, produto e engenharia.</p>
+          <p class="case-v2-impact__text" data-pt="Conduzi o projeto de ponta a ponta, com apoio direto do CEO da Rabbot na condução estratégica e da equipe de desenvolvimento na implementação. Fui a campo para entender a dor do operador, conduzi o discovery, mapeei o comportamento operacional e traduzi tudo isso em lógica de decisão para o agente. Defini os critérios de alerta e escalonamento, criei as interfaces da torre de controle no Lovable e estruturei o experimento A/B que provou o impacto. Atuei como ponte entre operação, produto e engenharia." data-en="I led the project end to end. I went to the field to understand the operator's pain, conducted the discovery, mapped the operational behavior and translated it all into decision logic for the agent. I defined the alert and escalation criteria, built the control tower interfaces in Lovable and structured the A/B experiment that proved the impact. I acted as the bridge between operations, product and engineering.">Conduzi o projeto de ponta a ponta, com apoio direto do CEO da Rabbot na condução estratégica e da equipe de desenvolvimento na implementação. Fui a campo para entender a dor do operador, conduzi o discovery, mapeei o comportamento operacional e traduzi tudo isso em lógica de decisão para o agente. Defini os critérios de alerta e escalonamento, criei as interfaces da torre de controle no Lovable e estruturei o experimento A/B que provou o impacto. Atuei como ponte entre operação, produto e engenharia.</p>
         </div>
       </div>
     </section>
@@ -286,7 +304,7 @@
   <!-- Footer -->
   <footer class="footer">
     <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
-    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Desenhado e desenvolvido por mim. 😄" data-en="Designed and developed by me. 😄">Desenhado e desenvolvido por mim. 😄</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Design e código por Henrique Saito." data-en="Designed and developed by me. 😄">Design e código por Henrique Saito.</p>
   </footer>
 
   <script src="script.js"></script>

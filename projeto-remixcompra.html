@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo de Compra de Peças — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    @media (max-width: 768px) {
+      .remix-meta {
+        grid-template-columns: 1fr !important;
+      }
+      .remix-features {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .remix-discovery {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #F9FAFB;
+    }
+
+    .remix-discovery__track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .remix-discovery__slide {
+      min-width: 100%;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .remix-discovery__slide img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .remix-discovery__label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #111;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .remix-discovery__label span {
+      font-weight: 400;
+      color: #888;
+    }
+
+    .remix-discovery__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 24px 20px 24px;
+    }
+
+    .remix-discovery__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .remix-discovery__btn:hover {
+      background: #f0f0f0;
+    }
+
+    .remix-discovery__dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .remix-discovery__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.12);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .remix-discovery__dot--active {
+      background: #111;
+    }
+
+    .remix-phase-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .remix-phase-label--asis {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+
+    .remix-phase-label--tobe {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .remix-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .remix-feature {
+      padding: 20px;
+      background: #F9FAFB;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .remix-feature h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      margin: 0 0 6px 0;
+    }
+
+    .remix-feature p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .remix-site-preview {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      background: #F9F9F9;
+      transition: all 0.4s ease;
+    }
+
+    .remix-site-preview--mobile {
+      max-width: 375px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .remix-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .remix-device-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #F2F2F2;
+      border-radius: 999px;
+      padding: 4px;
+      width: fit-content;
+    }
+
+    .remix-device-toggle__btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #999;
+      background: transparent;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .remix-device-toggle__btn--active {
+      background: #fff;
+      color: #111;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .remix-site-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .remix-highlight {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: #F9FAFB;
+      border-radius: 12px;
+      margin: 24px 0;
+      border-left: 3px solid #3366FF;
+    }
+
+    .remix-highlight svg {
+      flex-shrink: 0;
+    }
+
+    .remix-highlight p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .remix-flow {
+      display: flex;
+      gap: 0;
+      margin: 32px 0;
+      position: relative;
+    }
+
+    .remix-flow__step {
+      flex: 1;
+      text-align: center;
+      padding: 20px 16px;
+      background: #F9FAFB;
+      border: 1px solid rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .remix-flow__step:first-child {
+      border-radius: 12px 0 0 12px;
+    }
+
+    .remix-flow__step:last-child {
+      border-radius: 0 12px 12px 0;
+    }
+
+    .remix-flow__step-num {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #3366FF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .remix-flow__step-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #111;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .remix-flow__step-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .remix-flow {
+        flex-direction: column;
+      }
+      .remix-flow__step:first-child {
+        border-radius: 12px 12px 0 0;
+      }
+      .remix-flow__step:last-child {
+        border-radius: 0 0 12px 12px;
+      }
+    }
+  </style>
+</head>
+<body class="case-v2">
+
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate" data-project="projeto-7" data-password="saito2026">
+    <div class="password-gate__box">
+      <div class="password-gate__icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2 class="password-gate__title" data-pt="Projeto protegido" data-en="Protected project">Projeto protegido</h2>
+      <p class="password-gate__text" data-pt="Este case contém informações confidenciais. Insira a senha para acessar." data-en="This case contains confidential information. Enter the password to access.">Este case contém informações confidenciais. Insira a senha para acessar.</p>
+      <form class="password-gate__form" id="passwordForm">
+        <input type="password" class="password-gate__input" id="passwordInput" placeholder="Senha" autocomplete="off">
+        <button type="submit" class="password-gate__submit" data-pt="Acessar projeto" data-en="Access project">Acessar projeto</button>
+        <span class="password-gate__error" id="passwordError"></span>
+      </form>
+      <a href="index.html" class="password-gate__back" data-pt="← Voltar ao portfólio" data-en="← Back to portfolio">← Voltar ao portfólio</a>
+    </div>
+  </div>
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#problema" class="case-nav__link" data-section="problema" data-pt="Problema" data-en="Problem">Problema</a>
+      <a href="#processo" class="case-nav__link" data-section="processo" data-pt="Processo" data-en="Process">Processo</a>
+      <a href="#solucao" class="case-nav__link" data-section="solucao" data-pt="Solução" data-en="Solution">Solução</a>
+      <a href="#prototipo" class="case-nav__link" data-section="prototipo" data-pt="Protótipo Navegável" data-en="Prototype">Protótipo Navegável</a>
+      <a href="#impacto" class="case-nav__link" data-section="impacto" data-pt="Impacto" data-en="Impact">Impacto</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="Módulo de Compra de Peças" data-en="Parts Purchasing Module">Módulo de Compra de Peças</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">Product Design</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Rabbot</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">UX/UI Designer</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2025</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="Plataforma de aprovação de cotações e comparação de fornecedores para compra de peças automotivas." data-en="Quotation approval and supplier comparison platform for automotive parts procurement.">Plataforma de aprovação de cotações e comparação de fornecedores para compra de peças automotivas.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — VISÃO GERAL -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+
+      <div class="remix-meta anim-fade" data-delay="50" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 32px; padding: 24px; background: #F9FAFB; border-radius: 12px;">
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Empresa" data-en="Company">Empresa</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Rabbot</p>
+        </div>
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Meu papel" data-en="My role">Meu papel</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Product Designer</p>
+        </div>
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Ferramentas" data-en="Tools">Ferramentas</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Figma, Lovable</p>
+        </div>
+      </div>
+
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="O Módulo de Compra de Peças é uma plataforma de aprovação de cotações dentro do ecossistema Rabbot. O desafio era criar uma interface que permitisse gestores de compras comparar múltiplos fornecedores, selecionar as melhores opções por item e aprovar pedidos — tudo em um fluxo denso em informação, mas claro e eficiente." data-en="Módulo de Compra de Peças is a quotation approval platform within the Rabbot ecosystem. The challenge was to create an interface that allowed purchasing managers to compare multiple suppliers, select the best options per item, and approve orders — all in an information-dense but clear and efficient flow.">
+        O Módulo de Compra de Peças é uma plataforma de aprovação de cotações dentro do ecossistema Rabbot. O desafio era criar uma interface que permitisse gestores de compras comparar múltiplos fornecedores, selecionar as melhores opções por item e aprovar pedidos — tudo em um fluxo denso em informação, mas claro e eficiente.
+      </p>
+    </section>
+
+    <!-- 02 — PROBLEMA -->
+    <section class="case-v2-section" id="problema">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label" data-pt="PROBLEMA" data-en="PROBLEM">PROBLEMA</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="O processo de aprovação de cotações na operação de manutenção de frota pesada era fragmentado. Em transportadoras com oficinas internas, a compra de peças envolve múltiplos atores e etapas. Gestores precisavam comparar preços, prazos de entrega, marcas e disponibilidade de múltiplos fornecedores para dezenas de itens — muitas vezes usando planilhas ou processos manuais que geravam erros e lentidão." data-en="The quotation approval process in the automotive maintenance operation was fragmented. Managers needed to compare prices, delivery times, brands, and availability from multiple suppliers for dozens of items — often using spreadsheets or manual processes that generated errors and slowness.">
+        O processo de aprovação de cotações na operação de manutenção de frota pesada era fragmentado. Em transportadoras com oficinas internas, a compra de peças envolve múltiplos atores e etapas. Gestores precisavam comparar preços, prazos de entrega, marcas e disponibilidade de múltiplos fornecedores para dezenas de itens — muitas vezes usando planilhas ou processos manuais que geravam erros e lentidão.
+      </p>
+      <p class="case-v2-section__text anim-fade" data-delay="150" data-pt="Faltava uma visão unificada que permitisse decisões rápidas e seguras. O gestor precisava de clareza para entender, em segundos, qual o melhor fornecedor para cada peça — considerando custo, prazo e disponibilidade." data-en="There was no unified view that allowed quick and confident decisions. The manager needed clarity to understand, in seconds, the best supplier for each part — considering cost, delivery time, and availability.">
+        Faltava uma visão unificada que permitisse decisões rápidas e seguras. O gestor precisava de clareza para entender, em segundos, qual o melhor fornecedor para cada peça — considerando custo, prazo e disponibilidade.
+      </p>
+
+      <p class="case-v2-section__text anim-fade" data-delay="200" style="font-size: 14px; color: #666; margin-bottom: 16px;" data-pt="Na prática, o comprador recebia os orçamentos por e-mail e transferia manualmente para uma planilha de Excel para comparar itens e fornecedores. Um processo lento, sujeito a erros e que não escalava." data-en="In practice, the buyer received quotes by email and manually transferred them to an Excel spreadsheet to compare items and suppliers. A slow, error-prone process that didn't scale.">Na prática, o comprador recebia os orçamentos por e-mail e transferia manualmente para uma planilha de Excel para comparar itens e fornecedores. Um processo lento, sujeito a erros e que não escalava.</p>
+
+      <div class="anim-scale" data-delay="220" style="position: relative; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); background: #f5f5f5;">
+        <img src="compraantes.png" alt="Planilha de comparação manual de orçamentos no Excel" style="width: 100%; display: block;">
+        <span style="display: block; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: #999;" data-pt="Exemplo real de planilha usada para comparação de orçamentos antes da solução." data-en="Real example of spreadsheet used for quote comparison before the solution.">Exemplo real de planilha usada para comparação de orçamentos antes da solução.</span>
+      </div>
+    </section>
+
+    <!-- 03 — PROCESSO -->
+    <section class="case-v2-section" id="processo">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label" data-pt="PROCESSO" data-en="PROCESS">PROCESSO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="O processo de design partiu do entendimento profundo do fluxo operacional de compras. Mapeei como gestores tomavam decisões, quais informações eram críticas e onde o processo travava." data-en="The design process started from a deep understanding of the procurement operational flow. I mapped how managers made decisions, which information was critical, and where the process stalled.">
+        O processo de design partiu do entendimento profundo do fluxo operacional de compras. Mapeei como gestores tomavam decisões, quais informações eram críticas e onde o processo travava.
+      </p>
+
+      <span class="remix-phase-label remix-phase-label--asis anim-fade" data-delay="120">As-Is</span>
+      <h3 class="anim-fade" data-delay="125" style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #111; margin: 4px 0 12px 0;" data-pt="Discovery: jornada de compra por cliente" data-en="Discovery: purchasing journey per client">Discovery: jornada de compra por cliente</h3>
+      <p class="anim-fade" data-delay="130" style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;" data-pt="O primeiro passo foi entender como cada cliente operava o processo de compra de peças. Mapeei a jornada real (as-is) de diferentes empresas — cada uma com personas, etapas de aprovação e regras distintas. O objetivo era identificar padrões e variações para construir um produto que atendesse cenários diversos." data-en="The first step was to understand how each client operated the parts purchasing process. I mapped the real journey (as-is) of different companies — each with distinct personas, approval stages, and rules. The goal was to identify patterns and variations to build a product that served diverse scenarios.">O primeiro passo foi entender como cada cliente operava o processo de compra de peças. Mapeei a jornada real (as-is) de diferentes empresas — cada uma com personas, etapas de aprovação e regras distintas. O objetivo era identificar padrões e variações para construir um produto que atendesse cenários diversos.</p>
+
+      <div class="remix-discovery anim-scale" data-delay="140">
+        <div class="remix-discovery__track" id="discoveryTrack">
+          <div class="remix-discovery__slide">
+            <span class="remix-discovery__label">BrasilWeb <span>— compra para estoque, múltiplos analistas</span></span>
+            <img src="cliente1.png" alt="Jornada BrasilWeb">
+          </div>
+          <div class="remix-discovery__slide">
+            <span class="remix-discovery__label">Bauminas <span>— oficinas externas, níveis de aprovação por valor</span></span>
+            <img src="cliente2.png" alt="Jornada Bauminas">
+          </div>
+          <div class="remix-discovery__slide">
+            <span class="remix-discovery__label">CS Brasil <span>— 5 mil oficinas, automações e integração via Vetor</span></span>
+            <img src="cliente3.png" alt="Jornada CS Brasil">
+          </div>
+        </div>
+        <div class="remix-discovery__nav">
+          <button class="remix-discovery__btn" id="discoveryPrev" type="button" aria-label="Anterior">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="remix-discovery__dots" id="discoveryDots">
+            <span class="remix-discovery__dot remix-discovery__dot--active"></span>
+            <span class="remix-discovery__dot"></span>
+            <span class="remix-discovery__dot"></span>
+          </div>
+          <button class="remix-discovery__btn" id="discoveryNext" type="button" aria-label="Próximo">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <span class="remix-phase-label remix-phase-label--tobe anim-fade" data-delay="145" style="margin-top: 40px; display: inline-flex;">To-Be</span>
+      <h3 class="anim-fade" data-delay="148" style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #111; margin: 4px 0 12px 0;" data-pt="Jornada de produto com versionamento" data-en="Product journey with versioning">Jornada de produto com versionamento</h3>
+      <p class="anim-fade" data-delay="150" style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;" data-pt="A partir do discovery, consolidei a nova jornada (to-be) do produto via Rabbot. Defini o que seria entregue em cada versão (V1, V2, V3) — priorizando as funcionalidades críticas do fluxo de compras e planejando a evolução incremental." data-en="From the discovery, I consolidated the new product journey (to-be) via Rabbot. I defined what would be delivered in each version (V1, V2, V3) — prioritizing critical purchasing flow features and planning incremental evolution.">A partir do discovery, consolidei a nova jornada (to-be) do produto via Rabbot. Defini o que seria entregue em cada versão (V1, V2, V3) — priorizando as funcionalidades críticas do fluxo de compras e planejando a evolução incremental.</p>
+
+      <div class="anim-scale" data-delay="155" style="position: relative; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); margin-bottom: 32px; background: #f5f5f0;">
+        <img src="jornadaversionamento.png" alt="Jornada de produto com versionamento V1, V2, V3" style="width: 100%; display: block;">
+      </div>
+
+      <h3 class="anim-fade" data-delay="160" style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #111; margin: 40px 0 12px 0;" data-pt="Prototipação e handoff" data-en="Prototyping and handoff">Prototipação e handoff</h3>
+      <p class="anim-fade" data-delay="165" style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;" data-pt="O Figma foi organizado pensando no handoff para desenvolvimento. Além das telas principais de cada etapa do fluxo (Regulação, Cotação, Aprovação e Concluído), documentei variações de componentes, estados de interação, comportamentos condicionais e edge cases — garantindo que o time de engenharia tivesse clareza total para implementar sem idas e vindas." data-en="The Figma was organized with the development handoff in mind. Beyond the main screens for each flow stage (Regulation, Quotation, Approval, and Completed), I documented component variations, interaction states, conditional behaviors, and edge cases — ensuring the engineering team had full clarity to implement without back-and-forth.">O Figma foi organizado pensando no handoff para desenvolvimento. Além das telas principais de cada etapa do fluxo (Regulação, Cotação, Aprovação e Concluído), documentei variações de componentes, estados de interação, comportamentos condicionais e edge cases — garantindo que o time de engenharia tivesse clareza total para implementar sem idas e vindas.</p>
+
+      <div class="anim-scale" data-delay="170" style="position: relative; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); margin: 0 0 40px 0; background: #E8E8E8;">
+        <img src="exemplofigmacompra.png" alt="Processo de prototipação no Figma — fluxo completo de telas" style="width: 100%; display: block;">
+      </div>
+
+      <h3 class="anim-fade" data-delay="175" style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #111; margin: 0 0 12px 0;" data-pt="Validação em campo" data-en="Field validation">Validação em campo</h3>
+      <p class="anim-fade" data-delay="180" style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;" data-pt="Com o protótipo pronto, fui até a operação do cliente validar a solução diretamente com quem usa. Passei o dia em uma oficina interna de uma transportadora de frota pesada, acompanhando o fluxo real de compra de peças — desde a abertura da OS até o contato com fornecedores. Sentei com mecânicos, supervisores e almoxarifes no chão de oficina, mostrei o protótipo no notebook e coletei feedback ao vivo, observando onde a interface fazia sentido e onde travava. Esse contato direto com a operação foi essencial para ajustar decisões de design antes de ir pro desenvolvimento." data-en="With the prototype ready, I went to the client's operation to validate the solution directly with the end users. I spent the day at the workshop following the real parts purchasing flow — from work order opening to supplier contact. I sat with mechanics, supervisors, and warehouse keepers, showed the prototype on my laptop, and collected live feedback, observing where the interface made sense and where it stalled. This direct contact with the operation was essential to adjust design decisions before going into development.">Com o protótipo pronto, fui até a operação do cliente validar a solução diretamente com quem usa. Passei o dia em uma oficina interna de uma transportadora de frota pesada, acompanhando o fluxo real de compra de peças — desde a abertura da OS até o contato com fornecedores. Sentei com mecânicos, supervisores e almoxarifes no chão de oficina, mostrei o protótipo no notebook e coletei feedback ao vivo, observando onde a interface fazia sentido e onde travava. Esse contato direto com a operação foi essencial para ajustar decisões de design antes de ir pro desenvolvimento.</p>
+
+      <div class="anim-scale" data-delay="185" style="position: relative; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); margin: 0 0 32px 0;">
+        <img src="operacao1.png" alt="Validação em campo — teste de usabilidade na oficina do cliente" style="width: 100%; display: block;">
+      </div>
+    </section>
+
+    <!-- 04 — SOLUÇÃO -->
+    <section class="case-v2-section" id="solucao">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label" data-pt="SOLUÇÃO" data-en="SOLUTION">SOLUÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="A solução foi desenhada para cobrir o fluxo completo de compra de peças — desde a identificação da necessidade até a emissão do pedido. Cada etapa ganhou uma interface dedicada dentro da plataforma." data-en="The solution was designed to cover the complete parts purchasing flow — from need identification to order issuance. Each stage got a dedicated interface within the platform.">
+        A solução foi desenhada para cobrir o fluxo completo de compra de peças — desde a identificação da necessidade até a emissão do pedido. Cada etapa ganhou uma interface dedicada dentro da plataforma.
+      </p>
+
+      <div class="remix-features anim-fade" data-delay="150">
+        <div class="remix-feature">
+          <h4 data-pt="Identificação da necessidade" data-en="Need identification">Identificação da necessidade</h4>
+          <p data-pt="Gerada por uma OS de manutenção corretiva/preventiva, ou por estoque abaixo do mínimo detectado pelo almoxarife." data-en="Generated by a corrective/preventive maintenance work order, or by stock below minimum detected by the warehouse keeper.">Gerada por uma OS de manutenção corretiva/preventiva, ou por estoque abaixo do mínimo detectado pelo almoxarife.</p>
+        </div>
+        <div class="remix-feature">
+          <h4 data-pt="Solicitação de peça" data-en="Part request">Solicitação de peça</h4>
+          <p data-pt="Abertura de pedido pelo mecânico ou supervisor, vinculado ao ativo e à OS. Regulação do que será comprado." data-en="Order opening by the mechanic or supervisor, linked to the asset and work order. Regulation of what will be purchased.">Abertura de pedido pelo mecânico ou supervisor, vinculado ao ativo e à OS. Regulação do que será comprado.</p>
+        </div>
+        <div class="remix-feature">
+          <h4 data-pt="Cotação e comparação" data-en="Quotation and comparison">Cotação e comparação</h4>
+          <p data-pt="Contato com fornecedores, recebimento de propostas e comparação de preço, prazo e disponibilidade em uma matriz visual." data-en="Contact with suppliers, receiving proposals, and comparison of price, delivery time, and availability in a visual matrix.">Contato com fornecedores, recebimento de propostas e comparação de preço, prazo e disponibilidade em uma matriz visual.</p>
+        </div>
+        <div class="remix-feature">
+          <h4 data-pt="Aprovação e compra" data-en="Approval and purchase">Aprovação e compra</h4>
+          <p data-pt="Fluxo de aprovação conforme hierarquia, seleção final do fornecedor e emissão do pedido de compra." data-en="Approval flow according to hierarchy (Champion/RA/Exec), final supplier selection, and purchase order issuance.">Fluxo de aprovação conforme hierarquia, seleção final do fornecedor e emissão do pedido de compra.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 — PROTÓTIPO NAVEGÁVEL -->
+    <section class="case-v2-section" id="prototipo">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">05</span>
+        <span class="case-v2-section__label" data-pt="PROTÓTIPO NAVEGÁVEL" data-en="PROTOTYPE">PROTÓTIPO NAVEGÁVEL</span>
+      </div>
+
+      <p class="remix-site-desc anim-fade" data-delay="100" data-pt="Navegue pelo protótipo funcional abaixo. A interface permite comparar fornecedores, selecionar itens, gerenciar o carrinho e simular o fluxo completo de aprovação de cotações." data-en="Browse the functional prototype below. The interface allows comparing suppliers, selecting items, managing the cart, and simulating the complete quotation approval flow.">Navegue pelo protótipo funcional abaixo. A interface permite comparar fornecedores, selecionar itens, gerenciar o carrinho e simular o fluxo completo de aprovação de cotações.</p>
+
+      <div class="remix-site-preview anim-scale" data-delay="120" id="remixPreview">
+        <iframe src="remixcompra-demo/index.html" style="width: 1440px; height: 900px; border: none; transform-origin: 0 0;" id="remixFrame"></iframe>
+      </div>
+    </section>
+
+    <!-- 06 — IMPACTO -->
+    <section class="case-v2-section" id="impacto">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">06</span>
+        <span class="case-v2-section__label" data-pt="IMPACTO" data-en="IMPACT">IMPACTO</span>
+      </div>
+      <div class="case-v2-impact">
+        <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
+          <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Result">Resultado</h3>
+          <p class="case-v2-impact__text" data-pt="A plataforma centralizou o processo de aprovação de cotações, eliminando planilhas e processos manuais. Gestores passaram a tomar decisões de compra com mais velocidade e segurança, comparando fornecedores em uma única interface com visibilidade total de preço, prazo e disponibilidade." data-en="The platform centralized the quotation approval process, eliminating spreadsheets and manual processes. Managers started making purchasing decisions faster and more confidently, comparing suppliers in a single interface with full visibility of price, delivery time, and availability.">A plataforma centralizou o processo de aprovação de cotações, eliminando planilhas e processos manuais. Gestores passaram a tomar decisões de compra com mais velocidade e segurança, comparando fornecedores em uma única interface com visibilidade total de preço, prazo e disponibilidade.</p>
+        </div>
+        <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
+          <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
+          <p class="case-v2-impact__text" data-pt="Atuei como Product Designer de ponta a ponta: do discovery em campo ao protótipo de alta fidelidade. Mapeei o fluxo operacional diretamente com mecânicos, supervisores e compradores, defini a arquitetura de informação da matriz de comparação, desenhei os componentes no Figma e validei o protótipo funcional com Lovable. Foquei em equilibrar densidade de dados com usabilidade em um contexto B2B de operação." data-en="I worked as Product Designer end to end: from discovery to high-fidelity prototype. I mapped the operational flow, defined the information architecture of the comparison matrix, designed the components in Figma, and validated the functional prototype with Lovable. I focused on balancing data density with usability in a B2B operational context.">Atuei como Product Designer de ponta a ponta: do discovery em campo ao protótipo de alta fidelidade. Mapeei o fluxo operacional diretamente com mecânicos, supervisores e compradores, defini a arquitetura de informação da matriz de comparação, desenhei os componentes no Figma e validei o protótipo funcional com Lovable. Foquei em equilibrar densidade de dados com usabilidade em um contexto B2B de operação.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Design e código por Henrique Saito." data-en="Design and code by Henrique Saito.">Design e código por Henrique Saito.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Discovery carousel
+    (function() {
+      var idx = 0, total = 3;
+      var track = document.getElementById('discoveryTrack');
+      var dots = document.querySelectorAll('.remix-discovery__dot');
+      function goTo(i) {
+        idx = (i + total) % total;
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        dots.forEach(function(d, j) { d.classList.toggle('remix-discovery__dot--active', j === idx); });
+      }
+      document.getElementById('discoveryPrev').addEventListener('click', function() { goTo(idx - 1); });
+      document.getElementById('discoveryNext').addEventListener('click', function() { goTo(idx + 1); });
+      dots.forEach(function(d, j) { d.addEventListener('click', function() { goTo(j); }); });
+    })();
+
+    // Scale iframe to fit container
+    function scaleRemixFrame() {
+      const frame = document.getElementById('remixFrame');
+      const preview = document.getElementById('remixPreview');
+      const containerWidth = preview.clientWidth;
+      const scale = containerWidth / 1440;
+      frame.style.transform = 'scale(' + scale + ')';
+      preview.style.height = (900 * scale) + 'px';
+    }
+
+    scaleRemixFrame();
+    window.addEventListener('resize', scaleRemixFrame);
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

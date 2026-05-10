@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPa Social — Henrique Saito</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case-v2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    @media (max-width: 768px) {
+      .ipa-meta {
+        grid-template-columns: 1fr !important;
+      }
+      .ipa-gallery {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .ipa-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .ipa-gallery__item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .ipa-gallery__item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ipa-site-preview {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      background: #F9F9F9;
+      transition: all 0.4s ease;
+    }
+
+    .ipa-site-preview--mobile {
+      max-width: 375px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ipa-device-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #F2F2F2;
+      border-radius: 999px;
+      padding: 4px;
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+
+    .ipa-device-toggle__btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #999;
+      background: transparent;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ipa-device-toggle__btn--active {
+      background: #fff;
+      color: #111;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .ipa-site-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .ipa-highlight {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: #F9FAFB;
+      border-radius: 12px;
+      margin: 24px 0;
+      border-left: 3px solid #4CAF50;
+    }
+
+    .ipa-highlight svg {
+      flex-shrink: 0;
+    }
+
+    .ipa-highlight p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .ipa-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .ipa-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      background: #111;
+      padding: 10px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .ipa-link-btn:hover {
+      background: #333;
+    }
+
+    .ipa-eixos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 768px) {
+      .ipa-eixos {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ipa-eixo {
+      padding: 20px;
+      background: #F9FAFB;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .ipa-eixo h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      margin: 0 0 6px 0;
+    }
+
+    .ipa-eixo p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="case-v2">
+
+  <!-- Case Header -->
+  <header class="case-nav" id="caseNav">
+    <a href="index.html" class="case-nav__back" aria-label="Voltar">←</a>
+    <nav class="case-nav__pill" id="casePill">
+      <a href="#overview" class="case-nav__link active" data-section="overview" data-pt="Visão Geral" data-en="Overview">Visão Geral</a>
+      <a href="#contexto" class="case-nav__link" data-section="contexto" data-pt="Contexto" data-en="Context">Contexto</a>
+      <a href="#solucao" class="case-nav__link" data-section="solucao" data-pt="Solução" data-en="Solution">Solução</a>
+      <a href="#site" class="case-nav__link" data-section="site" data-pt="O Site" data-en="The Site">O Site</a>
+      <a href="#impacto" class="case-nav__link" data-section="impacto" data-pt="Impacto" data-en="Impact">Impacto</a>
+    </nav>
+    <button class="header__lang" id="langToggle" type="button">
+      <span class="header__lang-opt header__lang-opt--active" data-lang="pt">PT</span>
+      <span class="header__lang-opt" data-lang="en">EN</span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="case-v2-hero" style="display: flex; align-items: center; gap: 0; background: #F2F2F2; background-image: radial-gradient(circle, #CCCCCC 1px, transparent 1px); background-size: 24px 24px;">
+    <div style="flex: 0 0 60%; padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08);" class="case-v2-hero__left-col">
+      <h1 class="case-v2-hero__title" data-pt="IPa — Incentivadores da Paz" data-en="IPa — Peace Encouragers">IPa — Incentivadores da Paz</h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E8F5E9; color: #2E7D32;">Projeto Social</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #E3F2FD; color: #1565C0;">Web Design</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #F3E5F5; color: #6A1B9A;">Claude Code</span>
+        <span style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 999px; display: inline-flex; background: #FFF3E0; color: #E65100;">2025</span>
+      </div>
+    </div>
+    <div style="flex: 0 0 40%; padding-left: 48px; display: flex; align-items: center;" class="case-v2-hero__right-col">
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 400; color: #888; line-height: 1.7; margin: 0;" data-pt="Site institucional criado de forma voluntária para uma associação que transforma solidariedade em ação na comunidade." data-en="Institutional website created voluntarily for an association that transforms solidarity into action in the community.">Site institucional criado de forma voluntária para uma associação que transforma solidariedade em ação na comunidade.</p>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .case-v2-hero {
+        flex-direction: column !important;
+      }
+      .case-v2-hero__left-col {
+        flex: 1 1 100% !important;
+        padding-right: 0 !important;
+        border-right: none !important;
+        margin-bottom: 32px;
+      }
+      .case-v2-hero__right-col {
+        flex: 1 1 100% !important;
+        padding-left: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- Sections -->
+  <div class="case-v2-body">
+
+    <!-- 01 — VISÃO GERAL -->
+    <section class="case-v2-section" id="overview">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">01</span>
+        <span class="case-v2-section__label" data-pt="VISÃO GERAL" data-en="OVERVIEW">VISÃO GERAL</span>
+      </div>
+
+      <div class="ipa-meta anim-fade" data-delay="50" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 32px; padding: 24px; background: #F9FAFB; border-radius: 12px;">
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Organização" data-en="Organization">Organização</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">IPa — Incentivadores da Paz</p>
+        </div>
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Meu papel" data-en="My role">Meu papel</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;" data-pt="Design e desenvolvimento voluntário" data-en="Volunteer design and development">Design e desenvolvimento voluntário</p>
+        </div>
+        <div>
+          <h4 style="font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin: 0 0 8px 0;" data-pt="Ferramentas" data-en="Tools">Ferramentas</h4>
+          <p style="font-family: 'DM Sans', sans-serif; font-size: 14px; color: #333; margin: 0;">Claude Code, HTML, CSS, JS</p>
+        </div>
+      </div>
+
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="A IPa — Incentivadores da Paz — é uma associação comunitária fundada em 2022 em Indaiatuba/SP, que promove eventos culturais, esportivos e ações solidárias. Este foi um projeto totalmente social e voluntário: criei o site institucional da associação do zero, sem nenhum custo, usando Claude Code como ferramenta principal de desenvolvimento." data-en="IPa — Incentivadores da Paz (Peace Encouragers) — is a community association founded in 2022 in Indaiatuba/SP, Brazil, that promotes cultural events, sports activities, and solidarity actions. This was a fully social and voluntary project: I created the association's institutional website from scratch, at no cost, using Claude Code as the main development tool.">
+        A IPa — Incentivadores da Paz — é uma associação comunitária fundada em 2022 em Indaiatuba/SP, que promove eventos culturais, esportivos e ações solidárias. Este foi um projeto totalmente social e voluntário: criei o site institucional da associação do zero, sem nenhum custo, usando Claude Code como ferramenta principal de desenvolvimento.
+      </p>
+
+      <div class="ipa-highlight anim-fade" data-delay="150">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <p data-pt="Projeto 100% voluntário. Nenhum valor cobrado. O objetivo foi ajudar a associação a ter presença digital e alcançar mais pessoas na comunidade." data-en="100% volunteer project. No fees charged. The goal was to help the association have a digital presence and reach more people in the community.">Projeto 100% voluntário. Nenhum valor cobrado. O objetivo foi ajudar a associação a ter presença digital e alcançar mais pessoas na comunidade.</p>
+      </div>
+    </section>
+
+    <!-- 02 — CONTEXTO -->
+    <section class="case-v2-section" id="contexto">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">02</span>
+        <span class="case-v2-section__label" data-pt="CONTEXTO" data-en="CONTEXT">CONTEXTO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="A IPa já impactava centenas de pessoas na comunidade com bazares solidários, eventos culturais e esportivos, ações de Natal e Páscoa, e cortes de cabelo gratuitos. Mas toda a comunicação era feita por redes sociais, sem um canal oficial que apresentasse a história, as ações e formas de contribuir." data-en="IPa was already impacting hundreds of people in the community with solidarity bazaars, cultural and sports events, Christmas and Easter actions, and free haircuts. But all communication was done through social media, without an official channel presenting their history, actions, and ways to contribute.">
+        A IPa já impactava centenas de pessoas na comunidade com bazares solidários, eventos culturais e esportivos, ações de Natal e Páscoa, e cortes de cabelo gratuitos. Mas toda a comunicação era feita por redes sociais, sem um canal oficial que apresentasse a história, as ações e formas de contribuir.
+      </p>
+      <p class="case-v2-section__text anim-fade" data-delay="150" data-pt="A associação precisava de um site que transmitisse credibilidade, mostrasse o impacto real do trabalho e facilitasse a captação de doações, voluntários e parcerias." data-en="The association needed a website that conveyed credibility, showed the real impact of their work, and facilitated donations, volunteers, and partnerships.">
+        A associação precisava de um site que transmitisse credibilidade, mostrasse o impacto real do trabalho e facilitasse a captação de doações, voluntários e parcerias.
+      </p>
+
+      <h3 class="anim-fade" data-delay="200" style="font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: #111; margin: 32px 0 16px 0;" data-pt="Os 5 eixos de atuação da IPa" data-en="IPa's 5 areas of operation">Os 5 eixos de atuação da IPa</h3>
+
+      <div class="ipa-eixos anim-fade" data-delay="250">
+        <div class="ipa-eixo">
+          <h4 data-pt="Eventos Culturais" data-en="Cultural Events">Eventos Culturais</h4>
+          <p data-pt="Recreação, apresentações e distribuição de alimentos para a comunidade." data-en="Recreation, performances, and food distribution for the community.">Recreação, apresentações e distribuição de alimentos para a comunidade.</p>
+        </div>
+        <div class="ipa-eixo">
+          <h4 data-pt="Eventos Esportivos" data-en="Sports Events">Eventos Esportivos</h4>
+          <p data-pt="Uso do esporte como ferramenta de desenvolvimento social e inclusão." data-en="Using sports as a tool for social development and inclusion.">Uso do esporte como ferramenta de desenvolvimento social e inclusão.</p>
+        </div>
+        <div class="ipa-eixo">
+          <h4 data-pt="Natal e Páscoa Solidários" data-en="Solidarity Christmas & Easter">Natal e Páscoa Solidários</h4>
+          <p data-pt="Celebrações com crianças da comunidade em datas especiais." data-en="Celebrations with community children on special dates.">Celebrações com crianças da comunidade em datas especiais.</p>
+        </div>
+        <div class="ipa-eixo">
+          <h4 data-pt="Bazar Comunitário" data-en="Community Bazaar">Bazar Comunitário</h4>
+          <p data-pt="Distribuição de roupas, calçados, brinquedos e itens para o lar." data-en="Distribution of clothing, shoes, toys, and household items.">Distribuição de roupas, calçados, brinquedos e itens para o lar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 — SOLUÇÃO -->
+    <section class="case-v2-section" id="solucao">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">03</span>
+        <span class="case-v2-section__label" data-pt="SOLUÇÃO" data-en="SOLUTION">SOLUÇÃO</span>
+      </div>
+      <p class="case-v2-section__text anim-fade" data-delay="100" data-pt="Construí o site inteiro usando Claude Code como ferramenta de desenvolvimento. Todo o processo — desde a estrutura HTML, o CSS responsivo até o JavaScript de interações — foi feito com auxílio de IA, mostrando como a tecnologia pode acelerar projetos sociais sem custo." data-en="I built the entire website using Claude Code as the development tool. The whole process — from HTML structure, responsive CSS, to JavaScript interactions — was done with AI assistance, showing how technology can accelerate social projects at no cost.">
+        Construí o site inteiro usando Claude Code como ferramenta de desenvolvimento. Todo o processo — desde a estrutura HTML, o CSS responsivo até o JavaScript de interações — foi feito com auxílio de IA, mostrando como a tecnologia pode acelerar projetos sociais sem custo.
+      </p>
+      <p class="case-v2-section__text anim-fade" data-delay="150" data-pt="O site foi pensado para ser leve, rápido e acessível em qualquer dispositivo. O conteúdo foi organizado para contar a história da associação, apresentar cada eixo de atuação com fotos reais, exibir métricas de impacto e facilitar o engajamento de novos voluntários e doadores." data-en="The website was designed to be lightweight, fast, and accessible on any device. The content was organized to tell the association's story, present each area of operation with real photos, display impact metrics, and facilitate the engagement of new volunteers and donors.">
+        O site foi pensado para ser leve, rápido e acessível em qualquer dispositivo. O conteúdo foi organizado para contar a história da associação, apresentar cada eixo de atuação com fotos reais, exibir métricas de impacto e facilitar o engajamento de novos voluntários e doadores.
+      </p>
+
+      <div class="ipa-highlight anim-fade" data-delay="200">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <p data-pt="Construído 100% com Claude Code — da primeira linha de código ao deploy. Um exemplo prático de como IA pode ser usada para gerar impacto social real." data-en="Built 100% with Claude Code — from the first line of code to deployment. A practical example of how AI can be used to generate real social impact.">Construído 100% com Claude Code — da primeira linha de código ao deploy. Um exemplo prático de como IA pode ser usada para gerar impacto social real.</p>
+      </div>
+    </section>
+
+    <!-- 04 — O SITE -->
+    <section class="case-v2-section" id="site">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">04</span>
+        <span class="case-v2-section__label" data-pt="O SITE" data-en="THE SITE">O SITE</span>
+      </div>
+
+      <p class="ipa-site-desc anim-fade" data-delay="100" data-pt="O resultado final é um site responsivo, leve e acessível que apresenta a história da IPa, seus eixos de atuação, galeria de fotos e formas de contribuir. Navegue pelo preview abaixo nas versões desktop e mobile." data-en="The final result is a responsive, lightweight and accessible website that presents IPa's story, areas of operation, photo gallery, and ways to contribute. Browse the preview below in desktop and mobile versions.">O resultado final é um site responsivo, leve e acessível que apresenta a história da IPa, seus eixos de atuação, galeria de fotos e formas de contribuir. Navegue pelo preview abaixo nas versões desktop e mobile.</p>
+
+      <div class="ipa-toolbar anim-fade" data-delay="120">
+        <div class="ipa-device-toggle" id="deviceToggle">
+          <button class="ipa-device-toggle__btn ipa-device-toggle__btn--active" data-mode="desktop" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Desktop
+          </button>
+          <button class="ipa-device-toggle__btn" data-mode="mobile" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            Mobile
+          </button>
+        </div>
+        <a href="https://ipasocial.com.br/" target="_blank" rel="noopener" class="ipa-link-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span data-pt="Acessar o site ao vivo" data-en="Visit the live website">Acessar o site ao vivo</span>
+        </a>
+      </div>
+
+      <div class="ipa-site-preview anim-scale" data-delay="150" id="ipaPreview">
+        <iframe src="ipa/ipasocial/index.html" style="width: 1920px; height: 1080px; border: none; pointer-events: none; transform-origin: 0 0;" id="ipaFrame"></iframe>
+      </div>
+
+    </section>
+
+    <!-- 05 — IMPACTO -->
+    <section class="case-v2-section" id="impacto">
+      <div class="case-v2-section__header anim-slide-left">
+        <span class="case-v2-section__number">05</span>
+        <span class="case-v2-section__label" data-pt="IMPACTO" data-en="IMPACT">IMPACTO</span>
+      </div>
+      <div class="case-v2-impact">
+        <div class="case-v2-impact__card case-v2-impact__card--light anim-slide-up" data-delay="0">
+          <h3 class="case-v2-impact__title" data-pt="Resultado" data-en="Result">Resultado</h3>
+          <p class="case-v2-impact__text" data-pt="A associação ganhou um canal oficial para apresentar sua história e captar apoio. O site deu credibilidade institucional à IPa, facilitando a comunicação com parceiros, doadores e novos voluntários. Tudo construído sem custo, como contribuição social genuína." data-en="The association gained an official channel to present its story and attract support. The website gave institutional credibility to IPa, facilitating communication with partners, donors, and new volunteers. Everything built at no cost, as a genuine social contribution.">A associação ganhou um canal oficial para apresentar sua história e captar apoio. O site deu credibilidade institucional à IPa, facilitando a comunicação com parceiros, doadores e novos voluntários. Tudo construído sem custo, como contribuição social genuína.</p>
+        </div>
+        <div class="case-v2-impact__card case-v2-impact__card--dark dark-section anim-slide-up" data-delay="150">
+          <h3 class="case-v2-impact__title" data-pt="Meu papel" data-en="My role">Meu papel</h3>
+          <p class="case-v2-impact__text" data-pt="Fiz o design e o desenvolvimento completo do site de forma voluntária. Usei Claude Code para construir toda a base de código — HTML, CSS e JavaScript — do zero até o deploy. Atuei desde a concepção visual e estrutura de conteúdo até a publicação final. Um projeto que une design, tecnologia e propósito social." data-en="I did the complete design and development of the website voluntarily. I used Claude Code to build the entire codebase — HTML, CSS, and JavaScript — from scratch to deployment. I worked from visual conception and content structure to final publication. A project that combines design, technology, and social purpose.">Fiz o design e o desenvolvimento completo do site de forma voluntária. Usei Claude Code para construir toda a base de código — HTML, CSS e JavaScript — do zero até o deploy. Atuei desde a concepção visual e estrutura de conteúdo até a publicação final. Um projeto que une design, tecnologia e propósito social.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-pt="&copy; 2026 Henrique Saito. Todos os direitos reservados." data-en="&copy; 2026 Henrique Saito. All rights reserved.">&copy; 2026 Henrique Saito. Todos os direitos reservados.</p>
+    <p style="font-size: 13px; margin-top: 8px; opacity: 0.6;" data-pt="Design e código por Henrique Saito." data-en="Designed and developed by me. 😄">Design e código por Henrique Saito.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Case nav — active section tracking + smooth scroll
+    const caseLinks = document.querySelectorAll('.case-nav__link');
+    const caseSections = document.querySelectorAll('.case-v2-section');
+
+    caseLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const animElements = document.querySelectorAll('.anim-slide-left, .anim-slide-up, .anim-fade, .anim-scale, .anim-polaroid');
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animElements.forEach((el) => animObserver.observe(el));
+
+    // Device toggle + iframe scaling
+    let currentMode = 'desktop';
+    const desktopW = 1920, desktopH = 1080;
+    const mobileW = 360, mobileH = 760;
+
+    function scaleIpaFrame() {
+      const frame = document.getElementById('ipaFrame');
+      const preview = document.getElementById('ipaPreview');
+      const containerWidth = preview.clientWidth;
+
+      if (currentMode === 'desktop') {
+        preview.classList.remove('ipa-site-preview--mobile');
+        frame.style.width = desktopW + 'px';
+        frame.style.height = desktopH + 'px';
+        const scale = containerWidth / desktopW;
+        frame.style.transform = 'scale(' + scale + ')';
+        preview.style.height = (desktopH * scale) + 'px';
+      } else {
+        preview.classList.add('ipa-site-preview--mobile');
+        frame.style.width = mobileW + 'px';
+        frame.style.height = mobileH + 'px';
+        const mobileContainerWidth = Math.min(containerWidth, 375);
+        const scale = mobileContainerWidth / mobileW;
+        frame.style.transform = 'scale(' + scale + ')';
+        preview.style.height = (mobileH * scale) + 'px';
+      }
+    }
+
+    document.getElementById('deviceToggle').addEventListener('click', function(e) {
+      const btn = e.target.closest('.ipa-device-toggle__btn');
+      if (!btn || btn.dataset.mode === currentMode) return;
+      currentMode = btn.dataset.mode;
+      this.querySelectorAll('.ipa-device-toggle__btn').forEach(function(b) {
+        b.classList.remove('ipa-device-toggle__btn--active');
+      });
+      btn.classList.add('ipa-device-toggle__btn--active');
+      var preview = document.getElementById('ipaPreview');
+      preview.classList.remove('ipa-site-preview--mobile');
+      preview.style.height = '';
+      requestAnimationFrame(function() { scaleIpaFrame(); });
+    });
+
+    scaleIpaFrame();
+    window.addEventListener('resize', scaleIpaFrame);
+
+    // Active tracking on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      caseSections.forEach((section) => {
+        const top = section.offsetTop - 160;
+        if (window.scrollY >= top) {
+          current = section.id;
+        }
+      });
+      caseLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

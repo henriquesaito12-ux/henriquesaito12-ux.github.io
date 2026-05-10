@@ -565,6 +565,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
   display: block;
 }
 
@@ -1942,7 +1943,7 @@ img {
   }
 
   .folder__stack {
-    height: 280px;
+    height: 340px;
   }
 
   .sobre__content {
@@ -2066,6 +2067,10 @@ img {
 
   .section__title {
     font-size: 1.75rem;
+  }
+
+  .cases-grid {
+    gap: 36px;
   }
 
   .cases-grid {
